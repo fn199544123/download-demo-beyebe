@@ -9,17 +9,16 @@ ROBOTSTXT_OBEY = False  # 是否遵守ROBOTS协议,False为不遵守
 # 你大概率需要关注的参数（都有注释）
 
 # DOWNLOAD_DELAY = 1  # 在这里写delay远远好于代码中的sleep，这代表了一批多线程任务的间隔时间
-CONCURRENT_REQUESTS = 16  # 异步线程数
+CONCURRENT_REQUESTS = 1  # 异步线程数
 DOWNLOADER_MIDDLEWARES = {
 
-}  # 中间件,数越大优先级越小
-# ITEM_PIPELINES = {
-#     'scrapy_demo_fangnan.pipelines.MongoPipeline': 1,
-#     # 'scrapy_demo_fangnan.pipelines.KafkaPipeline': 200,
-#     # 'scrapy_demo_fangnan.pipelines.LocalFilePipeline': 300,
-#     # 'scrapy_demo_fangnan.pipelines.OSSPipeline': 400,
-# }  # 管道
-
+}  # 中间件,数越大优先级越小,在我的规范里一般在spider里定义
+ITEM_PIPELINES = {
+    'scrapy_demo_fangnan.pipelines.MongoPipeline': 1,
+    # 'scrapy_demo_fangnan.pipelines.KafkaPipeline': 200,
+    # 'scrapy_demo_fangnan.pipelines.LocalFilePipeline': 300,
+    # 'scrapy_demo_fangnan.pipelines.OSSPipeline': 400,
+}  # 管道
 
 # MONGO数据库参数
 
