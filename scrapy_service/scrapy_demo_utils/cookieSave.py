@@ -10,6 +10,7 @@ import sys
 from selenium import webdriver
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
+# 企查查账号:18923477217
 if __name__ == '__main__':
 
     options = webdriver.ChromeOptions()
@@ -32,7 +33,10 @@ if __name__ == '__main__':
         raise Exception("机器型号未知")
     # driver.maximize_window()
     # print("发起请求")
-    driver.get('https://www.baidu.com')
+    # driver.get('https://www.baidu.com')
+    driver.get('https://www.qichacha.com/')
+
+
     passMsg = input("输入任意值完成操作")
     try:
         print("保存截图")
@@ -53,9 +57,9 @@ if __name__ == '__main__':
 
     print("保存cookie")
     cookies = driver.get_cookies()
-    with open("web_msg/cookies.txt", "w") as fp:
+    with open("web_msg/cookies_qichacha.txt", "w") as fp:
         json.dump(cookies, fp)
     print("保存html")
     html = driver.page_source
-    with open("web_msg/test.html", "w") as fp:
+    with open("web_msg/test.web_msg", "w") as fp:
         fp.write(html)

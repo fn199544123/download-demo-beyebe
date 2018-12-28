@@ -33,11 +33,9 @@ class MongoPipeline(object):
         self.MONGODB_PORT = spider.settings.get('LOVE_MONGODB_PORT', 27017)
         self.MONGODB_DBNAME = spider.settings.get('LOVE_MONGODB_DBNAME', 'test')
 
-        self.client = pymongo.MongoClient(host=self.MONGODB_HOST,
-                                          username=self.MONGODB_USER,
-                                          password=self.MONGODB_PASSWORD,
-                                          port=self.MONGODB_PORT)
+        self.client = pymongo.MongoClient(host=self.MONGODB_HOST, port=self.MONGODB_PORT)
         self.db = self.client[self.MONGODB_DBNAME]
+        self.db.authenticate(self.MONGODB_USER, self.MONGODB_PASSWORD)
 
     def close_spider(self, spider):
         self.client.close()

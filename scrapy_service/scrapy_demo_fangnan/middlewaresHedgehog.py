@@ -9,12 +9,20 @@ import redis
 import requests
 from scrapy import Request
 
+
 # Cookie中间件
 class HegCookiesMiddlewars(object):
 
     def process_request(self, request, spider):
         if spider.settings.get('LOVE_COOKIES') is not None:
-            request.cookies =spider.settings.get('LOVE_COOKIES')
+            loveCookies = spider.settings.get('LOVE_COOKIES')
+
+            cookieScrapyDict = {}
+            for cookieNow in loveCookies:
+                cookieScrapyDict.update({cookieNow['name']: cookieNow['value']})
+            print("cookies注入:", cookieScrapyDict)
+            request.cookies = cookieScrapyDict
+
 
 # 去重中间件
 class HegDuplicateFilterMiddlewares(object):
@@ -23,6 +31,7 @@ class HegDuplicateFilterMiddlewares(object):
     TODO 请求前，进行key-value形式存储，定时过期（比如10秒），在这段时间不会再请求。
     请求成功，进行hash存储，彻底持久化。
     """
+
     def open_spider(self):
         self.redisPool = redis.ConnectionPool(host="192.168.10.9", password="123456", port=6379, db=14)
 
@@ -38,49 +47,50 @@ class HegDuplicateFilterMiddlewares(object):
         else:
             print("通过去重，继续抓取！", request.url)
 
-    def process_response(self,request,response,spider):
-        #成功请求,正式添加进去重队列
+    def process_response(self, request, response, spider):
+        # 成功请求,正式添加进去重队列
         return response
 
-# 隧道IP中间件1
-class HegProxyMiddlewares(object):
-    print("正在尝试获取一个隧道IP代理池")
-    # 代理处理
-    appkey = 'NnR5UHJoRTlnQmJKUGJMRDpJV1FuaHpJdU4wdDlkY0pi'
-    # 代理服务器
-    proxyServer = "http://transfer.mogumiao.com:9001"
-    # appkey为你订单的key
-    proxyAuth = "Basic " + appkey
 
-    def process_request(self, request, spider):
-        request.meta["proxy"] = self.proxyServer
-        # request.meta["isIppool"]=True
-        request.headers["Authorization"] = self.proxyAuth
-
-# 隧道IP中间件2
-class HegProxy2Middlewares(object):
-    """
-    新代理中间件
-    """
-    print("正在尝试获取一个隧道IP代理池")
-
-    ipList = [
-        "47.106.230.172:10000",
-        "47.106.230.172:10001",
-        "47.106.230.172:10002",
-        "47.106.230.172:10003",
-        "47.106.230.172:10004",
-        "47.106.230.172:10005",
-        "47.106.230.172:10006",
-        "47.106.230.172:10007",
-        "47.106.230.172:10008",
-        "47.106.230.172:10009",
-    ]
-
-    def process_request(self, request, spider):
-        ip = random.choice(self.ipList)
-        print("ip-proxy", ip)
-        request.meta["proxy"] = "http://" + ip
+# # 隧道IP中间件1
+# class HegProxyMiddlewares(object):
+#     print("正在尝试获取一个隧道IP代理池")
+#     # 代理处理
+#     appkey = 'NnR5UHJoRTlnQmJKUGJMRDpJV1FuaHpJdU4wdDlkY0pi'
+#     # 代理服务器
+#     proxyServer = "http://transfer.mogumiao.com:9001"
+#     # appkey为你订单的key
+#     proxyAuth = "Basic " + appkey
+#
+#     def process_request(self, request, spider):
+#         request.meta["proxy"] = self.proxyServer
+#         # request.meta["isIppool"]=True
+#         request.headers["Authorization"] = self.proxyAuth
+#
+# # 隧道IP中间件2
+# class HegProxy2Middlewares(object):
+#     """
+#     新代理中间件
+#     """
+#     print("正在尝试获取一个隧道IP代理池")
+#
+#     ipList = [
+#         "47.106.230.172:10000",
+#         "47.106.230.172:10001",
+#         "47.106.230.172:10002",
+#         "47.106.230.172:10003",
+#         "47.106.230.172:10004",
+#         "47.106.230.172:10005",
+#         "47.106.230.172:10006",
+#         "47.106.230.172:10007",
+#         "47.106.230.172:10008",
+#         "47.106.230.172:10009",
+#     ]
+#
+#     def process_request(self, request, spider):
+#         ip = random.choice(self.ipList)
+#         print("ip-proxy", ip)
+#         request.meta["proxy"] = "http://" + ip
 
 # UA中间件
 class HegUserAgentMiddlewares(object):
@@ -104,6 +114,7 @@ class HegUserAgentMiddlewares(object):
         request.headers['Accept-Language'] = 'zh-CN'
         request.headers['Accept-Encoding'] = 'deflate'
 
+
 # urlChange-URL匹配订正
 class HegurlChangeMiddlewares(object):
     def process_request(self, request, spider):
@@ -122,12 +133,14 @@ class HegurlChangeMiddlewares(object):
         #     urlOld = request.url
         #     request._set_url(urlOld.replace('m.', 'www.'))
         #     print("原", urlOld, "修改", request.url)
-    def process_response(self,request,response,spider):
+
+    def process_response(self, request, response, spider):
         if 'user_login' in response.url:
             print("被封了,重新发起请求")
-            request=request
+            request = request
             return request
         return response
+
 
 # 测试中间件(上线后应关闭)
 class HegTestMiddlewares(object):
