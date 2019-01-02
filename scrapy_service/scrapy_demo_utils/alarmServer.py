@@ -1,4 +1,11 @@
 # -*- coding:utf-8 -*-
+"""
+这个服务可以自动监控数据库、redis、kafka、服务器资源、服务器进程的情况
+从而时时进行回调和服务器监控
+
+2019/01/02
+
+"""
 import datetime
 import traceback
 
@@ -52,14 +59,14 @@ class IndexHandler(tornado.web.RequestHandler):
         # TODO Redis查询
         # TODO Kafka查询
         # TODO 服务器查询
-        return ansDict
+        self.write(ansDict)
 
     def countBefore(self, tableName, seconds):
         date2 = datetime.datetime.now()
         # date2=datetime.strftime("%Y-%m-%d %H:%M:%S", "sadasd")
         date1 = date2 + datetime.timedelta(seconds=seconds)
-        objIdTimeFrom = self.timeToObjId(date1)
-        objIdTimeTo = self.timeToObjId(date2)
+        objIdTimeFrom = self.__timeToObjId(date1)
+        objIdTimeTo = self.__timeToObjId(date2)
         return db[tableName].find({'_id': {
             '$gt': ObjectId(objIdTimeFrom),
         }}).count()
@@ -70,20 +77,20 @@ class IndexHandler(tornado.web.RequestHandler):
         # 转换成16进制的字符串，再加补齐16个0
         # t += 60 * 8
         t16 = hex(t)[2:]
-        print(t16)
+        # print(t16)
         return str(t16) + '0000000000000000'
 
     def __objIdToTime(self, dateStr):
         dateStr = str(dateStr)[:8]
         t10 = int(dateStr, 16)
-        print(t10)
-        print(datetime.datetime.fromtimestamp(int(t10)))
+        # print(t10)
+        # print(datetime.datetime.fromtimestamp(int(t10)))
         return t10
 
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
-    app = tornado.web.Application(handlers=[('/middleware/identifying/upload.go', IndexHandler)])
+    app = tornado.web.Application(handlers=[('/alarm.go', IndexHandler)])
     http_server = tornado.httpserver.HTTPServer(app)
     http_server.listen(options.port)
     print('[alarm Demo]tornadoansDict 启动')
