@@ -9,6 +9,9 @@ from scrapy_service.scrapy_demo_fangnan.items import NewsDemoItem
 
 种子页：http://www.sohu.com https://www.sina.com.cn
 难度系数：一颗星
+
+2019/01/02
+
 """
 
 

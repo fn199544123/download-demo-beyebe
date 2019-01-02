@@ -27,11 +27,11 @@ from pymongo.errors import DuplicateKeyError
 class MongoPipeline(object):
 
     def open_spider(self, spider):
-        self.MONGODB_HOST = spider.settings.get('LOVE_MONGODB_HOST', '121.9.245.183')
-        self.MONGODB_USER = spider.settings.get('LOVE_MONGODB_USER', 'zane')
-        self.MONGODB_PASSWORD = spider.settings.get('LOVE_MONGODB_PASSWORD', '*#06#')
+        self.MONGODB_HOST = spider.settings.get('LOVE_MONGODB_HOST', '192.168.10.9')
+        self.MONGODB_USER = spider.settings.get('LOVE_MONGODB_USER', 'fangnan')
+        self.MONGODB_PASSWORD = spider.settings.get('LOVE_MONGODB_PASSWORD', 'Fang135')
         self.MONGODB_PORT = spider.settings.get('LOVE_MONGODB_PORT', 27017)
-        self.MONGODB_DBNAME = spider.settings.get('LOVE_MONGODB_DBNAME', 'test')
+        self.MONGODB_DBNAME = spider.settings.get('LOVE_MONGODB_DBNAME', 'hedgehog_spider')
 
         self.client = pymongo.MongoClient(host=self.MONGODB_HOST, port=self.MONGODB_PORT)
         self.db = self.client[self.MONGODB_DBNAME]

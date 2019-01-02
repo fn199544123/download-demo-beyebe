@@ -51,47 +51,6 @@ class HegDuplicateFilterMiddlewares(object):
         # 成功请求,正式添加进去重队列
         return response
 
-
-# # 隧道IP中间件1
-# class HegProxyMiddlewares(object):
-#     print("正在尝试获取一个隧道IP代理池")
-#     # 代理处理
-#     appkey = 'NnR5UHJoRTlnQmJKUGJMRDpJV1FuaHpJdU4wdDlkY0pi'
-#     # 代理服务器
-#     proxyServer = "http://transfer.mogumiao.com:9001"
-#     # appkey为你订单的key
-#     proxyAuth = "Basic " + appkey
-#
-#     def process_request(self, request, spider):
-#         request.meta["proxy"] = self.proxyServer
-#         # request.meta["isIppool"]=True
-#         request.headers["Authorization"] = self.proxyAuth
-#
-# # 隧道IP中间件2
-# class HegProxy2Middlewares(object):
-#     """
-#     新代理中间件
-#     """
-#     print("正在尝试获取一个隧道IP代理池")
-#
-#     ipList = [
-#         "47.106.230.172:10000",
-#         "47.106.230.172:10001",
-#         "47.106.230.172:10002",
-#         "47.106.230.172:10003",
-#         "47.106.230.172:10004",
-#         "47.106.230.172:10005",
-#         "47.106.230.172:10006",
-#         "47.106.230.172:10007",
-#         "47.106.230.172:10008",
-#         "47.106.230.172:10009",
-#     ]
-#
-#     def process_request(self, request, spider):
-#         ip = random.choice(self.ipList)
-#         print("ip-proxy", ip)
-#         request.meta["proxy"] = "http://" + ip
-
 # UA中间件
 class HegUserAgentMiddlewares(object):
 

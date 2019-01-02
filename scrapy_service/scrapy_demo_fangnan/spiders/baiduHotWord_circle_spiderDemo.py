@@ -10,6 +10,9 @@ from scrapy_service.scrapy_demo_fangnan.items import NewsDemoItem, BaiduHotwordI
 
 种子页：http://top.baidu.com/buzz?b=1&c=513&fr=topbuzz_b1
 难度系数：一颗星
+
+2019/01/02
+
 """
 
 
