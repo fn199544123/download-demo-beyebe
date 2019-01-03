@@ -32,7 +32,14 @@ class DemoSpider(scrapy.Spider):
         # TODO 注意callback的函数名是不带括号的！
         request1 = scrapy.Request("http://top.baidu.com/buzz?b=1&c=513&fr=topbuzz_b1",
                                   callback=self.parse_baidu_hotword, dont_filter=True)
-        return [request1]
+
+        # 在这里写一下yield 和 return的区别
+        # yield迭代器建立后，scrapy会假return执行完任务后，再用next()方法回到原来的地方继续执行
+        # return就会直接停止,应用层的话，你用yield总归是没错的（嗯，多用yield)。
+        # 详情：https://zhidao.baidu.com/question/1801721526050869707.html
+        yield [request1]
+        # 这里这块代码的逻辑结束了,你用两个都是可以的
+        # return [request1]
 
     def parse_baidu_hotword(self, response):
         # here you would extract links to follow and return Requests for

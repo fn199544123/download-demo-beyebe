@@ -57,6 +57,10 @@ class DemoRedisSpider(RedisSpider):
     }
 
     def parse(self, response):
+        # TODO
+        # TODO
+        # TODO 你需要首先使用utils的redisListUpload下发任务。否则会一直等待直到有任务来！
+
         url = response.url
         print("当前解析页", url)
         request = response.request
@@ -89,28 +93,28 @@ class DemoRedisSpider(RedisSpider):
             print("该页为法律诉讼")
             request.meta['item']['susong_html'] = response.text
             requestNew = Request(url=request.url.replace('susong', 'run'))
-            requestNew.meta['item'] =request.meta['item']
+            requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'run' in url:
             print("该页为经营状况")
             request.meta['item']['run_html'] = response.text
             requestNew = Request(url=request.url.replace('run', 'fengxian'))
-            requestNew.meta['item'] =request.meta['item']
+            requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'fengxian' in url:
             print("该页为经营风险")
             request.meta['item']['fengxian_html'] = response.text
             requestNew = Request(url=request.url.replace('fengxian', 'report'))
-            requestNew.meta['item'] =request.meta['item']
+            requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'report' in url:
             print("该页为企业年报")
             request.meta['item']['report_html'] = response.text
             requestNew = Request(url=request.url.replace('report', 'history'))
-            requestNew.meta['item'] =request.meta['item']
+            requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'history' in url:
