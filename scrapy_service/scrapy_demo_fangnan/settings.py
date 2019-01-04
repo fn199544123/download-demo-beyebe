@@ -10,7 +10,14 @@ ROBOTSTXT_OBEY = False  # 是否遵守ROBOTS协议,False为不遵守
 
 # DOWNLOAD_DELAY = 1  # 在这里写delay远远好于代码中的sleep，这代表了一批多线程任务的间隔时间
 CONCURRENT_REQUESTS = 1  # 异步线程数
+
+#重试设置，RETRY_ENABLED为是否开启重试，RETRY_TIMES为重试次数
+RETRY_ENABLED = True
+RETRY_TIMES = 5
+
 DOWNLOADER_MIDDLEWARES = {
+
+
 
 }  # 中间件,数越大优先级越小,在我的规范里一般在spider里定义
 ITEM_PIPELINES = {

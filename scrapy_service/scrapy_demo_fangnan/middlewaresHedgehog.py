@@ -24,6 +24,18 @@ class HegCookiesMiddlewars(object):
             request.cookies = cookieScrapyDict
 
 
+# Proxy中间件
+class HegProxyMiddlewars(object):
+    """
+    新城负责维护的代理池（隧道代理），每次请求返回当前高可用的IP。
+    """
+
+    def process_request(self, request, spider):
+        ip = requests.get('http://192.168.10.74:5555/random').text
+        request.meta['proxy'] = 'http://' + ip
+        print(request.meta['proxy'])
+
+
 # 去重中间件
 class HegDuplicateFilterMiddlewares(object):
     """
@@ -50,6 +62,7 @@ class HegDuplicateFilterMiddlewares(object):
     def process_response(self, request, response, spider):
         # 成功请求,正式添加进去重队列
         return response
+
 
 # UA中间件
 class HegUserAgentMiddlewares(object):

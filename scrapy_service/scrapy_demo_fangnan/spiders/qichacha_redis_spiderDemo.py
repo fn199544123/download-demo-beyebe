@@ -45,11 +45,10 @@ class DemoRedisSpider(RedisSpider):
         'REDIS_HOST': '192.168.10.9',
         'REDIS_PORT': 6379,
         'REDIS_PARAMS': {'password': '123456', 'db': 15},
-        # 指定cookies
-        'COOKIES_ENABLED': True,
-        # 设置为True的时候scrapy就会把settings的cookie关掉，使用自定义cookie
+        # 把settings的cookie中间关掉，使用自定义cookie中间件，并为自己自定义的中间件设置
         'LOVE_COOKIES': cookies,
         'DOWNLOADER_MIDDLEWARES': {
+            'scrapy.downloadermiddlewares.cookies.CookiesMiddleware': None,
             'scrapy_demo_fangnan.middlewaresHedgehog.HegCookiesMiddlewars': 1,
             'scrapy_demo_fangnan.middlewaresHedgehog.HegUserAgentMiddlewares': 2,
         }
