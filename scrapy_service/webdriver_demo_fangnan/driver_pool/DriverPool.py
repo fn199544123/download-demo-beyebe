@@ -9,6 +9,8 @@
 import threading
 from queue import Queue
 
+from selenium.webdriver.chrome.webdriver import WebDriver
+
 from scrapy_service.webdriver_demo_fangnan.driver_pool.DriverBean import WebDriverBean
 
 DRIVER_NUM = 1
@@ -47,6 +49,13 @@ class WebDriverPool():
 
     def getOneDriverNoWait(self):
         return self.driverQueue.get_nowait().driver
+
+    @staticmethod
+    def getOneDriverForTest():
+        # 为什么有这个方法？实际上不应该有...
+        # 只不过编译器总不帮我提示应该有的方法（被Queue挡住了）
+        # 所以用这个方便开发，最后替换成getOneDriver
+        return WebDriverBean().driver
 
     def returnDriver(self, driver=None):
         """
