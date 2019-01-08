@@ -1,7 +1,7 @@
 import json
 import redis
 
-from factory.downloadFactory import getDownloadImp
+from requests_service.factory.downloadFactory import getDownloadImp
 
 start_urls = ['https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html']
 redis_key = 'requests:requests_start_urls'

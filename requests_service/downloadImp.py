@@ -1,6 +1,5 @@
 # 下载器基类
 import hashlib
-import traceback
 
 import redis
 from pymongo import MongoClient

@@ -1,9 +1,8 @@
 import traceback
-import redis
 import requests
 
-from Custom_exception import LoginError
-from downloadImp import DownloadImp
+from requests_service.Custom_Exception import LoginError
+from requests_service.downloadImp import DownloadImp
 
 
 class QichachaMainImpl(DownloadImp):
