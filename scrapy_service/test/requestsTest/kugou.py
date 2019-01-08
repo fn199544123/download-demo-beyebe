@@ -1,5 +1,5 @@
-from scrapy_service.request_test.saveHtml import html_test
-from scrapy_service.request_test.saveImg import file_test
+from scrapy_service.test.requestsTest.saveHtml import html_test
+from scrapy_service.test.requestsTest.saveImg import file_test
 
 if __name__ == '__main__':
     html_test("http://www.kugou.com/song/t5y7342.html",'kugou.html')

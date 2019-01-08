@@ -2,26 +2,58 @@
 小刺猬下载集群中间件
 
 """
+import hashlib
 import random
 import json
 
 import redis
 import requests
 from scrapy import Request
+from scrapy.http import HtmlResponse
+
+redisPool14 = redis.ConnectionPool(host="192.168.10.9", password="123456", port=6379, db=14)
+redisPool15 = redis.ConnectionPool(host="192.168.10.9", password="123456", port=6379, db=15)
+redis_key = 'requests:requests_start_urls'
+
+
+# 【谢鋆维护】requests下载中间件
+class requestsMiddlewars(object):
+    def process_request(self, request, spider):
+        url = request.url
+        print("上传任务", redis_key, url)
+        # 首先判断是否下载完了,尝试取结果
+        r14 = redis.Redis(connection_pool=redisPool14)
+        r15 = redis.Redis(connection_pool=redisPool15)
+        hash = hashlib.md5()
+        hash.update(url.encode('utf-8'))
+        urlmd5 = hash.hexdigest()
+        mid = request.meta['item'].get('mid_requests', 0)  # 谢鋆Request下载框架MID
+
+        print('urlmd5', urlmd5)
+        mission = r14.get(urlmd5)
+        if mission is not None:
+            html = mission.decode()
+            return HtmlResponse(request.url, body=html, encoding='utf-8', request=request)
+        # 如果没能找到结果,就查看是否在临时去重库里,这个是一级去重库
+        if not r14.get('Dup_' + urlmd5):
+            r14.expire(urlmd5, 10 * 60)
+            print("回调结果成功")
+            print(mission)
+            # 如果都没有找到最后下发给谢鋆的下载框架
+            dictNow = {'url': request.url, 'mid': mid, 'etc': ''}
+            r14.set('Dup_' + urlmd5, 'Duplicate_removal')
+            r15.lpush(redis_key, json.dumps(dictNow))
+        return request
 
 
 # Cookie中间件
 class HegCookiesMiddlewars(object):
 
     def process_request(self, request, spider):
-        if spider.settings.get('LOVE_COOKIES') is not None:
-            loveCookies = spider.settings.get('LOVE_COOKIES')
-
-            cookieScrapyDict = {}
-            for cookieNow in loveCookies:
-                cookieScrapyDict.update({cookieNow['name']: cookieNow['value']})
-            print("cookies注入:", cookieScrapyDict)
-            request.cookies = cookieScrapyDict
+        cookieNow = {"QCCSESSID": "ck3e09qbhsqn2eh8g6195i4cm1"}
+        print("cookies注入:", cookieNow)
+        request.cookies = cookieNow
+        request.meta.update({'dont_merge_cookies': True})
 
 
 # Proxy中间件
@@ -61,7 +93,7 @@ class HegDuplicateFilterMiddlewares(object):
 
     def process_response(self, request, response, spider):
         # 成功请求,正式添加进去重队列
-        return response
+        return None
 
 
 # UA中间件
@@ -128,5 +160,7 @@ class HegTestMiddlewares(object):
 
 
 if __name__ == '__main__':
-    url = "http://121.9.245.173:8001/middleware/htmlparse.go"
-    print(json.loads(requests.get(url).text))
+    hash = hashlib.md5()
+    hash.update('12354'.encode('utf-8'))
+    urlmd5 = hash.hexdigest()
+    print('urlmd5', urlmd5)
