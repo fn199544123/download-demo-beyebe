@@ -9,6 +9,8 @@ import traceback
 import pymongo
 from pymongo.errors import DuplicateKeyError
 
+from logging_utils.log import mylog
+
 """
 验证爬取数据，检查爬取字段。
 查重并丢弃重复内容。
@@ -51,9 +53,9 @@ class MongoPipeline(object):
         # 如果不是特别需求,这里不要画蛇添足的添加入库时间,mongo的入库时间是可以通过自建索引_id来查询的
         try:
             self.db[tableName].insert_one(dict(item))
-            print(spider.name, "mongo成功入库!")
+            mylog.info(spider.name, "mongo成功入库!")
         except DuplicateKeyError:
-            print("该条主键存储重复,跳过")
+            mylog.info("该条主键存储重复,跳过")
         except:
             traceback.print_exc()
         # 这里返回item，后续的pipelines才能继续处理数据
@@ -62,17 +64,17 @@ class MongoPipeline(object):
 
 class KafkaPipeline(object):
     def process_item(self, item, spider):
-        print("Kafka尚未开发,暂不支持")
+        mylog.info("Kafka尚未开发,暂不支持")
         return item
 
 
 class LocalFilePipeline(object):
     def process_item(self, item, spider):
-        print("本地文件存储尚未开发,暂不支持")
+        mylog.info("本地文件存储尚未开发,暂不支持")
         return item
 
 
 class OSSPipeline(object):
     def process_item(self, item, spider):
-        print("OSSPipeline尚未开发,暂不支持")
+        mylog.info("OSSPipeline尚未开发,暂不支持")
         return item

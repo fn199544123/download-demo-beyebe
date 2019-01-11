@@ -1,6 +1,7 @@
 import scrapy
 from scrapy import cmdline
 
+from logging_utils.log import mylog
 from scrapy_service.scrapy_demo_fangnan.items import NewsDemoItem
 
 """
@@ -33,7 +34,7 @@ class DemoSpider(scrapy.Spider):
     def parse_sina(self, response):
         # here you would extract links to follow and return Requests for
         # each of them, with another callback
-        print("开始新浪网站的解析")
+        mylog.info("开始新浪网站的解析")
         # 可以使用xpath替代 response.xpath
         items = response.css(".newslist")[0].css('a')
         for item in items:
@@ -47,7 +48,7 @@ class DemoSpider(scrapy.Spider):
 
 
     def parse_sohu(self, response):
-        print("开始搜狐网站的解析")
+        mylog.info("开始搜狐网站的解析")
         items = response.css(".news")[0].css('a')
         for item in items:
 

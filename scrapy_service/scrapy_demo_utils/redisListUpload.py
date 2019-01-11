@@ -5,6 +5,8 @@
 
 import redis
 
+from logging_utils.log import mylog
+
 start_urls = ['https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html']
 redis_key = 'redisSpiderDemo:start_urls'
 # REDIS池应用单例模式构造
@@ -16,7 +18,7 @@ if __name__ == '__main__':
         r = redis.Redis(connection_pool=redisPool)
 
         for url in start_urls:
-            print("上传任务", redis_key, url)
+            mylog.info("上传任务", redis_key, url)
             r.lpush(redis_key, url)
-        print('hahaha')
+        mylog.info('hahaha')
 

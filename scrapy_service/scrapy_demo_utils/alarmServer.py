@@ -18,6 +18,7 @@ import numpy as np
 import requests
 
 # import urllib.request
+from logging_utils.log import mylog
 
 define("port", default=9009, help="run on the given port", type=int)
 LOVE_MONGODB_HOST = '192.168.10.9'
@@ -54,7 +55,7 @@ class IndexHandler(tornado.web.RequestHandler):
                 dataNow['num_day'] = self.countBefore(tableName, 60 * 60 * 24)
                 ansDict['data_db'].append(dataNow)
             except:
-                print("数据库查询出现未知异常,表名", tableName)
+                mylog.info("数据库查询出现未知异常,表名", tableName)
                 traceback.print_exc()
         # TODO Redis查询
         # TODO Kafka查询
@@ -77,14 +78,14 @@ class IndexHandler(tornado.web.RequestHandler):
         # 转换成16进制的字符串，再加补齐16个0
         # t += 60 * 8
         t16 = hex(t)[2:]
-        # print(t16)
+        # mylog.info(t16)
         return str(t16) + '0000000000000000'
 
     def __objIdToTime(self, dateStr):
         dateStr = str(dateStr)[:8]
         t10 = int(dateStr, 16)
-        # print(t10)
-        # print(datetime.datetime.fromtimestamp(int(t10)))
+        # mylog.info(t10)
+        # mylog.info(datetime.datetime.fromtimestamp(int(t10)))
         return t10
 
 
@@ -93,5 +94,5 @@ if __name__ == "__main__":
     app = tornado.web.Application(handlers=[('/alarm.go', IndexHandler)])
     http_server = tornado.httpserver.HTTPServer(app)
     http_server.listen(options.port)
-    print('[alarm Demo]tornadoansDict 启动')
+    mylog.info('[alarm Demo]tornadoansDict 启动')
     tornado.ioloop.IOLoop.instance().start()

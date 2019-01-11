@@ -5,6 +5,8 @@ import traceback
 import redis
 from pymongo import MongoClient
 
+from logging_utils.log import mylog
+
 
 def format_headers(string) -> dict:
     """
@@ -58,11 +60,11 @@ class DownloadImp:
 
     def error(self, mission, err):
         url = mission['url']
-        print(err)
-        print(url)
+        mylog.info(err)
+        mylog.info(url)
         self.hash_.update(url.encode('utf-8'))
         urlmd5 = self.hash_.hexdigest()
         self.r_return.set(urlmd5, err)
         self.r_return.expire(urlmd5, 5 * 60)
-        print(urlmd5)
-        print('返回结果异常，url:', url)
+        mylog.info(urlmd5)
+        mylog.info('返回结果异常，url:', url)

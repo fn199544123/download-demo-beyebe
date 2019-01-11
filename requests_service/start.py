@@ -1,7 +1,8 @@
 import json
 import redis
 
-from factory.downloadFactory import getDownloadImp
+from logging_utils.log import mylog
+from requests_service.factory.downloadFactory import getDownloadImp
 
 start_urls = ['https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html']
 redis_key = 'requests:requests_start_urls'
@@ -18,8 +19,8 @@ if __name__ == '__main__':
         if mission is None:
             continue
         mission = json.loads(mission.decode().replace("'", '"'))
-        print(mission)
-        print('获取任务成功')
+        mylog.info(mission)
+        mylog.info('获取任务成功')
         try:
             getDownloadImp(mission['mid']).download(mission)
         except Exception as err:

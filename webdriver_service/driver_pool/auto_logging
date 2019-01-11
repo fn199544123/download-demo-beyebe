@@ -1,0 +1,4 @@
+[2019-01-08 19:29:20,415] - DriverBean.py [Line:56] - [INFO]-[thread:4563649984]-[process:2745] - 覆写该方法,完成任务和操作
+[2019-01-08 19:29:21,059] - DriverBean.py [Line:52] - [INFO]-[thread:4563649984]-[process:2745] - 自动归还Driver
+[2019-01-08 19:31:38,228] - loginDriverImp.py [Line:7] - [INFO]-[thread:4409951680]-[process:2863] - 覆写该登陆方法,完成任务和操作
+[2019-01-08 19:31:40,425] - driverBean.py [Line:52] - [INFO]-[thread:4409951680]-[process:2863] - 自动归还Driver

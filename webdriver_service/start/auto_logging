@@ -1,0 +1,10 @@
+[2019-01-10 18:34:43,476] - driverBean.py [Line:53] - [INFO]-[thread:4706252224]-[process:40768] - 自动归还Driver
+[2019-01-10 18:35:25,174] - driverBean.py [Line:53] - [INFO]-[thread:4521133504]-[process:40815] - 自动归还Driver
+[2019-01-10 19:12:55,483] - driverBean.py [Line:53] - [INFO]-[thread:4657190336]-[process:41953] - 自动归还Driver
+[2019-01-11 09:21:18,960] - driverBean.py [Line:66] - [INFO]-[thread:4567328192]-[process:44157] - 自动归还Driver
+[2019-01-11 10:42:53,324] - driverBean.py [Line:72] - [INFO]-[thread:4555941312]-[process:1016] - 自动归还Driver成功
+[2019-01-11 10:42:55,699] - driverBean.py [Line:74] - [INFO]-[thread:4555941312]-[process:1016] - 数据存储成功
+[2019-01-11 11:02:04,462] - driverBean.py [Line:80] - [INFO]-[thread:4497700288]-[process:1735] - 自动归还Driver成功
+[2019-01-11 11:02:20,570] - driverBean.py [Line:80] - [INFO]-[thread:4497700288]-[process:1735] - 自动归还Driver成功
+[2019-01-11 11:06:14,523] - driverBean.py [Line:80] - [INFO]-[thread:4567020992]-[process:1892] - 自动归还Driver成功
+[2019-01-11 11:07:39,868] - driverBean.py [Line:80] - [INFO]-[thread:4629030336]-[process:1959] - 自动归还Driver成功

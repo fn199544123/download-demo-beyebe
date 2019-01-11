@@ -1,5 +1,5 @@
-from factory.qichachaMainImpl import QichachaMainImpl
-from factory.qichachaOtherImpl import QichachaOtherImpl
+from requests_service.factory.qichachaMainImpl import QichachaMainImpl
+from requests_service.factory.qichachaOtherImpl import QichachaOtherImpl
 
 downloadImplList = [
     QichachaMainImpl(),

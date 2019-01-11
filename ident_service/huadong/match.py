@@ -4,6 +4,8 @@
 # @time: 2018/10/25 18:36
 import cv2
 
+from logging_utils.log import mylog
+
 
 def match(target):
     img = cv2.imread(target, 0)
@@ -23,7 +25,7 @@ def match(target):
     left_top = max_loc  # 左上角
     right_bottom = (left_top[0] + w, left_top[1] + h)  # 右下角
     cv2.rectangle(img, left_top, right_bottom, 255, 2)  # 画出矩形位置
-    print(left_top, right_bottom)
+    mylog.info(left_top, right_bottom)
 
     res = list(left_top)
     res[0] = res[0] + 27
@@ -34,4 +36,4 @@ def match(target):
 
 if __name__ == "__main__":
     target = 'target.jpg'
-    print(match(target))
+    mylog.info(match(target))

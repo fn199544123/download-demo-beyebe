@@ -50,7 +50,7 @@ class CrackSlider():
         self.zoom = 320 / int(size_loc[0])
 
     def get_tracks(self, distance):
-        print(distance)
+        mylog.info(distance)
         distance += 20
         v = 0
         t = 0.2
@@ -76,7 +76,7 @@ class CrackSlider():
         template = cv2.imread(template, 0)
         run = 1
         w, h = template.shape[::-1]
-        print(w, h)
+        mylog.info(w, h)
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
         # 使用二分法查找阈值的精确值
@@ -85,21 +85,21 @@ class CrackSlider():
         while run < 20:
             run += 1
             threshold = (R + L) / 2
-            print(threshold)
+            mylog.info(threshold)
             if threshold < 0:
-                print('Error')
+                mylog.info('Error')
                 return None
             loc = np.where(res >= threshold)
-            print(len(loc[1]))
+            mylog.info(len(loc[1]))
             if len(loc[1]) > 1:
                 L += (R - L) / 2
             elif len(loc[1]) == 1:
-                print('目标区域起点x坐标为：%d' % loc[1][0])
+                mylog.info('目标区域起点x坐标为：%d' % loc[1][0])
                 break
             elif len(loc[1]) < 1:
                 R -= (R - L) / 2
-        print(type(loc[1][0]))
-        print("loc:", loc[1][0])
+        mylog.info(type(loc[1][0]))
+        mylog.info("loc:", loc[1][0])
         return loc[1][0]
 
     def crack_slider(self):
@@ -109,7 +109,7 @@ class CrackSlider():
         self.get_pic()
         distance = self.match(target, template)
         tracks = self.get_tracks((distance + 7) * self.zoom)  # 对位移的缩放计算
-        print(tracks)
+        mylog.info(tracks)
         slider = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'yidun_slider')))
         ActionChains(self.driver).click_and_hold(slider).perform()
 
@@ -127,9 +127,9 @@ class CrackSlider():
         try:
             failure = self.wait.until(
                 EC.text_to_be_present_in_element((By.CLASS_NAME, 'yidun_tips__text'), '向右滑动滑块填充拼图'))
-            print(failure)
+            mylog.info(failure)
         except:
-            print('验证成功')
+            mylog.info('验证成功')
             return None
 
         if failure:

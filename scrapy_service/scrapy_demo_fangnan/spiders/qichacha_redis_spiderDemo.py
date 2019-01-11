@@ -3,6 +3,7 @@ import json
 from scrapy import cmdline, Request
 from scrapy_redis.spiders import RedisSpider
 
+from logging_utils.log import mylog
 from scrapy_service.scrapy_demo_fangnan.items import QichachaHtmlItem
 
 """
@@ -57,36 +58,36 @@ class DemoRedisSpider(RedisSpider):
         # TODO 你需要首先使用utils的redisListUpload下发任务。否则会一直等待直到有任务来！
 
         url = response.url
-        print("当前解析页", url)
+        mylog.info("当前解析页", url)
         request = response.request
         if '玄鸟' not in response.text and 'company_getinfos' not in url:
-            print("虽然正常可达,但登陆失败,需要更新cookie")
-            print(response.text)
+            mylog.info("虽然正常可达,但登陆失败,需要更新cookie")
+            mylog.info(response.text)
             with open("../web_msg/qcc_loginErr.html", "w", encoding='utf-8') as fp:
                 fp.write(response.text)
             raise Exception("虽然正常可达,但登陆失败,需要更新cookie")
         elif '#ipo' in url:
-            print("该页为上市信息，不采集")
+            mylog.info("该页为上市信息，不采集")
             # IPO不采集
             request._set_url = (request.url.replace('#ipo', '#base'))
             request.dont_filter = True
 
             yield request
         elif 'base' in url or 'firm' in url:
-            print("该页为基本信息")
+            mylog.info("该页为基本信息")
             item = QichachaHtmlItem()
             item['base_html'] = response.text
             item['name'] = response.css('h1::text')[0].extract()
             item['id'] = url.split('firm_')[1].split('.')[0]
             item['mid_requests'] = 1  # 谢鋆Request下载框架MID
-            print("企查查首页解析成功:", item['name'], item['id'])
+            mylog.info("企查查首页解析成功:", item['name'], item['id'])
             requestNew = Request(url=self.URL_BASE.format(item['id'], item['name'], 'susong'))
             requestNew.meta['item'] = item
             requestNew.priority = request.priority + 100
             requestNew.dont_filter = True
             # yield requestNew
         elif 'susong' in url:
-            print("该页为法律诉讼")
+            mylog.info("该页为法律诉讼")
             request.meta['item']['susong_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
@@ -95,7 +96,7 @@ class DemoRedisSpider(RedisSpider):
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'run' in url:
-            print("该页为经营状况")
+            mylog.info("该页为经营状况")
             request.meta['item']['run_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
@@ -104,7 +105,7 @@ class DemoRedisSpider(RedisSpider):
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'fengxian' in url:
-            print("该页为经营风险")
+            mylog.info("该页为经营风险")
             request.meta['item']['fengxian_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
@@ -113,7 +114,7 @@ class DemoRedisSpider(RedisSpider):
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'report' in url:
-            print("该页为企业年报")
+            mylog.info("该页为企业年报")
             request.meta['item']['report_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
@@ -122,16 +123,16 @@ class DemoRedisSpider(RedisSpider):
             requestNew.priority = request.priority + 100
             yield requestNew
         elif 'history' in url:
-            print("该页为历史股东")
+            mylog.info("该页为历史股东")
             request.meta['item']['history_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
-            print('存储数据')
+            mylog.info('存储数据')
             yield request.meta['item']
 
         else:
-            print("跳转到了异常页,停止抓取")
-            print(response.text)
+            mylog.info("跳转到了异常页,停止抓取")
+            mylog.info(response.text)
             raise Exception("抓取异常,url不包括关键字,停止抓取")
 
 

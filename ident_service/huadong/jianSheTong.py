@@ -60,7 +60,7 @@ class CrackSlider():
         :param distance:滑块起始位置和终点位置的水平位移
         :return:
         """
-        print(distance)
+        mylog.infodistance)
         distance += 20
         v = 0
         t = 0.2
@@ -105,7 +105,7 @@ class CrackSlider():
         left_top = max_loc  # 左上角
         right_bottom = (left_top[0] + w, left_top[1] + h)  # 右下角
         cv2.rectangle(img, left_top, right_bottom, 255, 2)  # 画出矩形位置
-        # print(left_top, right_bottom)
+        # mylog.infoleft_top, right_bottom)
         res = list(left_top)
         res[0] = res[0] + 3  # 按实际情况微调
         res[1] = res[1] + 27
@@ -121,7 +121,7 @@ class CrackSlider():
         self.get_pic()
         distance = self.match(target)
         tracks = self.get_tracks((distance) * self.zoom)  # 对位移的缩放计算
-        print(tracks)
+        mylog.infotracks)
         slider = self.wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'yidun_slider')))
         ActionChains(self.driver).click_and_hold(slider).perform()
 
@@ -144,9 +144,9 @@ class CrackSlider():
         # try:
         #     failure = self.wait.until(
         #         EC.text_to_be_present_in_element((By.CLASS_NAME, 'yidun_tips__text'), '向右拖动滑块填充拼图'))
-        #     print(failure)
+        #     mylog.infofailure)
         # except:
-        #     print('验证成功')
+        #     mylog.info'验证成功')
         #     return None
         #
         # if failure:

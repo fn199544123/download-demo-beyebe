@@ -4,6 +4,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 import re
 
+from logging_utils.log import mylog
 from scrapy_service.scrapy_demo_fangnan.items import IqiyiVideoItem
 
 """
@@ -61,15 +62,16 @@ class DemoCrawlSpider(CrawlSpider):
         for aTag in aList:
             try:
                 if 'www.iqiyi.com/v_' in aTag.css('::attr(href)').extract()[0]:
-                    #存储这个链接
+                    # 存储这个链接
                     item = IqiyiVideoItem()
-                    item['title']=aTag.css('::text').extract()[0]
+                    item['title'] = aTag.css('::text').extract()[0]
                     item['url'] = aTag.css('::attr(href)').extract()[0]
 
                     yield item
             except:
-                print("这个a标签有问题（比如没有href）,跳过")
+                mylog.info("这个a标签有问题（比如没有href）,跳过")
                 continue
+
 
 if __name__ == '__main__':
     cmdline.execute("scrapy crawl crawlSpiderDemo".split())

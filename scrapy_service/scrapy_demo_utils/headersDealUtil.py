@@ -5,6 +5,8 @@ By xincheng
 使用方法：
 打开chrome访问网页，使用调试器进行调试，进入网页点击headers，拉到requestHeaders整体复制
 """
+from logging_utils.log import mylog
+
 headersStr = """
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
 Accept-Encoding: gzip, deflate, br
@@ -39,6 +41,6 @@ if __name__ == '__main__':
     headers = format_headers(headersStr)
     rep = requests.get("https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html#report", headers=headers)
     html = rep.text
-    print(rep.url)
+    mylog.info(rep.url)
     with open("web_msg/headerTest.html", "w", encoding='utf-8') as fp:
         fp.write(html)

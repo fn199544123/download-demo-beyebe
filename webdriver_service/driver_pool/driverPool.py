@@ -11,9 +11,9 @@ from queue import Queue
 
 from selenium.webdriver.chrome.webdriver import WebDriver
 
-from scrapy_service.webdriver_demo_fangnan.driver_pool.DriverBean import WebDriverBean
-
-DRIVER_NUM = 1
+from logging_utils.log import mylog
+from webdriver_service.driverBean import WebDriverImp
+from webdriver_service.loginDriverImp import LoginDriverImp
 
 
 def synchronized(func):
@@ -32,49 +32,36 @@ class WebDriverPool():
     driverQueue = Queue()
 
     @synchronized
-    def __new__(cls, *args, **kwargs):
-        print(cls.__instance)
+    def __new__(cls, dBean=WebDriverImp, num=1, headless=False, *args, **kwargs):
+
         if not cls.__instance:
-            print("成功实例化")
-            for i in range(DRIVER_NUM):
-                cls.driverQueue.put(WebDriverBean())
+            mylog.info("成功实例化")
             cls.__instance = super().__new__(cls)
+            for i in range(num):
+                cls.driverQueue.put(dBean(cls.__instance, headless=headless))
+
         else:
+            mylog.info("已经实例化")
             pass
-            print("已经实例化")
         return cls.__instance
 
     def getOneDriver(self):
-        return self.driverQueue.get().driver
+        return self.driverQueue.get()
 
     def getOneDriverNoWait(self):
-        return self.driverQueue.get_nowait().driver
+        return self.driverQueue.get_nowait()
 
-    @staticmethod
-    def getOneDriverForTest():
-        # 为什么有这个方法？实际上不应该有...
-        # 只不过编译器总不帮我提示应该有的方法（被Queue挡住了）
-        # 所以用这个方便开发，最后替换成getOneDriver
-        return WebDriverBean().driver
-
-    def returnDriver(self, driver=None):
+    def returnDriver(self, driverBean):
         """
         归还源生driver实例
         :param driver:
         :return:
         """
-        driverBean = WebDriverBean(driver)
         self.driverQueue.put_nowait(driverBean)
 
     def queueSize(self):
         return self.driverQueue.qsize()
 
 
-def createObj():
-    WebDriverPool()
-
-
 if __name__ == '__main__':
-
-    for i in range(10):
-        threading.Thread(target=createObj).start()
+    WebDriverPool(dBean=LoginDriverImp, num=1).getOneDriver().deal()

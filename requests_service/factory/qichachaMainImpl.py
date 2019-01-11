@@ -2,8 +2,9 @@ import traceback
 import redis
 import requests
 
-from Custom_exception import LoginError
-from downloadImp import DownloadImp
+from logging_utils.log import mylog
+from requests_service.Custom_exception import LoginError
+from requests_service.downloadImp import DownloadImp
 
 
 class QichachaMainImpl(DownloadImp):
@@ -17,8 +18,8 @@ class QichachaMainImpl(DownloadImp):
             self.hash_.update(url.encode('utf-8'))
             urlmd5 = self.hash_.hexdigest()
             self.r_return.set(urlmd5, html)
-            print(urlmd5)
-            print("回调任务成功")
+            mylog.info(urlmd5)
+            mylog.info("回调任务成功")
         else:
             traceback.print_exc()
             raise LoginError('未能成功登入账户。')
