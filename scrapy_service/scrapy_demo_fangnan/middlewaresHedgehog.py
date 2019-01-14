@@ -8,6 +8,7 @@ import json
 
 import redis
 import requests
+import time
 from scrapy import Request
 from scrapy.http import HtmlResponse
 
@@ -62,9 +63,15 @@ class requestsMiddlewars(object):
         """
         r14 = redis.Redis(connection_pool=redisPool14)
         r15 = redis.Redis(connection_pool=redisPool15)
-        dictNow = {'url': url, 'mid': mid, 'etc': ''}
-        r14.set('Dup_' + url, 'Duplicate_removal')
-        r15.lpush(redis_key, json.dumps(dictNow))
+        # dictNow = {'url': url, 'mid': mid, 'etc': ''}
+        dupKey = 'Dup_' + url + 'Duplicate_removal'
+        if not r14.get(dupKey):
+            r14.set(dupKey, url)
+            r14.expire('Dup_' + url, 60)
+            r15.zadd(redis_key, url, float(time.time()))
+
+        else:
+            print("这个任务60秒内已经下发过,暂时不重复下发", url)
 
 
 # Cookie中间件
