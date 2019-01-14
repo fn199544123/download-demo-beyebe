@@ -31,6 +31,7 @@ class IqiyiVideoItem(scrapy.Item):
 class QichachaHtmlItem(scrapy.Item):
     id = scrapy.Field()
     name = scrapy.Field()
+    mid_requests = scrapy.Field()
     base_html = scrapy.Field()
     susong_html = scrapy.Field()
     run_html = scrapy.Field()

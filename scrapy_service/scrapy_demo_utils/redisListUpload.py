@@ -2,6 +2,7 @@
 # 这个类用来上传scrapy_redis任务
 # 用比一比举例
 """
+import uuid
 
 import redis
 
@@ -14,11 +15,11 @@ redisPool = redis.ConnectionPool(host="192.168.10.9", password="123456", port=63
 # 账号: 18923477217
 # 密码: pk*****
 if __name__ == '__main__':
-    while True:
-        r = redis.Redis(connection_pool=redisPool)
 
-        for url in start_urls:
-            mylog.info("上传任务", redis_key, url)
-            r.lpush(redis_key, url)
-        mylog.info('hahaha')
+    r = redis.Redis(connection_pool=redisPool)
 
+    for url in start_urls:
+        urlNow = url + "?dup=" + str(uuid.uuid1()).replace('-', '_')
+        print("上传任务" + redis_key + urlNow)
+        r.lpush(redis_key, urlNow)
+    print('hahaha')

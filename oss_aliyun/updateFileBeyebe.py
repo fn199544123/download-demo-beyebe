@@ -59,7 +59,7 @@ def fileUpdate(file_dir, isFileName=False):
     f = open(file_dir, 'rb')
     file = f.read()
     f.close()
-    mylog.info('正在上传')
+    print('正在上传')
     if isFileName:
         fileName = file_dir.split('/')[-1].split('.')[0]
         msg = uploadToOss(file_dir.split('.')[-1], file, fileName)
@@ -73,13 +73,13 @@ def mkdirUpdate(file_mkdir_dir, isFileName=False):
     msgList = []
     for root, dirs, files in os.walk(file_mkdir_dir):
         for fileName in files:
-            mylog.info("文件路径", file_mkdir_dir + '/' + fileName)
+            print("文件路径", file_mkdir_dir + '/' + fileName)
             msgList.append(fileUpdate(file_mkdir_dir + '/' + fileName, isFileName=isFileName))
     return msgList
 
 
 if __name__ == '__main__':
     # 单文件上传
-    mylog.info(fileUpdate('./test.txt'))
+    print(fileUpdate('./test.txt'))
     # 文件夹上传,如果isFileName=True,那么地址会保留文件名,并且不会被文件系统去重逻辑去重
-    mylog.info(mkdirUpdate('./banner', isFileName=True))
+    print(mkdirUpdate('./banner', isFileName=True))

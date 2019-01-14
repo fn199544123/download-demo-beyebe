@@ -42,11 +42,9 @@ class DemoRedisSpider(RedisSpider):
         'REDIS_HOST': '192.168.10.9',
         'REDIS_PORT': 6379,
         'REDIS_PARAMS': {'password': '123456', 'db': 15},
-        'COOKIES_ENABLED': True,
-        'COOKIE': {'QCCSESSID': 'ck3e09qbhsqn2eh8g6195i4cm1'},
         'DOWNLOADER_MIDDLEWARES': {
             # 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware': None,
-            'scrapy_demo_fangnan.middlewaresHedgehog.HegCookiesMiddlewars': 1,
+            # 'scrapy_demo_fangnan.middlewaresHedgehog.HegCookiesMiddlewars': 1,
             'scrapy_demo_fangnan.middlewaresHedgehog.HegUserAgentMiddlewares': 2,
             'scrapy_demo_fangnan.middlewaresHedgehog.requestsMiddlewars': 999,
 
@@ -58,81 +56,85 @@ class DemoRedisSpider(RedisSpider):
         # TODO 你需要首先使用utils的redisListUpload下发任务。否则会一直等待直到有任务来！
 
         url = response.url
-        mylog.info("当前解析页", url)
+        print("当前解析页", url)
         request = response.request
         if '玄鸟' not in response.text and 'company_getinfos' not in url:
-            mylog.info("虽然正常可达,但登陆失败,需要更新cookie")
-            mylog.info(response.text)
+            print("虽然正常可达,但登陆失败,需要更新cookie")
+            print(response.text)
             with open("../web_msg/qcc_loginErr.html", "w", encoding='utf-8') as fp:
                 fp.write(response.text)
             raise Exception("虽然正常可达,但登陆失败,需要更新cookie")
         elif '#ipo' in url:
-            mylog.info("该页为上市信息，不采集")
+            print("该页为上市信息，不采集")
             # IPO不采集
             request._set_url = (request.url.replace('#ipo', '#base'))
             request.dont_filter = True
 
             yield request
         elif 'base' in url or 'firm' in url:
-            mylog.info("该页为基本信息")
+            print("该页为基本信息")
             item = QichachaHtmlItem()
             item['base_html'] = response.text
             item['name'] = response.css('h1::text')[0].extract()
             item['id'] = url.split('firm_')[1].split('.')[0]
             item['mid_requests'] = 1  # 谢鋆Request下载框架MID
-            mylog.info("企查查首页解析成功:", item['name'], item['id'])
+            print("企查查首页解析成功:", item['name'], item['id'])
             requestNew = Request(url=self.URL_BASE.format(item['id'], item['name'], 'susong'))
             requestNew.meta['item'] = item
+            requestNew.meta['item']['mid_requests'] = 2
             requestNew.priority = request.priority + 100
             requestNew.dont_filter = True
-            # yield requestNew
+            yield requestNew
         elif 'susong' in url:
-            mylog.info("该页为法律诉讼")
+            print("该页为法律诉讼")
             request.meta['item']['susong_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
             requestNew = Request(url=request.url.replace('susong', 'run'))
             requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
+            requestNew.dont_filter = True
             yield requestNew
         elif 'run' in url:
-            mylog.info("该页为经营状况")
+            print("该页为经营状况")
             request.meta['item']['run_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
             requestNew = Request(url=request.url.replace('run', 'fengxian'))
             requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
+            requestNew.dont_filter = True
             yield requestNew
         elif 'fengxian' in url:
-            mylog.info("该页为经营风险")
+            print("该页为经营风险")
             request.meta['item']['fengxian_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
             requestNew = Request(url=request.url.replace('fengxian', 'report'))
             requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
+            requestNew.dont_filter = True
             yield requestNew
         elif 'report' in url:
-            mylog.info("该页为企业年报")
+            print("该页为企业年报")
             request.meta['item']['report_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
 
             requestNew = Request(url=request.url.replace('report', 'history'))
             requestNew.meta['item'] = request.meta['item']
             requestNew.priority = request.priority + 100
+            requestNew.dont_filter = True
             yield requestNew
         elif 'history' in url:
-            mylog.info("该页为历史股东")
+            print("该页为历史股东")
             request.meta['item']['history_html'] = response.text
             request.meta['item']['mid_requests'] = 2  # 谢鋆Request下载框架MID
-
-            mylog.info('存储数据')
+            print('存储数据')
             yield request.meta['item']
 
         else:
-            mylog.info("跳转到了异常页,停止抓取")
-            mylog.info(response.text)
+            print("跳转到了异常页,停止抓取")
+            print(response.text)
             raise Exception("抓取异常,url不包括关键字,停止抓取")
 
 

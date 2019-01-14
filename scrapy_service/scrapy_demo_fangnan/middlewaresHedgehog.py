@@ -22,30 +22,49 @@ redis_key = 'requests:requests_start_urls'
 class requestsMiddlewars(object):
     def process_request(self, request, spider):
         url = request.url
-        mylog.info("上传任务", redis_key, url)
+        # 首先分发mid，未来会删除
+        try:
+            mid = request.meta['item'].get('mid_requests', 0)  # 谢鋆Request下载框架MID
+        except:
+            # TODO 这里有个下发mid的逻辑,未来会删除，无需依靠mid下发
+            mid = 1
+
         # 首先判断是否下载完了,尝试取结果
         r14 = redis.Redis(connection_pool=redisPool14)
-        r15 = redis.Redis(connection_pool=redisPool15)
+        # r15 = redis.Redis(connection_pool=redisPool15)
         hash = hashlib.md5()
         hash.update(url.encode('utf-8'))
         urlmd5 = hash.hexdigest()
-        mid = request.meta['item'].get('mid_requests', 0)  # 谢鋆Request下载框架MID
 
-        mylog.info('urlmd5', urlmd5)
-        mission = r14.get(urlmd5)
+        # print('urlmd5 ' + urlmd5)
+        mission = r14.get(url)
         if mission is not None:
             html = mission.decode()
             return HtmlResponse(request.url, body=html, encoding='utf-8', request=request)
-        # 如果没能找到结果,就查看是否在临时去重库里,这个是一级去重库
-        if not r14.get('Dup_' + urlmd5):
-            r14.expire(urlmd5, 10 * 60)
-            mylog.info("回调结果成功")
-            mylog.info(mission)
-            # 如果都没有找到最后下发给谢鋆的下载框架
-            dictNow = {'url': request.url, 'mid': mid, 'etc': ''}
-            r14.set('Dup_' + urlmd5, 'Duplicate_removal')
-            r15.lpush(redis_key, json.dumps(dictNow))
-        return request
+        if request.dont_filter:
+            self.request_download(url, mid)
+            return request
+        else:
+            # 如果没能找到结果,就查看是否在临时去重库里,这个是一级去重库
+            if not r14.get('Dup_' + urlmd5):
+                r14.expire(urlmd5, 10 * 60)
+                print("回调结果成功")
+                print(mission)
+                # 如果都没有找到最后下发给谢鋆的下载框架
+                self.request_download(url, mid)
+            return request
+
+    def request_download(self, url, mid):
+        """
+        异步交付给谢鋆的框架,不会获取结果
+        :param url:
+        :return:
+        """
+        r14 = redis.Redis(connection_pool=redisPool14)
+        r15 = redis.Redis(connection_pool=redisPool15)
+        dictNow = {'url': url, 'mid': mid, 'etc': ''}
+        r14.set('Dup_' + url, 'Duplicate_removal')
+        r15.lpush(redis_key, json.dumps(dictNow))
 
 
 # Cookie中间件
@@ -53,7 +72,7 @@ class HegCookiesMiddlewars(object):
 
     def process_request(self, request, spider):
         cookieNow = {"QCCSESSID": "ck3e09qbhsqn2eh8g6195i4cm1"}
-        mylog.info("cookies注入:", cookieNow)
+        print("cookies注入:", cookieNow)
         request.cookies = cookieNow
         request.meta.update({'dont_merge_cookies': True})
 
@@ -67,7 +86,7 @@ class HegProxyMiddlewars(object):
     def process_request(self, request, spider):
         ip = requests.get('http://192.168.10.74:5555/random').text
         request.meta['proxy'] = 'http://' + ip
-        mylog.info(request.meta['proxy'])
+        print(request.meta['proxy'])
 
 
 # 去重中间件
@@ -86,12 +105,12 @@ class HegDuplicateFilterMiddlewares(object):
         isFilter = r.sadd(spider.name, request.url)
         if isFilter == 0:
             # 已经存在了,不再抓取
-            mylog.info("去重不再抓取", request.url)
+            print("去重不再抓取", request.url)
             # raise IgnoreRequest("去重不再抓取")
             r = redis.Redis(connection_pool=self.redisPool)
             name = r.lpop('name').decode()
         else:
-            mylog.info("通过去重，继续抓取！", request.url)
+            print("通过去重，继续抓取！", request.url)
 
     def process_response(self, request, response, spider):
         # 成功请求,正式添加进去重队列
@@ -125,24 +144,24 @@ class HegUserAgentMiddlewares(object):
 class HegurlChangeMiddlewares(object):
     def process_request(self, request, spider):
         # if 'm.qichacha.com/search?key=' in request.url:
-        #     mylog.info("企查查搜索页url重定向")
+        #     print("企查查搜索页url重定向")
         #     urlOld = request.url
         #     request._set_url(urlOld.replace('m.', 'www.'))
-        #     mylog.info("原", urlOld, "修改", request.url)
+        #     print("原", urlOld, "修改", request.url)
         if 'm.qichacha.com/firm' in request.url:
-            mylog.info("企查查落地页重定向")
+            print("企查查落地页重定向")
             urlOld = request.url
             request._set_url(urlOld.replace('m.', 'www.'))
-            mylog.info("原", urlOld, "修改", request.url)
+            print("原", urlOld, "修改", request.url)
         # if 'm.tianyancha.com/company/' in request.url:
-        #     mylog.info("天眼查修正落地页,手机连接至http连接")
+        #     print("天眼查修正落地页,手机连接至http连接")
         #     urlOld = request.url
         #     request._set_url(urlOld.replace('m.', 'www.'))
-        #     mylog.info("原", urlOld, "修改", request.url)
+        #     print("原", urlOld, "修改", request.url)
 
     def process_response(self, request, response, spider):
         if 'user_login' in response.url:
-            mylog.info("被封了,重新发起请求")
+            print("被封了,重新发起请求")
             request = request
             return request
         return response
@@ -151,13 +170,13 @@ class HegurlChangeMiddlewares(object):
 # 测试中间件(上线后应关闭)
 class HegTestMiddlewares(object):
     def process_request(self, request, spider):
-        mylog.info("【测试INFO】爬虫", spider.name)
-        mylog.info("【测试INFO】正在发起一次请求", request.url)
+        print("【测试INFO】爬虫", spider.name)
+        print("【测试INFO】正在发起一次请求", request.url)
 
     def process_response(self, request, response, spider):
-        mylog.info("【测试INFO】爬虫", spider.name)
-        mylog.info("【测试INFO】请求链接", request.url)
-        mylog.info("【测试INFO】完成下载\n", response.text)
+        print("【测试INFO】爬虫", spider.name)
+        print("【测试INFO】请求链接", request.url)
+        print("【测试INFO】完成下载\n", response.text)
         return response
 
 
@@ -165,4 +184,4 @@ if __name__ == '__main__':
     hash = hashlib.md5()
     hash.update('12354'.encode('utf-8'))
     urlmd5 = hash.hexdigest()
-    mylog.info('urlmd5', urlmd5)
+    print('urlmd5', urlmd5)

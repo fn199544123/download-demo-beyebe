@@ -41,6 +41,6 @@ if __name__ == '__main__':
     headers = format_headers(headersStr)
     rep = requests.get("https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html#report", headers=headers)
     html = rep.text
-    mylog.info(rep.url)
+    print(rep.url)
     with open("web_msg/headerTest.html", "w", encoding='utf-8') as fp:
         fp.write(html)

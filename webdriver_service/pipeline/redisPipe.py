@@ -38,7 +38,7 @@ def getMission(redis_key, dBean, num):
             data = json.loads(mission.decode())
             WebDriverPool(dBean=dBean, num=num, headless=False).getOneDriver().deal(data)
         else:
-            mylog.info("队列为空，间隔一段时间再尝试")
+            print("队列为空，间隔一段时间再尝试")
             time.sleep(1)
     except DuplicateKeyError:
         mylog.warning("存储主键重复,跳过")

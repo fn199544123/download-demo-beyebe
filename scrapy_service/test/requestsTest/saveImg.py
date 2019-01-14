@@ -7,7 +7,7 @@ def file_test(url, fileName):
     ua = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50'
     headers = {'User-Agent': ua}
     response = requests.get(url=url, verify=False, headers=headers)
-    mylog.info(response.status_code)
+    print(response.status_code)
     with open(fileName, 'wb') as file:
         file.write(response.content)
 

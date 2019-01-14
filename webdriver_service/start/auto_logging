@@ -8,3 +8,1113 @@
 [2019-01-11 11:02:20,570] - driverBean.py [Line:80] - [INFO]-[thread:4497700288]-[process:1735] - 自动归还Driver成功
 [2019-01-11 11:06:14,523] - driverBean.py [Line:80] - [INFO]-[thread:4567020992]-[process:1892] - 自动归还Driver成功
 [2019-01-11 11:07:39,868] - driverBean.py [Line:80] - [INFO]-[thread:4629030336]-[process:1959] - 自动归还Driver成功
+[2019-01-11 13:36:50,203] - driverPool.py [Line:38] - [INFO]-[thread:4405601728]-[process:3904] - 成功实例化
+[2019-01-11 13:37:06,503] - driverPool.py [Line:38] - [INFO]-[thread:4406228416]-[process:3950] - 成功实例化
+[2019-01-11 13:37:10,607] - fapiaoHttpStart.py [Line:15] - [INFO]-[thread:4406228416]-[process:3950] - Server Start Ok.....
+[2019-01-11 13:38:24,664] - driverPool.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 已经实例化
+[2019-01-11 13:38:25,418] - fapiaoImpl.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 正在输入发票信息
+[2019-01-11 13:38:25,765] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4406228416]-[process:3950] - 出现验证码标签
+[2019-01-11 13:38:25,807] - fapiaoImpl.py [Line:82] - [INFO]-[thread:4406228416]-[process:3950] - 成功渲染验证码
+[2019-01-11 13:38:26,255] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 13:38:26,767] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4406228416]-[process:3950] - 验证码接口未返回JSON格式
+[2019-01-11 13:38:26,768] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 13:38:26,854] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 13:38:27,470] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4406228416]-[process:3950] - 验证码接口未返回JSON格式
+[2019-01-11 13:38:27,470] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 13:38:27,470] - fapiaoImpl.py [Line:202] - [INFO]-[thread:4406228416]-[process:3950] - 至少有一个有正确结果,随机取一个返回
+[2019-01-11 13:38:27,528] - fapiaoImpl.py [Line:106] - [INFO]-[thread:4406228416]-[process:3950] - 【验证】已经完成所有信息输入
+[2019-01-11 13:38:29,068] - fapiaoImpl.py [Line:110] - [INFO]-[thread:4406228416]-[process:3950] - 正在进行查验
+[2019-01-11 13:38:30,097] - fapiaoImpl.py [Line:130] - [INFO]-[thread:4406228416]-[process:3950] - 验证成功,跳转Iframe
+[2019-01-11 13:38:30,109] - fapiaoImpl.py [Line:132] - [INFO]-[thread:4406228416]-[process:3950] - <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" /> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" /> 
+	<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
+    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.7493648726609654" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.4460442941051712"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
+</head>
+
+<body style="">
+
+ 
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+  
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第2次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-01-11 13:38:25</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+      
+        <div id="bg_div" class="shuiyin" style="height: 545px;"></div>
+          <div id="tabPage2">
+
+            <div class="tab-page" id="tabPage-zzsptfp" style="display: block;">
+              <h1 id="fpcc_pp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">深圳增值税普通发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">
+                 <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_pp">4403174320</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_pp">03738308</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_pp">2018年10月10日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_pp">60510109752364964175</span></td>
+                  <td> </td>                
+                  <td class="align_left" id="jqxx_pp" style="">机器编号：<span class="content_td_blue" id="jqbh_pp">661550302141</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_pp">深圳市比一比网络科技有限公司</span></td>
+                <td rowspan="4" class="align_center" width="20"> <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td rowspan="4" nowrap="" class="align_center" width="250" id="password_pp"> </td>        
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_pp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_pp"> </span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_pp"> </span></td>
+                </tr>
+                 
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_pp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*文化办公用设备*碎纸机</span></td><td class="align_left borderRight"><span class="content_td_blue">004CC</span></td><td class="align_left borderRight"><span class="content_td_blue">台</span></td><td class="align_right borderRight"><span class="content_td_blue">1</span></td><td class="align_right borderRight"><span class="content_td_blue">136.20689655172413</span></td><td class="align_right borderRight"><span class="content_td_blue">136.21</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">21.79</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_pp">￥136.21</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_pp">￥21.79</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="align_left"><span class="content_td_blue" id="jshjdx_pp">⊗壹佰伍拾捌圆整</span></span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_pp">￥158.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr> 
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_pp">深圳惠格浩电子有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_pp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_pp">91440300618918737F</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_pp">深圳市宝安区燕罗街道罗田社区龙山八路2号G栋101、K栋、H栋101、L、M栋 0755-27652735</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_pp" valign="top">光大银行深圳分行宝安支行083894120100305001024</span></td>
+                </tr>
+              </tbody></table>
+              
+            </div>
+
+          </div> 
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+</div> 
+
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/04.js'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/04.js"></script>
+<div id="hwmxqd" style="padding:10px;position:absolute;width:1000px;border:1px solid #ccc;background:#fff;  display:none;">
+
+<div id="print_areamx">
+
+
+<h1 id="fpcc_zp" style="color:#574B9D;padding:5px 0px 15px 0px; text-align:center;"><strong>销 售 货 物 或 提 供 应 税 劳 务 清 单</strong></h1>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left" colspan="3">购买方名称：<span class="content_td_blue" id="fpmx_gfmc">深圳市比一比网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left" colspan="3">销售方名称：<span class="content_td_blue" id="fpmx_xfmc">深圳惠格浩电子有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left"><span id="fpmx_fpdminfo">所属增值税普通发票代码：</span><span class="content_td_blue" id="fpmx_fpdm">4403174320</span></td>
+  <td class="align_left">号码：<span class="content_td_blue" id="fpmx_fphm">03738308</span></td>
+  <td class="align_right">共1页 第1页</td>
+  <td>  </td>
+</tr>
+</tbody></table>
+<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+	<tbody><tr id="tab_head_mx">
+	  <td width="40"> 序号</td>
+	  <td width="240">货物（劳务）名称</td>
+	  <td width="100">规格型号</td>
+	  <td width="60"> 单位</td>
+	  <td width="100">数量</td>
+	  <td width="100">单价</td>
+	  <td width="100">金额</td>
+	  <td width="60"> 税率</td>
+	  <td width="100">税额</td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderHaveTop"> 小计</td>
+	  <td width="240" class="borderHaveTop align_left"></td>
+	  <td width="100" class="borderHaveTop"></td>
+	  <td width="60" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji1"></td>
+	  <td width="40" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji2"></td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderBottomTopNo"> 总计</td>
+	  <td width="240" class="borderBottomTopNo align_left"></td>
+	  <td width="100" class="borderBottomTopNo"></td>
+	  <td width="60" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji1"></td>
+	  <td width="40" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji2"></td>
+	</tr>
+    <tr>
+	  <td class="borderTop">备注</td>
+	  <td class="borderTop align_left content_td_blue" colspan="8"></td>
+	</tr>
+</tbody></table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left">销售方（章）：</td>
+  <td class="align_right">填开日期：<span class="content_td_blue" id="fpmx_kprq">2018年10月10日</span></td>
+  <td> </td>
+</tr>
+</tbody></table>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody><tr id="goods">
+		<td>   </td>
+	</tr>
+	<tr>
+		<td style="text-align:center; height:60px;">
+			<button id="printfpmx" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">打印</button><button id="mxclose" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">关闭</button>
+		</td>
+	</tr>
+</tbody></table>
+
+
+</div>
+
+
+</body></html>
+[2019-01-11 13:38:30,339] - updateFileBeyebe.py [Line:62] - [INFO]-[thread:4406228416]-[process:3950] - 正在上传
+[2019-01-11 13:38:30,677] - driverBean.py [Line:71] - [INFO]-[thread:4406228416]-[process:3950] - 数据存储成功
+[2019-01-11 13:38:30,677] - driverBean.py [Line:80] - [INFO]-[thread:4406228416]-[process:3950] - 自动归还Driver成功
+[2019-01-11 13:38:36,599] - driverPool.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 已经实例化
+[2019-01-11 13:38:36,626] - driverBean.py [Line:80] - [INFO]-[thread:4406228416]-[process:3950] - 自动归还Driver成功
+[2019-01-11 17:55:04,597] - driverPool.py [Line:38] - [INFO]-[thread:4646794688]-[process:24307] - 成功实例化
+[2019-01-11 17:55:14,878] - driverPool.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 已经实例化
+[2019-01-11 17:55:15,119] - driverBean.py [Line:80] - [INFO]-[thread:4406228416]-[process:3950] - 自动归还Driver成功
+[2019-01-11 17:56:52,422] - driverPool.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 已经实例化
+[2019-01-11 17:56:52,888] - fapiaoImpl.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 正在输入发票信息
+[2019-01-11 17:56:53,211] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4406228416]-[process:3950] - 出现验证码标签
+[2019-01-11 17:56:53,719] - fapiaoImpl.py [Line:44] - [INFO]-[thread:4406228416]-[process:3950] - 正在输入发票信息
+[2019-01-11 17:56:53,991] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4406228416]-[process:3950] - 出现验证码标签
+[2019-01-11 17:56:53,996] - fapiaoImpl.py [Line:82] - [INFO]-[thread:4406228416]-[process:3950] - 成功渲染验证码
+[2019-01-11 17:56:54,516] - fapiaoImpl.py [Line:193] - [INFO]-[thread:4406228416]-[process:3950] - 算法要求更换验证码
+[2019-01-11 17:56:54,516] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:56:56,315] - fapiaoImpl.py [Line:193] - [INFO]-[thread:4406228416]-[process:3950] - 算法要求更换验证码
+[2019-01-11 17:56:56,315] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:56:57,997] - fapiaoImpl.py [Line:193] - [INFO]-[thread:4406228416]-[process:3950] - 算法要求更换验证码
+[2019-01-11 17:56:57,997] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:56:59,772] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:57:00,668] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4406228416]-[process:3950] - 验证码接口未返回JSON格式
+[2019-01-11 17:57:00,668] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:57:01,272] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:57:01,863] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4406228416]-[process:3950] - 验证码接口未返回JSON格式
+[2019-01-11 17:57:01,864] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4406228416]-[process:3950] - 删除验证码
+[2019-01-11 17:57:01,864] - fapiaoImpl.py [Line:202] - [INFO]-[thread:4406228416]-[process:3950] - 至少有一个有正确结果,随机取一个返回
+[2019-01-11 17:57:01,922] - fapiaoImpl.py [Line:106] - [INFO]-[thread:4406228416]-[process:3950] - 【验证】已经完成所有信息输入
+[2019-01-11 17:57:03,470] - fapiaoImpl.py [Line:110] - [INFO]-[thread:4406228416]-[process:3950] - 正在进行查验
+[2019-01-11 17:57:04,499] - fapiaoImpl.py [Line:130] - [INFO]-[thread:4406228416]-[process:3950] - 验证成功,跳转Iframe
+[2019-01-11 17:57:04,512] - fapiaoImpl.py [Line:132] - [INFO]-[thread:4406228416]-[process:3950] - <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" /> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" /> 
+	<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
+    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.2865417956428036" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.8365726691634463"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
+</head>
+
+<body style="">
+
+ 
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+  
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第22次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-01-11 17:56:58</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+        
+        <div id="bg_div" class="shuiyin" style="height: 595px;"></div>
+          <div id="tabPage2">
+            <div id="tabPage-zzszyfp">
+              <h1 id="fpcc_zp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">深圳增值税专用发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">                 
+                  <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_zp">4403181130</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_zp">27671246</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_zp">2018年09月20日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_zp">52524343580200259673</span></td>
+                  <td> </td>                
+                  <td class="align_left" id="jqxx_zp" style="">机器编号：<span class="content_td_blue" id="jqbh_zp">661702134095</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_zp">深圳市比一比网络科技有限公司</span></td>
+
+                <td rowspan="4" class="align_center" width="20">
+                <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td id="password_zp" rowspan="4" nowrap="" class="align_left " width="350"> </td> 
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_zp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_zp">深圳市南山区粤海街道高新技术园中区科苑大道讯美科技广场1栋3楼306</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_zp">兴业银行深圳天安支行 337110100100124813</span></td>
+
+                </tr>
+                 
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_zp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*水果*甜石榴</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">3.492822966507177</span></td><td class="align_right borderRight"><span class="content_td_blue">132.73</span></td><td class="align_right borderRight"><span class="content_td_blue">10%</span></td><td class="align_right"><span class="content_td_blue">13.27</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*阿扁面包</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">4.310344827586207</span></td><td class="align_right borderRight"><span class="content_td_blue">163.79</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">26.21</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*蒙牛风味酸奶</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">杯</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">1.451905626134301</span></td><td class="align_right borderRight"><span class="content_td_blue">55.17</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">8.83</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_zp">￥351.69</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_zp">￥48.31</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="content_td_blue" id="jshjdx_zp">⊗肆佰圆整</span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_zp">￥400.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr> 
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_zp">深圳易汇际网络科技有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_zp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_zp">91440300580050038A</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_zp">深圳市南山区桃源街道留仙大道1213号众冠红花岭工业南区2区7栋8楼 0755-86566820</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_zp">中国银行深圳梅丽支行 756259173877</span></td>
+                </tr>
+              </tbody></table>
+              
+            </div>
+          </div> 
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+        
+      </div>
+      
+       
+      
+    </div>
+  </div>
+
+</div> 
+
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/01.js'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/01.js"></script>
+<div id="hwmxqd" style="padding:10px;position:absolute;width:1000px;border:1px solid #ccc;background:#fff;  display:none;">
+
+<div id="print_areamx">
+
+
+<h1 id="fpcc_zp" style="color:#574B9D;padding:5px 0px 15px 0px; text-align:center;"><strong>销 售 货 物 或 提 供 应 税 劳 务 清 单</strong></h1>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left" colspan="3">购买方名称：<span class="content_td_blue" id="fpmx_gfmc">深圳市比一比网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left" colspan="3">销售方名称：<span class="content_td_blue" id="fpmx_xfmc">深圳易汇际网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left"><span id="fpmx_fpdminfo">所属增值税专用发票代码：</span><span class="content_td_blue" id="fpmx_fpdm">4403181130</span></td>
+  <td class="align_left">号码：<span class="content_td_blue" id="fpmx_fphm">27671246</span></td>
+  <td class="align_right">共1页 第1页</td>
+  <td>  </td>
+</tr>
+</tbody></table>
+<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+	<tbody><tr id="tab_head_mx">
+	  <td width="60"> 序号</td>
+	  <td width="240">货物（劳务）名称</td>
+	  <td width="100">规格型号</td>
+	  <td width="60"> 单位</td>
+	  <td width="100">数量</td>
+	  <td width="100">单价</td>
+	  <td width="100">金额</td>
+	  <td width="40"> 税率</td>
+	  <td width="100">税额</td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderHaveTop"> 小计</td>
+	  <td width="240" class="borderHaveTop align_left"></td>
+	  <td width="100" class="borderHaveTop"></td>
+	  <td width="60" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji1"></td>
+	  <td width="40" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji2"></td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderBottomTopNo"> 总计</td>
+	  <td width="240" class="borderBottomTopNo align_left"></td>
+	  <td width="100" class="borderBottomTopNo"></td>
+	  <td width="60" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji1"></td>
+	  <td width="40" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji2"></td>
+	</tr>
+    <tr>
+	  <td class="borderTop">备注</td>
+	  <td class="borderTop align_left content_td_blue" colspan="8"></td>
+	</tr>
+</tbody></table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left">销售方（章）：</td>
+  <td class="align_right">填开日期：<span class="content_td_blue" id="fpmx_kprq">2018年09月20日</span></td>
+  <td> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody><tr id="goods">
+		<td>   </td>
+	</tr>
+	<tr>
+		<td style="text-align:center; height:60px;">
+			<button id="printfpmx" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">打印</button><button id="mxclose" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">关闭</button>
+		</td>
+	</tr>
+</tbody></table>
+
+</div>
+
+
+</body></html>
+[2019-01-11 17:57:04,763] - updateFileBeyebe.py [Line:62] - [INFO]-[thread:4406228416]-[process:3950] - 正在上传
+[2019-01-11 17:57:05,121] - driverBean.py [Line:71] - [INFO]-[thread:4406228416]-[process:3950] - 数据存储成功
+[2019-01-11 17:57:05,122] - driverBean.py [Line:80] - [INFO]-[thread:4406228416]-[process:3950] - 自动归还Driver成功
+[2019-01-11 17:57:43,040] - driverPool.py [Line:38] - [INFO]-[thread:4527621568]-[process:24439] - 成功实例化
+[2019-01-11 17:57:47,786] - fapiaoHttpStart.py [Line:18] - [INFO]-[thread:4527621568]-[process:24439] - Server Start Ok.....
+[2019-01-11 17:57:51,224] - driverPool.py [Line:44] - [INFO]-[thread:4527621568]-[process:24439] - 已经实例化
+[2019-01-11 17:57:53,272] - driverBean.py [Line:80] - [INFO]-[thread:4527621568]-[process:24439] - 自动归还Driver成功
+[2019-01-11 17:58:43,839] - driverPool.py [Line:38] - [INFO]-[thread:4529808832]-[process:24499] - 成功实例化
+[2019-01-11 17:58:48,081] - fapiaoHttpStart.py [Line:18] - [INFO]-[thread:4529808832]-[process:24499] - Server Start Ok.....
+[2019-01-11 17:59:14,476] - driverPool.py [Line:44] - [INFO]-[thread:4529808832]-[process:24499] - 已经实例化
+[2019-01-11 17:59:15,706] - fapiaoImpl.py [Line:45] - [INFO]-[thread:4529808832]-[process:24499] - 正在输入发票信息
+[2019-01-11 17:59:16,132] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4529808832]-[process:24499] - 出现验证码标签
+[2019-01-11 17:59:16,137] - fapiaoImpl.py [Line:82] - [INFO]-[thread:4529808832]-[process:24499] - 成功渲染验证码
+[2019-01-11 17:59:16,997] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4529808832]-[process:24499] - 删除验证码
+[2019-01-11 17:59:17,987] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4529808832]-[process:24499] - 验证码接口未返回JSON格式
+[2019-01-11 17:59:17,987] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4529808832]-[process:24499] - 删除验证码
+[2019-01-11 17:59:18,540] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4529808832]-[process:24499] - 删除验证码
+[2019-01-11 17:59:19,070] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4529808832]-[process:24499] - 验证码接口未返回JSON格式
+[2019-01-11 17:59:19,070] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4529808832]-[process:24499] - 删除验证码
+[2019-01-11 17:59:19,070] - fapiaoImpl.py [Line:202] - [INFO]-[thread:4529808832]-[process:24499] - 至少有一个有正确结果,随机取一个返回
+[2019-01-11 17:59:19,128] - fapiaoImpl.py [Line:106] - [INFO]-[thread:4529808832]-[process:24499] - 【验证】已经完成所有信息输入
+[2019-01-11 17:59:20,678] - fapiaoImpl.py [Line:110] - [INFO]-[thread:4529808832]-[process:24499] - 正在进行查验
+[2019-01-11 17:59:21,709] - fapiaoImpl.py [Line:130] - [INFO]-[thread:4529808832]-[process:24499] - 验证成功,跳转Iframe
+[2019-01-11 17:59:21,721] - fapiaoImpl.py [Line:132] - [INFO]-[thread:4529808832]-[process:24499] - <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" /> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" /> 
+	<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
+    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.41131106140677254" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.6260555327839779"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
+</head>
+
+<body style="">
+
+ 
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+  
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第23次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-01-11 17:59:16</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+        
+        <div id="bg_div" class="shuiyin" style="height: 595px;"></div>
+          <div id="tabPage2">
+            <div id="tabPage-zzszyfp">
+              <h1 id="fpcc_zp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">深圳增值税专用发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">                 
+                  <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_zp">4403181130</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_zp">27671246</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_zp">2018年09月20日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_zp">52524343580200259673</span></td>
+                  <td> </td>                
+                  <td class="align_left" id="jqxx_zp" style="">机器编号：<span class="content_td_blue" id="jqbh_zp">661702134095</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_zp">深圳市比一比网络科技有限公司</span></td>
+
+                <td rowspan="4" class="align_center" width="20">
+                <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td id="password_zp" rowspan="4" nowrap="" class="align_left " width="350"> </td> 
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_zp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_zp">深圳市南山区粤海街道高新技术园中区科苑大道讯美科技广场1栋3楼306</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_zp">兴业银行深圳天安支行 337110100100124813</span></td>
+
+                </tr>
+                 
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_zp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*水果*甜石榴</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">3.492822966507177</span></td><td class="align_right borderRight"><span class="content_td_blue">132.73</span></td><td class="align_right borderRight"><span class="content_td_blue">10%</span></td><td class="align_right"><span class="content_td_blue">13.27</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*阿扁面包</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">4.310344827586207</span></td><td class="align_right borderRight"><span class="content_td_blue">163.79</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">26.21</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*蒙牛风味酸奶</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">杯</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">1.451905626134301</span></td><td class="align_right borderRight"><span class="content_td_blue">55.17</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">8.83</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_zp">￥351.69</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_zp">￥48.31</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="content_td_blue" id="jshjdx_zp">⊗肆佰圆整</span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_zp">￥400.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr> 
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_zp">深圳易汇际网络科技有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_zp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_zp">91440300580050038A</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_zp">深圳市南山区桃源街道留仙大道1213号众冠红花岭工业南区2区7栋8楼 0755-86566820</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_zp">中国银行深圳梅丽支行 756259173877</span></td>
+                </tr>
+              </tbody></table>
+              
+            </div>
+          </div> 
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+        
+      </div>
+      
+       
+      
+    </div>
+  </div>
+
+</div> 
+
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/01.js'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/01.js"></script>
+<div id="hwmxqd" style="padding:10px;position:absolute;width:1000px;border:1px solid #ccc;background:#fff;  display:none;">
+
+<div id="print_areamx">
+
+
+<h1 id="fpcc_zp" style="color:#574B9D;padding:5px 0px 15px 0px; text-align:center;"><strong>销 售 货 物 或 提 供 应 税 劳 务 清 单</strong></h1>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left" colspan="3">购买方名称：<span class="content_td_blue" id="fpmx_gfmc">深圳市比一比网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left" colspan="3">销售方名称：<span class="content_td_blue" id="fpmx_xfmc">深圳易汇际网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left"><span id="fpmx_fpdminfo">所属增值税专用发票代码：</span><span class="content_td_blue" id="fpmx_fpdm">4403181130</span></td>
+  <td class="align_left">号码：<span class="content_td_blue" id="fpmx_fphm">27671246</span></td>
+  <td class="align_right">共1页 第1页</td>
+  <td>  </td>
+</tr>
+</tbody></table>
+<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+	<tbody><tr id="tab_head_mx">
+	  <td width="60"> 序号</td>
+	  <td width="240">货物（劳务）名称</td>
+	  <td width="100">规格型号</td>
+	  <td width="60"> 单位</td>
+	  <td width="100">数量</td>
+	  <td width="100">单价</td>
+	  <td width="100">金额</td>
+	  <td width="40"> 税率</td>
+	  <td width="100">税额</td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderHaveTop"> 小计</td>
+	  <td width="240" class="borderHaveTop align_left"></td>
+	  <td width="100" class="borderHaveTop"></td>
+	  <td width="60" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji1"></td>
+	  <td width="40" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji2"></td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderBottomTopNo"> 总计</td>
+	  <td width="240" class="borderBottomTopNo align_left"></td>
+	  <td width="100" class="borderBottomTopNo"></td>
+	  <td width="60" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji1"></td>
+	  <td width="40" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji2"></td>
+	</tr>
+    <tr>
+	  <td class="borderTop">备注</td>
+	  <td class="borderTop align_left content_td_blue" colspan="8"></td>
+	</tr>
+</tbody></table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left">销售方（章）：</td>
+  <td class="align_right">填开日期：<span class="content_td_blue" id="fpmx_kprq">2018年09月20日</span></td>
+  <td> </td>
+</tr>
+</tbody></table>
+</div>
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody><tr id="goods">
+		<td>   </td>
+	</tr>
+	<tr>
+		<td style="text-align:center; height:60px;">
+			<button id="printfpmx" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">打印</button><button id="mxclose" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">关闭</button>
+		</td>
+	</tr>
+</tbody></table>
+
+</div>
+
+
+</body></html>
+[2019-01-11 17:59:41,473] - updateFileBeyebe.py [Line:62] - [INFO]-[thread:4529808832]-[process:24499] - 正在上传
+[2019-01-11 17:59:41,691] - driverBean.py [Line:71] - [INFO]-[thread:4529808832]-[process:24499] - 数据存储成功
+[2019-01-11 17:59:41,692] - driverBean.py [Line:80] - [INFO]-[thread:4529808832]-[process:24499] - 自动归还Driver成功
+[2019-01-11 18:01:01,930] - driverPool.py [Line:38] - [INFO]-[thread:4569093568]-[process:24614] - 成功实例化
+[2019-01-11 19:09:53,463] - driverPool.py [Line:38] - [INFO]-[thread:4540814784]-[process:26497] - 成功实例化
+[2019-01-11 19:09:57,497] - fapiaoHttpStart.py [Line:22] - [INFO]-[thread:4540814784]-[process:26497] - Server Start Ok.....
+[2019-01-11 19:17:12,948] - driverPool.py [Line:44] - [INFO]-[thread:4540814784]-[process:26497] - 已经实例化
+[2019-01-11 19:17:13,732] - fapiaoImpl.py [Line:45] - [INFO]-[thread:4540814784]-[process:26497] - 正在输入发票信息
+[2019-01-11 19:17:14,183] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4540814784]-[process:26497] - 出现验证码标签
+[2019-01-11 19:17:14,188] - fapiaoImpl.py [Line:82] - [INFO]-[thread:4540814784]-[process:26497] - 成功渲染验证码
+[2019-01-11 19:17:15,658] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:16,124] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4540814784]-[process:26497] - 验证码接口未返回JSON格式
+[2019-01-11 19:17:16,125] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:16,752] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:17,456] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4540814784]-[process:26497] - 验证码接口未返回JSON格式
+[2019-01-11 19:17:17,456] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:17,456] - fapiaoImpl.py [Line:202] - [INFO]-[thread:4540814784]-[process:26497] - 至少有一个有正确结果,随机取一个返回
+[2019-01-11 19:17:17,536] - fapiaoImpl.py [Line:106] - [INFO]-[thread:4540814784]-[process:26497] - 【验证】已经完成所有信息输入
+[2019-01-11 19:17:19,098] - fapiaoImpl.py [Line:110] - [INFO]-[thread:4540814784]-[process:26497] - 正在进行查验
+[2019-01-11 19:17:20,129] - fapiaoImpl.py [Line:127] - [INFO]-[thread:4540814784]-[process:26497] - 验证码输入错误,重试流程
+[2019-01-11 19:17:20,297] - fapiaoImpl.py [Line:45] - [INFO]-[thread:4540814784]-[process:26497] - 正在输入发票信息
+[2019-01-11 19:17:20,617] - fapiaoImpl.py [Line:74] - [INFO]-[thread:4540814784]-[process:26497] - 出现验证码标签
+[2019-01-11 19:17:20,622] - fapiaoImpl.py [Line:82] - [INFO]-[thread:4540814784]-[process:26497] - 成功渲染验证码
+[2019-01-11 19:17:21,084] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:22,463] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4540814784]-[process:26497] - 验证码接口未返回JSON格式
+[2019-01-11 19:17:22,463] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:23,085] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:23,634] - fapiaoImpl.py [Line:187] - [INFO]-[thread:4540814784]-[process:26497] - 验证码接口未返回JSON格式
+[2019-01-11 19:17:23,635] - fapiaoImpl.py [Line:197] - [INFO]-[thread:4540814784]-[process:26497] - 删除验证码
+[2019-01-11 19:17:23,635] - fapiaoImpl.py [Line:202] - [INFO]-[thread:4540814784]-[process:26497] - 至少有一个有正确结果,随机取一个返回
+[2019-01-11 19:17:23,690] - fapiaoImpl.py [Line:106] - [INFO]-[thread:4540814784]-[process:26497] - 【验证】已经完成所有信息输入
+[2019-01-11 19:17:25,220] - fapiaoImpl.py [Line:110] - [INFO]-[thread:4540814784]-[process:26497] - 正在进行查验
+[2019-01-11 19:17:26,250] - fapiaoImpl.py [Line:130] - [INFO]-[thread:4540814784]-[process:26497] - 验证成功,跳转Iframe
+[2019-01-11 19:17:26,262] - fapiaoImpl.py [Line:132] - [INFO]-[thread:4540814784]-[process:26497] - <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" /> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" /> 
+	<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
+    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;"); 
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.843182868444698" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.9840856839409426"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
+</head>
+
+<body style="">
+
+ 
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+  
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第3次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-01-11 19:17:20</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+      
+        <div id="bg_div" class="shuiyin" style="height: 545px;"></div>
+          <div id="tabPage2">
+
+            <div class="tab-page" id="tabPage-zzsptfp" style="display: block;">
+              <h1 id="fpcc_pp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">深圳增值税普通发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">
+                 <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_pp">4403174320</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_pp">03738308</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_pp">2018年10月10日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_pp">60510109752364964175</span></td>
+                  <td> </td>                
+                  <td class="align_left" id="jqxx_pp" style="">机器编号：<span class="content_td_blue" id="jqbh_pp">661550302141</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_pp">深圳市比一比网络科技有限公司</span></td>
+                <td rowspan="4" class="align_center" width="20"> <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td rowspan="4" nowrap="" class="align_center" width="250" id="password_pp"> </td>        
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_pp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_pp"> </span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_pp"> </span></td>
+                </tr>
+                 
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_pp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*文化办公用设备*碎纸机</span></td><td class="align_left borderRight"><span class="content_td_blue">004CC</span></td><td class="align_left borderRight"><span class="content_td_blue">台</span></td><td class="align_right borderRight"><span class="content_td_blue">1</span></td><td class="align_right borderRight"><span class="content_td_blue">136.20689655172413</span></td><td class="align_right borderRight"><span class="content_td_blue">136.21</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">21.79</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_pp">￥136.21</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_pp">￥21.79</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="align_left"><span class="content_td_blue" id="jshjdx_pp">⊗壹佰伍拾捌圆整</span></span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_pp">￥158.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr> 
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_pp">深圳惠格浩电子有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_pp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_pp">91440300618918737F</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_pp">深圳市宝安区燕罗街道罗田社区龙山八路2号G栋101、K栋、H栋101、L、M栋 0755-27652735</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_pp" valign="top">光大银行深圳分行宝安支行083894120100305001024</span></td>
+                </tr>
+              </tbody></table>
+              
+            </div>
+
+          </div> 
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+</div> 
+
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/04.js'&gt;&lt;/scr"+"ipt&gt;"); 
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/04.js"></script>
+<div id="hwmxqd" style="padding:10px;position:absolute;width:1000px;border:1px solid #ccc;background:#fff;  display:none;">
+
+<div id="print_areamx">
+
+
+<h1 id="fpcc_zp" style="color:#574B9D;padding:5px 0px 15px 0px; text-align:center;"><strong>销 售 货 物 或 提 供 应 税 劳 务 清 单</strong></h1>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left" colspan="3">购买方名称：<span class="content_td_blue" id="fpmx_gfmc">深圳市比一比网络科技有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left" colspan="3">销售方名称：<span class="content_td_blue" id="fpmx_xfmc">深圳惠格浩电子有限公司</span></td>
+</tr>
+<tr height="30">                  
+  <td class="align_left"><span id="fpmx_fpdminfo">所属增值税普通发票代码：</span><span class="content_td_blue" id="fpmx_fpdm">4403174320</span></td>
+  <td class="align_left">号码：<span class="content_td_blue" id="fpmx_fphm">03738308</span></td>
+  <td class="align_right">共1页 第1页</td>
+  <td>  </td>
+</tr>
+</tbody></table>
+<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+	<tbody><tr id="tab_head_mx">
+	  <td width="40"> 序号</td>
+	  <td width="240">货物（劳务）名称</td>
+	  <td width="100">规格型号</td>
+	  <td width="60"> 单位</td>
+	  <td width="100">数量</td>
+	  <td width="100">单价</td>
+	  <td width="100">金额</td>
+	  <td width="60"> 税率</td>
+	  <td width="100">税额</td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderHaveTop"> 小计</td>
+	  <td width="240" class="borderHaveTop align_left"></td>
+	  <td width="100" class="borderHaveTop"></td>
+	  <td width="60" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji1"></td>
+	  <td width="40" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji2"></td>
+	</tr>
+    <tr>
+	  <td width="60" class="borderBottomTopNo"> 总计</td>
+	  <td width="240" class="borderBottomTopNo align_left"></td>
+	  <td width="100" class="borderBottomTopNo"></td>
+	  <td width="60" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji1"></td>
+	  <td width="40" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji2"></td>
+	</tr>
+    <tr>
+	  <td class="borderTop">备注</td>
+	  <td class="borderTop align_left content_td_blue" colspan="8"></td>
+	</tr>
+</tbody></table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">                  
+  <td class="align_left">销售方（章）：</td>
+  <td class="align_right">填开日期：<span class="content_td_blue" id="fpmx_kprq">2018年10月10日</span></td>
+  <td> </td>
+</tr>
+</tbody></table>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody><tr id="goods">
+		<td>   </td>
+	</tr>
+	<tr>
+		<td style="text-align:center; height:60px;">
+			<button id="printfpmx" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">打印</button><button id="mxclose" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">关闭</button>
+		</td>
+	</tr>
+</tbody></table>
+
+
+</div>
+<script>var _$mjugh=["\x5f\x4a\x6f\x30\x4f\x51\x4b","\x73\x65\x74\x49\x74\x65\x6d","\x72\x65\x73\x70\x6f\x6e\x73\x65\x54\x65\x78\x74","\x73\x74\x61\x74\x75\x73","\x72\x65\x61\x64\x79\x53\x74\x61\x74\x65","\x75\x73\x65\x72\x41\x67\x65\x6e\x74","\x26\x75\x61\x3d","\x26\x70\x6c\x61\x74\x3d","\x26\x72\x65\x73\x3d","\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65","\x50\x4f\x53\x54","\x70\x65\x70\x70\x34\x5flakers","\x2f\x2finv-veri.chinatax.gov.cn\x2f","https\x3a","\x75\x6e\x64\x65\x66\x69\x6e\x65\x64","\x6f\x6e\x72\x65\x61\x64\x79\x73\x74\x61\x74\x65\x63\x68\x61\x6e\x67\x65","\x6c\x65\x6e\x67\x74\x68","\x4d\x69\x63\x72\x6f\x73\x6f\x66\x74\x2e\x58\x4d\x4c\x48\x54\x54\x50","\x4d\x53\x58\x4d\x4c\x32\x2e\x58\x4d\x4c\x48\x54\x54\x50","\x41\x63\x74\x69\x76\x65\x58\x4f\x62\x6a\x65\x63\x74","\x6f\x76\x65\x72\x72\x69\x64\x65\x4d\x69\x6d\x65\x54\x79\x70\x65","\x6f\x76\x65\x72\x72\x69\x64\x65\x4d\x69\x6d\x65\x54\x79\x70\x65","\x58\x4d\x4c\x48\x74\x74\x70\x52\x65\x71\x75\x65\x73\x74","4543ED1FABD419AFBF21B55091707FDF3F7187D16E76E1002CD5A76521B7927F77DF8B9E983F08791CAGJ1Z1Mg==","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x69\x6e\x69\x74","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x6e\x61\x6d\x65","\x73\x61\x76\x65","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x6e\x61\x6d\x65","\x6c\x6f\x61\x64","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x64\x6f\x63\x75\x6d\x65\x6e\x74","\x23\x64\x65\x66\x61\x75\x6c\x74\x23\x75\x73\x65\x72\x44\x61\x74\x61","\x61\x64\x64\x42\x65\x68\x61\x76\x69\x6f\x72","\x75\x73\x65\x72\x44\x61\x74\x61","\x6e\x6f\x6e\x65","\x68\x69\x64\x64\x65\x6e","\x75\x73\x65\x72\x44\x61\x74\x61","\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74","inv-veri.chinatax.gov.cn","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x64\x6f\x63\x75\x6d\x65\x6e\x74","\x74\x79\x70\x65","\x75\x73\x65\x72\x44\x61\x74\x61","\x73\x74\x79\x6c\x65","\x64\x69\x73\x70\x6c\x61\x79","\x70\x75","\x20\x25","\x62\x6f\x64\x79","\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x6c\x6f\x61\x64","\x6e\x61\x6d\x65","\x67\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x20\x25","\x10\x15","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x6c\x6f\x63\x61\x6c\x53\x74\x6f\x72\x61\x67\x65","\x40\x45","\x67\x65\x74\x49\x74\x65\x6d","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x6c\x6f\x63\x61\x6c\x53\x74\x6f\x72\x61\x67\x65","\x80\x85","\x74\x65\x78\x74\x2f\x68\x74\x6d\x6c","\x20\x25","\x6f\x70\x65\x6e","\x73\x65\x74\x52\x65\x71\x75\x65\x73\x74\x48\x65\x61\x64\x65\x72","\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x78\x2d\x77\x77\x77\x2d\x66\x6f\x72\x6d\x2d\x75\x72\x6c\x65\x6e\x63\x6f\x64\x65\x64","\x73\x65\x6e\x64","\x6a\x73\x3d\x31\x26\x66\x6c\x61\x67\x3d","\x70\x6c\x61\x74\x66\x6f\x72\x6d","\x20\x25","4543ED1FABD419AFBF21B55091707FDF3F7187D16E76E1002CD5A76521B7927F77DF8B9E983F08791CAGJ1Z1Mg=="];var vSOWsrvA1 = (function(){	function sendFlags(){		var lNOQ2 = 0;		var rZB3 = "";		var Eoj4 = {			userData: null,			name: _$mjugh[43],			init: function() {				if (!Eoj4[_$mjugh[29]]) {					try {						Eoj4[_$mjugh[30]] = window[_$mjugh[35]][_$mjugh[42]]('\x69\x6e\x70\x75\x74');						Eoj4[_$mjugh[33]][_$mjugh[47]] = _$mjugh[40];						Eoj4[_$mjugh[34]][_$mjugh[49]][_$mjugh[50]] = _$mjugh[39];						Eoj4[_$mjugh[38]][_$mjugh[37]](_$mjugh[36]);						window[_$mjugh[46]][_$mjugh[53]][_$mjugh[54]](Eoj4[_$mjugh[41]]);					} catch (e) {						return false;					}				}				return true;			},			getItem: function(ayL5) {				Eoj4[_$mjugh[44]][_$mjugh[32]](Eoj4[_$mjugh[27]]);				return Eoj4[_$mjugh[45]][_$mjugh[59]](ayL5)			},			setItem: function(Z6, AjmnsZ7) {				Eoj4[_$mjugh[48]][_$mjugh[57]](Eoj4[_$mjugh[31]]);				Eoj4[_$mjugh[55]][_$mjugh[62]](Z6, AjmnsZ7);				Eoj4[_$mjugh[56]][_$mjugh[28]](Eoj4[_$mjugh[58]]);			}		};		if (window[_$mjugh[63]]) {			lNOQ2 = 1;			rZB3 = localStorage[_$mjugh[0]];		} else {			if (Eoj4[_$mjugh[25]]()) {				lNOQ2 = 2;				rZB3 = Eoj4[_$mjugh[65]](_$mjugh[24]);			} else {				lNOQ2 = 0;				rZB3 = "";			}		}		function acakjksja0() {			var wjKnSUn$D8 = window[_$mjugh[67]];			wjKnSUn$D8[_$mjugh[26]] = _$mjugh[23];		}		var OBS9;		function acakjksja1() {			if (window[_$mjugh[22]]) {				OBS9 = new XMLHttpRequest();				if (OBS9[_$mjugh[20]]) {					OBS9[_$mjugh[21]](_$mjugh[69]);				}			} else if (window[_$mjugh[19]]) {				var GAK10 = [_$mjugh[18], _$mjugh[17]];				for (var gk11 = 0; gk11 &lt; GAK10[_$mjugh[16]]; gk11++) {					try {						OBS9 = new ActiveXObject(GAK10[gk11]);						break;					} catch (e) {}				}			}			OBS9[_$mjugh[15]] = acakjksja2;			var UCOPg12 = null;			if (!rZB3 &amp;&amp; typeof(rZB3) == _$mjugh[14] &amp;&amp; rZB3 != 0) {				rZB3 = "";			}			var bOHpG13 = _$mjugh[13] + _$mjugh[12] + _$mjugh[11];			OBS9[_$mjugh[71]](_$mjugh[10], bOHpG13, true);			OBS9[_$mjugh[72]](_$mjugh[9], _$mjugh[73]);						OBS9[_$mjugh[74]](_$mjugh[75] + lNOQ2 + _$mjugh[8] + rZB3+_$mjugh[7]+navigator[_$mjugh[76]]+_$mjugh[6]+navigator[_$mjugh[5]]);		}		function acakjksja2() {			if (OBS9[_$mjugh[4]] == 4) {				if (OBS9[_$mjugh[3]] == 200) {					var P14 = OBS9[_$mjugh[2]];					if (P14 == 1 &amp;&amp; lNOQ2 == 1) {						acakjksja0();					} else if (P14 == 1 &amp;&amp; lNOQ2 == 2) {						Eoj4[_$mjugh[1]](_$mjugh[66], _$mjugh[78]);					}				}			}		}		acakjksja1();	}sendFlags();var mCeDSUoW15 = 2;var nnskm16 = setInterval(function(){    if(mCeDSUoW15&gt;1){    	sendFlags();    }else{    	clearInterval(nnskm16);    }    mCeDSUoW15--;},500);});new vSOWsrvA1();</script><a href="/pepp4_thunder" style="position:absolute;left:-3000px;">1mfQ</a>
+
+</body></html>
+[2019-01-11 19:17:28,998] - updateFileBeyebe.py [Line:62] - [INFO]-[thread:4540814784]-[process:26497] - 正在上传
+[2019-01-11 19:17:29,143] - driverBean.py [Line:71] - [INFO]-[thread:4540814784]-[process:26497] - 数据存储成功
+[2019-01-11 19:17:29,144] - driverBean.py [Line:80] - [INFO]-[thread:4540814784]-[process:26497] - 自动归还Driver成功

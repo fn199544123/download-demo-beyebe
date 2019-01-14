@@ -18,8 +18,8 @@ class QichachaMainImpl(DownloadImp):
             self.hash_.update(url.encode('utf-8'))
             urlmd5 = self.hash_.hexdigest()
             self.r_return.set(urlmd5, html)
-            mylog.info(urlmd5)
-            mylog.info("回调任务成功")
+            print(urlmd5)
+            print("回调任务成功")
         else:
             traceback.print_exc()
             raise LoginError('未能成功登入账户。')

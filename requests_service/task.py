@@ -12,10 +12,10 @@ redisPool14 = redis.ConnectionPool(host="192.168.10.9", password="123456", port=
 # 为了示范使用，我先自己下发一个任务。DB15
 r = redis.Redis(connection_pool=redisPool15)
 for url in start_urls:
-    mylog.info("上传任务", redis_key, url)
+    print("上传任务", redis_key, url)
     dictNow = {'url': url, 'mid': 1, 'etc': ''}
     r.lpush(redis_key, json.dumps(dictNow))
 
-mylog.info("上传一批任务成功")
+print("上传一批任务成功")
 # 消费一个任务
 r = redis.Redis(connection_pool=redisPool15)

@@ -53,9 +53,9 @@ class MongoPipeline(object):
         # 如果不是特别需求,这里不要画蛇添足的添加入库时间,mongo的入库时间是可以通过自建索引_id来查询的
         try:
             self.db[tableName].insert_one(dict(item))
-            mylog.info(spider.name, "mongo成功入库!")
+            print(spider.name, "mongo成功入库!")
         except DuplicateKeyError:
-            mylog.info("该条主键存储重复,跳过")
+            print("该条主键存储重复,跳过")
         except:
             traceback.print_exc()
         # 这里返回item，后续的pipelines才能继续处理数据
@@ -64,17 +64,17 @@ class MongoPipeline(object):
 
 class KafkaPipeline(object):
     def process_item(self, item, spider):
-        mylog.info("Kafka尚未开发,暂不支持")
+        print("Kafka尚未开发,暂不支持")
         return item
 
 
 class LocalFilePipeline(object):
     def process_item(self, item, spider):
-        mylog.info("本地文件存储尚未开发,暂不支持")
+        print("本地文件存储尚未开发,暂不支持")
         return item
 
 
 class OSSPipeline(object):
     def process_item(self, item, spider):
-        mylog.info("OSSPipeline尚未开发,暂不支持")
+        print("OSSPipeline尚未开发,暂不支持")
         return item

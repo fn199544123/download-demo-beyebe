@@ -23,20 +23,21 @@ class WebDriverImp():
         options = webdriver.ChromeOptions()
         if headless:
             options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
         # 浏览器加载
         if driver is None:
-            mylog.info("系统检测", platform.system())
+            print("系统检测", platform.system())
             if 'inux' in platform.system():
                 driverPath = self.__filePath('chromedriver/linux/chromedriver')
-                mylog.info("检测到系统是", "Linux", driverPath)
+                print("检测到系统是", "Linux", driverPath)
             elif 'indows' in platform.system():
                 driverPath = self.__filePath('chromedriver/windows/chromedriver.exe')
-                mylog.info("检测到系统是", "Windows", driverPath)
+                print("检测到系统是", "Windows", driverPath)
             elif 'arwin' in platform.system():
                 driverPath = self.__filePath('chromedriver/mac/chromedriver')
-                mylog.info("检测到系统是", "Mac系统（其他系统）", driverPath)
+                print("检测到系统是", "Mac系统（其他系统）", driverPath)
             else:
-                mylog.info("不知道是什么系统,无法实例化WebDriver对象")
+                print("不知道是什么系统,无法实例化WebDriver对象")
                 raise Exception("不知道是什么系统,无法实例化Driver对象")
             self.driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
         # 数据库加载
@@ -68,7 +69,7 @@ class WebDriverImp():
             elif isDup == False:
                 input.update(self._deal(input))
                 self.save(input)
-                mylog.info("数据存储成功")
+                print("数据存储成功")
                 return input
             elif isDup == True:
                 input.update({'state': 100, 'errMsg': '任务重复'})
@@ -77,11 +78,11 @@ class WebDriverImp():
                 return isDup
         finally:
             self.myPool.returnDriver(self)
-            mylog.info("自动归还Driver成功")
+            print("自动归还Driver成功")
 
     # overwrite
     def _deal(self, input):
-        mylog.info("覆写该方法,完成任务和操作")
+        print("覆写该方法,完成任务和操作")
         self.driver.get("http://www.baidu.com")
         input.update({'msg': 'error', 'state': 0})
         return input

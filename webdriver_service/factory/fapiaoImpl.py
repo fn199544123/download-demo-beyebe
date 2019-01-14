@@ -6,6 +6,7 @@ import random
 
 import time
 import traceback
+import uuid
 
 import requests
 import sys
@@ -41,7 +42,7 @@ class fapiaoImpl(WebDriverImp):
             try:
                 dictNow = input
                 driver.get('https://inv-veri.chinatax.gov.cn/index.html')
-                mylog.info("正在输入发票信息")
+                print("正在输入发票信息")
                 # 1
                 fpdm = input['fpdm']
                 fphm = input['fphm']
@@ -56,7 +57,6 @@ class fapiaoImpl(WebDriverImp):
                 driver.find_element_by_id('fphm').clear()
                 driver.find_element_by_id('fphm').send_keys(fphm)
                 # 开票日期
-
                 driver.find_element_by_id('kprq').clear()
                 driver.find_element_by_id('kprq').send_keys(kprq)
                 # 开具金额
@@ -71,7 +71,7 @@ class fapiaoImpl(WebDriverImp):
                 # self.setAttribute(imgTag2, "height", 35)
                 while True:
                     if 'yzm_img' in driver.page_source:
-                        mylog.info("出现验证码标签")
+                        print("出现验证码标签")
                         break
                 """
                 验证码
@@ -79,7 +79,7 @@ class fapiaoImpl(WebDriverImp):
                 try:
                     for i in range(100):
                         if '请输入验证码图片' in driver.page_source:
-                            mylog.info("成功渲染验证码")
+                            print("成功渲染验证码")
                             break
                     else:
                         continue
@@ -89,48 +89,48 @@ class fapiaoImpl(WebDriverImp):
                             .find_element_by_css_selector('font') \
                             .get_attribute('color')
                     except:
-                        mylog.info("不打不带颜色的码,跳过")
+                        print("不打不带颜色的码,跳过")
                         continue
 
                     # 处理逻辑是：如果为空,换一张验证码.不为空则直接输入
                     imgCode1 = self.getCodeString()
                 except:
-                    mylog.info("未知错误")
+                    print("未知错误")
                     traceback.print_exc()
                     continue
 
-                mylog.info("成功识别", imgCode1)
+                print("成功识别", imgCode1)
                 inputa = imgCode1
                 driver.find_element_by_id('yzm').clear()
                 driver.find_element_by_id('yzm').send_keys(inputa)
-                mylog.info("【验证】已经完成所有信息输入")
+                print("【验证】已经完成所有信息输入")
                 time.sleep(1.5)  # 这里延时未来可以调低一点,为了录屏
                 action_chains = ActionChains(self.driver)
                 action_chains.double_click(driver.find_element_by_id('checkfp')).perform()
-                mylog.info("正在进行查验")
+                print("正在进行查验")
                 time.sleep(1)
                 for i in range(100):
                     if 'popup_ok' in driver.page_source or 'iframe' in driver.page_source:
                         break
                     time.sleep(0.1)
                 if '超过该张发票当日查验次数' in driver.page_source:
-                    mylog.info("超过次数")
+                    print("超过次数")
                     dictNow = {'errMsg': "超过次数！无法返回信息", 'state': 601}
                     return dictNow
                 elif '一分钟' in driver.page_source:
-                    mylog.info("访问过于频繁，休息60秒后再试")
+                    print("访问过于频繁，休息60秒后再试")
                     # popup_ok
                     # driver.find_element_by_id('popup_ok').click()  # 点击搜索按钮
                     time.sleep(60)
                     continue
                 elif 'popup_ok' in driver.page_source:
-                    mylog.info("验证码输入错误,重试流程")
+                    print("验证码输入错误,重试流程")
                     continue
                 elif 'iframe' in driver.page_source:
-                    mylog.info("验证成功,跳转Iframe")
+                    print("验证成功,跳转Iframe")
                     driver.switch_to_frame(0)
-                    mylog.info(driver.page_source)
-                    filePath = fpdm + '.png'
+                    print(driver.page_source)
+                    filePath = 'fapiao/' + fpdm + '.png'
                     driver.save_screenshot(filePath)
                     ossPath = fileUpdate(filePath)
                     dictNow.update({'html': driver.page_source,
@@ -139,7 +139,7 @@ class fapiaoImpl(WebDriverImp):
                                     'state': 200})
                     return dictNow
             except:
-                mylog.info("未知异常,暂停一分钟之后再进行")
+                print("未知异常,暂停一分钟之后再进行")
                 traceback.print_exc()
                 time.sleep(60)
                 continue
@@ -178,37 +178,39 @@ class fapiaoImpl(WebDriverImp):
                         file = {'file': open(filePath, 'rb')}
                         colorStr = filePath.split('_')[-1].replace('.png', '')
                         file.update({'etc': colorStr})
-                        mylog.info("发起对【王博】验证码接口的请求 颜色", colorStr, "文件", filePath)
+                        print("发起对【王博】验证码接口的请求 颜色", colorStr, "文件", filePath)
                         response = requests.post(url, files=file)
-                        mylog.info("发起对【王博】验证码接口返回", response.text)
+                        print("发起对【王博】验证码接口返回", response.text)
                         try:
                             dict_res = json.loads(response.text)
                         except:
-                            mylog.info("验证码接口未返回JSON格式")
+                            print("验证码接口未返回JSON格式")
                             continue
                         if dict_res['state'] == 200:
                             code = dict_res['data']
                             ansList.append(code)
                         else:
-                            mylog.info("算法要求更换验证码")
+                            print("算法要求更换验证码")
                             break
                     finally:
                         os.remove(filePath)
-                        mylog.info("删除验证码")
+                        print("删除验证码")
                 except:
-                    mylog.info("验证码接口请求异常", url)
+                    print("验证码接口请求异常", url)
                     traceback.print_exc()
             if len(ansList) > 0:
-                mylog.info("至少有一个有正确结果,随机取一个返回")
+                print("至少有一个有正确结果,随机取一个返回")
                 ans = random.sample(ansList, 1)[0]
-                mylog.info("返回", ans)
+                print("返回", ans)
                 return ans
             # 更换图片再来一次
             self.click100('yzm_img')
 
     def get_snap(self):  # 对目标网页进行截屏.这里截的是全屏
-        self.driver.save_screenshot('full_snap.png')
-        page_snap_obj = Image.open('full_snap.png')
+        fileName = str(uuid.uuid1()) + 'full_snap.png'
+        self.driver.save_screenshot(fileName)
+        page_snap_obj = Image.open(fileName)
+        os.remove(fileName)
         return page_snap_obj
 
     def setAttribute(self, elementObj, attributeName, value):
@@ -229,6 +231,8 @@ class fapiaoImpl(WebDriverImp):
             .get_attribute('color')
         if not os.path.exists('./code'):
             os.makedirs('./code')
+        if not os.path.exists('./fapiao'):
+            os.makedirs('./fapiao')
 
         filePath = 'code/imgCode2' + str(time.time()).replace('.', '_') + '_new_{}.png'.format(colorStr)
 
@@ -252,7 +256,7 @@ class fapiaoImpl(WebDriverImp):
                 else:
                     left_Moren = loc['x']
                     top_Moren = loc['y']
-                    mylog.info("已对验证码图片位置做死定位,从而降低定位不到时候的命中率")
+                    print("已对验证码图片位置做死定位,从而降低定位不到时候的命中率")
                     break
             else:
                 if left_Moren == 0:
@@ -264,7 +268,7 @@ class fapiaoImpl(WebDriverImp):
             top = loc['y']
             right = left + size['width']
             bottom = top + size['height']
-            mylog.info("截图定位坐标", left, top, right, bottom)
+            print("截图定位坐标", left, top, right, bottom)
             page_snap_obj = self.get_snap()
             image_obj = page_snap_obj.crop((left, top, right, bottom))
             colorStr = self.driver.find_element_by_id('yzminfo') \
@@ -281,7 +285,7 @@ class fapiaoImpl(WebDriverImp):
         action_chains.move_to_element_with_offset(self.driver.find_element_by_id(tagId), 10, 10)
         action_chains.click()
         action_chains.perform()
-        mylog.info("完成按键操作", tagId)
+        print("完成按键操作", tagId)
 
 
 if __name__ == '__main__':

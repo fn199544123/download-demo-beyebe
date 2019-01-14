@@ -1,3 +1,5 @@
+import sys
+sys.path.append("/")
 from webdriver_service.factory.fapiaoImpl import fapiaoImpl
 from webdriver_service.pipeline.redisPipe import getMission
 

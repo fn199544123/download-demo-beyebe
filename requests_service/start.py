@@ -19,8 +19,8 @@ if __name__ == '__main__':
         if mission is None:
             continue
         mission = json.loads(mission.decode().replace("'", '"'))
-        mylog.info(mission)
-        mylog.info('获取任务成功')
+        print(mission)
+        print('获取任务成功')
         try:
             getDownloadImp(mission['mid']).download(mission)
         except Exception as err:

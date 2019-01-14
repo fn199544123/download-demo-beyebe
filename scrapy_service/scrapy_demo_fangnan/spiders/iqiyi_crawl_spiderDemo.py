@@ -69,7 +69,7 @@ class DemoCrawlSpider(CrawlSpider):
 
                     yield item
             except:
-                mylog.info("这个a标签有问题（比如没有href）,跳过")
+                print("这个a标签有问题（比如没有href）,跳过")
                 continue
 
 

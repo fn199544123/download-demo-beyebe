@@ -35,13 +35,13 @@ class WebDriverPool():
     def __new__(cls, dBean=WebDriverImp, num=1, headless=False, *args, **kwargs):
 
         if not cls.__instance:
-            mylog.info("成功实例化")
+            print("成功实例化")
             cls.__instance = super().__new__(cls)
             for i in range(num):
                 cls.driverQueue.put(dBean(cls.__instance, headless=headless))
 
         else:
-            mylog.info("已经实例化")
+            print("已经实例化")
             pass
         return cls.__instance
 

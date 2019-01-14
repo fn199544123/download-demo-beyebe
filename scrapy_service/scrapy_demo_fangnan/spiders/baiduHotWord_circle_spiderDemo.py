@@ -45,9 +45,9 @@ class DemoSpider(scrapy.Spider):
     def parse_baidu_hotword(self, response):
         # here you would extract links to follow and return Requests for
         # each of them, with another callback
-        mylog.info("开始百度热词的解析")
+        print("开始百度热词的解析")
         # 可以使用xpath替代 response.xpath
-        # mylog.info(response.text)
+        # print(response.text)
         items = response.css(".list-table")[0].css('.keyword')
         for item in items:
             itemA = item.css('a')[0]
@@ -59,7 +59,7 @@ class DemoSpider(scrapy.Spider):
         urlNew = "http://top.baidu.com/buzz?b=1&c=513&fr=topbuzz_b1&timeMyself={}".format(str(time.time()))
         request1 = scrapy.Request(urlNew, callback=self.parse_baidu_hotword, dont_filter=True)
         yield request1
-        mylog.info("重新部署任务,5秒后重新抓取,在class的头部custom_settings设置")
+        print("重新部署任务,5秒后重新抓取,在class的头部custom_settings设置")
 
 
 if __name__ == '__main__':
