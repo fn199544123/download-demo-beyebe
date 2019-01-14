@@ -28,15 +28,16 @@ if __name__ == '__main__':
             continue
         url = mission[0].decode()
         if ('qichacha' in url) and ('#' not in url):
-            mid = 1
-        if ('qichacha' in url) and ('#' in url):
-            mid = 2
+            mission = {'url': url, 'mid': 1}
+        if ('qichacha' in url) and ('tab' in url):
+            mission = {'url': url, 'mid': 2}
         # mission = json.loads(mission.decode().replace("'", '"'))
-        print(url)
+        print(mission)
         print('获取任务成功')
         try:
-            getDownloadImp(mid).download(mission)
+            getDownloadImp(mission['mid']).download(mission)
+            print("将会等待10秒！")
             time.sleep(10)
             # 休眠10秒，限制频率。
         except Exception as err:
-            getDownloadImp(mid).error(mission, 'Error')
+            getDownloadImp(mission['mid']).error(mission, 'Error')

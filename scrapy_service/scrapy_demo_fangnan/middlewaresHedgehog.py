@@ -67,7 +67,7 @@ class requestsMiddlewars(object):
         dupKey = 'Dup_' + url + 'Duplicate_removal'
         if not r14.get(dupKey):
             r14.set(dupKey, url)
-            r14.expire('Dup_' + url, 60)
+            r14.expire(dupKey, 5)
             r15.zadd(redis_key, url, float(time.time()))
 
         else:
