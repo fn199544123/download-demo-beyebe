@@ -1,6 +1,6 @@
 import requests
 
-from requests_service.downloadImp import DownloadImp
+from downloadImp import DownloadImp
 
 
 class CommonImpl(DownloadImp):

@@ -2,8 +2,8 @@ import traceback
 import redis
 import requests
 
-from requests_service.Custom_exception import LoginError
-from requests_service.downloadImp import DownloadImp
+from Custom_exception import LoginError
+from downloadImp import DownloadImp
 
 
 class QichachaMainImpl(DownloadImp):
@@ -15,7 +15,6 @@ class QichachaMainImpl(DownloadImp):
         html = res.text
         if '玄鸟' in html:
             self.r_return.set(url, html)
-            self.r_return.expire(url, 5 * 60)
             print(url)
             print("回调任务成功")
         else:

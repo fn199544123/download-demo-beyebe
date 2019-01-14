@@ -2,7 +2,8 @@ import json
 
 from scrapy import cmdline, Request
 from scrapy_redis.spiders import RedisSpider
-
+import sys
+sys.path.append("../../../")
 from logging_utils.log import mylog
 from scrapy_service.scrapy_demo_fangnan.items import QichachaHtmlItem
 
@@ -51,6 +52,8 @@ class DemoRedisSpider(RedisSpider):
         }
 
     }
+
+
 
     def parse(self, response):
         # TODO 你需要首先使用utils的redisListUpload下发任务。否则会一直等待直到有任务来！
