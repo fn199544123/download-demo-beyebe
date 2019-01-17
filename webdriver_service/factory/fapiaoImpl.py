@@ -16,6 +16,7 @@ from selenium.webdriver import ActionChains
 from logging_utils.log import mylog
 from oss_aliyun.updateFileBeyebe import fileUpdate
 from webdriver_service.driverBean import WebDriverImp
+from webdriver_service.driverRemoteBean import WebDriverRemoteImp
 from webdriver_service.driver_pool.driverPool import WebDriverPool
 from webdriver_service.loginDriverImp import LoginDriverImp
 
@@ -34,7 +35,9 @@ top_Moren = 0
 """
 
 
-class fapiaoImpl(WebDriverImp):
+# 有远程遥控Driver和本地Driver两种模拟形式
+# class fapiaoImpl(WebDriverImp):
+class fapiaoImpl(WebDriverRemoteImp):
 
     def _deal(self, input):
         driver = self.driver
@@ -291,19 +294,19 @@ class fapiaoImpl(WebDriverImp):
 if __name__ == '__main__':
     # # 1
 
-    fpdm = "4403181130"
-    fphm = "27671246"
-    kprq = "20180920"
-    kjje = "351.69"
+    # fpdm = "4403181130"
+    # fphm = "27671246"
+    # kprq = "20180920"
+    # kjje = "351.69"
     # #2
     # fpdm = "4403181130"
     # fphm = "27671246"
     # kprq = "20180920"
     # kjje = "351.69"
     # # 3
-    # fpdm = "1100182130"
-    # fphm = "15024752"
-    # kprq = "20180614"
-    # kjje = "18679.25"
+    fpdm = "1100182130"
+    fphm = "15024752"
+    kprq = "20180614"
+    kjje = "18679.25"
     data = {'fpdm': fpdm, 'fphm': fphm, 'kprq': kprq, 'kjje': kjje}
-    WebDriverPool(dBean=fapiaoImpl, num=1, headless=False).getOneDriver().deal(data)
+    print(WebDriverPool(dBean=fapiaoImpl, num=1, headless=False).getOneDriver().deal(data))

@@ -51,11 +51,14 @@ class WebDriverImp():
 
     def __filePath(self, basePath):
         # 往上查5个级别,看看是否有目标文件,没有最终抛出异常
+        if os.path.exists("/root/scrapy-demo-beyebe/chromedriver"):
+            return "/root/scrapy-demo-beyebe/" + basePath
         for i in range(5):
             if os.path.exists(basePath):
                 return basePath
             else:
                 basePath = "../" + basePath
+
         raise Exception("未找到对应的ChromeDriver驱动文件")
 
     # 将deal私有化，可复写，框架使用deal_and_recover自动回收资源

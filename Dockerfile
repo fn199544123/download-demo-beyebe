@@ -1,13 +1,11 @@
-#基于的基础镜像
-FROM python:3.6
-FROM python:3.6
-#代码添加到code文件夹
+# 基于的基础镜像
+FROM python:3.6.4
 
-ADD . /scrapy-demo-beyebe
-# 设置code文件夹是工作目录
-WORKDIR /scrapy-demo-beyebe
-# 安装支持
-RUN yum install chrome
-RUN pip install -r requirements.txt
-CMD ["cd","/scrapy-demo-beyebe"]
-CMD ["python3", "/scrapy-demo-beyebe/webdriver_service/start/fapiaoHttpStart.py"]
+# 安装Python支持包支持
+ADD . /root/scrapy-demo-beyebe
+RUN python36 -m pip install --upgrade pip
+RUN python36 -m pip install -r /root/scrapy-demo-beyebe/requirements.txt
+
+
+CMD ["cd","/root/scrapy-demo-beyebe"]
+CMD ["python36", "/root/scrapy-demo-beyebe/webdriver_service/start/fapiaoHttpStart.py"]
