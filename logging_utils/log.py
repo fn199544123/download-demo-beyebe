@@ -41,6 +41,12 @@ class MyLog(logging.Logger):
         self.addHandler(fh)
         self.addHandler(ch)
 
+    def info(self, *args):
+        super().info(str(args))
+
+    def error(self, *args):
+        super().error(str(args))
+
 
 mylog = MyLog()
 if __name__ == '__main__':

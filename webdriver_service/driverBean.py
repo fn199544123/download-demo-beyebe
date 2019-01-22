@@ -12,11 +12,18 @@ from logging_utils.log import mylog
 class WebDriverImp():
     __instance = None
     myPool = None
-    MONGODB_HOST = '192.168.10.9'
-    MONGODB_USER = 'fangnan'
-    MONGODB_PASSWORD = 'Fang135'
+    # MONGODB_HOST = '192.168.10.9'
+    # MONGODB_USER = 'fangnan'
+    # MONGODB_PASSWORD = 'Fang135'
+    # MONGODB_PORT = 27017
+    # MONGODB_DBNAME = 'hedgehog_spider'
+
+    MONGODB_HOST = '58.221.49.26'
+    MONGODB_USER = 'developer'
+    MONGODB_PASSWORD = '123!@#qaz'
     MONGODB_PORT = 27017
     MONGODB_DBNAME = 'hedgehog_spider'
+
 
     def __init__(self, MyPool, driver=None, headless=False):
         self.myPool = MyPool
