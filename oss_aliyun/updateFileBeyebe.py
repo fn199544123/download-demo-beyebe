@@ -9,6 +9,8 @@ import pymongo
 import requests
 
 # 从内网Mongo获取账号密码
+import sys
+
 from logging_utils.log import mylog
 
 MONGODB_HOST = '192.168.10.9'
@@ -36,15 +38,30 @@ for param in (access_key_id, access_key_secret, bucket_name, endpoint):
 bucket = oss2.Bucket(oss2.Auth(access_key_id, access_key_secret), endpoint, bucket_name)
 
 
-def uploadToOss(type, data, fileName):
+def percentage(consumed_bytes, total_bytes):
+    if total_bytes:
+        rate = int(100 * (float(consumed_bytes) / float(total_bytes)))
+        print('\r{0}% '.format(rate), end='')
+        sys.stdout.flush()
+
+
+def uploadToOss(type, data, fileName, path="beyebe/data/{yyyymmdd}/"):
     global bucket, URL_BASE
-    path = "beyebe/data/{yyyymmdd}/".replace('{yyyymmdd}', datetime.datetime.now().strftime('%Y%m%d'))
+    if path is None:
+        path = "beyebe/data/{yyyymmdd}/"
+    if path[-1] != '/':
+        path += '/'
+    path = path.replace('{yyyymmdd}', datetime.datetime.now().strftime('%Y%m%d'))
     name = getMd5(data)
     if fileName is None:
         url = path + "_" + name + '.' + type
     else:
         url = path + fileName + "_" + name + '.' + type
-    bucket.put_object(url, data)
+    print('正在上传')
+    print('name', name)
+    print('url', url)
+
+    bucket.put_object(url, data, progress_callback=percentage)
     return URL_BASE + url
 
 
@@ -54,32 +71,33 @@ def getMd5(file):
     return m0.hexdigest()
 
 
-def fileUpdate(file_dir, isFileName=False):
+def fileUpdate(file_dir, isFileName=False, path=None):
     # 图片上传
     f = open(file_dir, 'rb')
     file = f.read()
     f.close()
-    print('正在上传')
+
     if isFileName:
         fileName = file_dir.split('/')[-1].split('.')[0]
-        msg = uploadToOss(file_dir.split('.')[-1], file, fileName)
+        msg = uploadToOss(file_dir.split('.')[-1], file, fileName, path=path)
     else:
-        msg = uploadToOss(file_dir.split('.')[-1], file, None)
+        msg = uploadToOss(file_dir.split('.')[-1], file, None, path=path)
 
     return msg
 
 
-def mkdirUpdate(file_mkdir_dir, isFileName=False):
+def mkdirUpdate(file_mkdir_dir, isFileName=False, path=None):
     msgList = []
     for root, dirs, files in os.walk(file_mkdir_dir):
         for fileName in files:
             print("文件路径", file_mkdir_dir + '/' + fileName)
-            msgList.append(fileUpdate(file_mkdir_dir + '/' + fileName, isFileName=isFileName))
+            msgList.append(fileUpdate(file_mkdir_dir + '/' + fileName, isFileName=isFileName, path=path))
     return msgList
 
 
 if __name__ == '__main__':
     # 单文件上传
-    print(fileUpdate('./test.txt'))
+    print(fileUpdate('/Users/magic/Library/Mobile Documents/com~apple~CloudDocs/Desktop/docker镜像/fapiao_http_new.tar', path='beyebe/docker', isFileName=True))
+    # print(fileUpdate('./test.txt'))
     # 文件夹上传,如果isFileName=True,那么地址会保留文件名,并且不会被文件系统去重逻辑去重
-    print(mkdirUpdate('./banner', isFileName=True))
+    # print(mkdirUpdate('./banner', isFileName=True))
