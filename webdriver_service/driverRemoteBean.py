@@ -20,29 +20,40 @@ class WebDriverRemoteImp(WebDriverImp):
         self.myPool = MyPool
         mylog.info("正在尝试创建一个Driver实例")
         while True:
-            ipList = ['localhost', 'dockerhost', '172.18.0.1', '172.18.0.2', '172.18.0.3', '172.18.0.4', '172.18.0.5',
-                      '172.18.0.6','172.18.0.7','172.18.0.8','172.18.0.9']
-            # cmd = """/sbin/ip route|awk '/default/ { print  $3,"\tdockerhost" }'"""
-            # ipNow = os.popen(cmd).read()
-            # if ipNow is not None and ipNow != "":
-            #     ipStrList = self.__getIP(ipNow)
-            #     if len(ipStrList) != 0:
-            #         mylog.info("宿主机环境变量获取成功", ipStrList)
-            #         ipList.extend(ipStrList)
-            # else:
-            #     mylog.info("未成功执行指令")
+            # 这里一大长串地址,是可以作为webdriver对象的地址
+            # 但是,你不要错误理解了,比如你觉得前面的优先级大，互相实例会抢，从而修改这个基类
+            # 其实这下面的地址无论你怎么设置，理论上只有一个可以ping通（各自ping通自己的），哪怕你起了10个webdriver
+            # 神奇吧！你好奇怎么控制的分发？
+            # 使用docker network create指令
+            ipList = ['localhost', 'dockerhost',
+                      '172.18.0.1', '172.18.0.2', '172.18.0.3',
+                      '172.19.0.1', '172.19.0.2', '172.19.0.3',
+                      '172.20.0.1', '172.20.0.2', '172.20.0.3',
+                      '172.21.0.1', '172.21.0.2', '172.21.0.3',
+                      '172.22.0.1', '172.22.0.2', '172.22.0.3',
+                      ]
+
             for ip in ipList:
+                urlTest = "http://{}:4444/".format(ip)
+                try:
+                    requests.get(urlTest, timeout=3)
+                except:
+                    print("测试失败", "跳过该webdriver", urlTest)
+                    continue
                 try:
                     mylog.info("正在尝试使用", ip)
                     self.driver = webdriver.Remote(command_executor="http://{}:4444/wd/hub".format(ip),
                                                    desired_capabilities=DesiredCapabilities.CHROME)
                     self.driver.maximize_window()
-                    # 数据库加载
+                    self.driver.implicitly_wait(7)
+                    self.driver.set_page_load_timeout(7)  # 数据库加载
+                    self.driver.set_script_timeout(7)
                     self.client = pymongo.MongoClient(host=self.MONGODB_HOST, port=self.MONGODB_PORT)
                     self.db = self.client[self.MONGODB_DBNAME]
                     self.db.authenticate(self.MONGODB_USER, self.MONGODB_PASSWORD)
                     return
                 except:
+                    mylog.info(traceback.format_exc())
                     mylog.info("尝试失败,尝试使用下一个", ip)
                     pass
                     # traceback.mylog.info_exc()

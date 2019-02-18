@@ -1,0 +1,11 @@
+aliyun-python-sdk-core==2.11.4
+aliyun-python-sdk-core-v3==2.11.4
+aliyun-python-sdk-kms==2.5.0
+beautifulsoup4==4.6.3
+oss2==2.6.0
+Pillow==5.3.0
+pymongo==3.7.1
+redis==2.10.6
+requests==2.21.0
+selenium==3.141.0
+tornado==5.1.1

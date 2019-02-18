@@ -94,10 +94,9 @@ def mkdirUpdate(file_mkdir_dir, isFileName=False, path=None):
             msgList.append(fileUpdate(file_mkdir_dir + '/' + fileName, isFileName=isFileName, path=path))
     return msgList
 
-
 if __name__ == '__main__':
     # 单文件上传
-    print(fileUpdate('/Users/magic/Library/Mobile Documents/com~apple~CloudDocs/Desktop/docker镜像/fapiao_http_new.tar', path='beyebe/docker', isFileName=True))
+    print(fileUpdate('/Users/magic/PycharmProjects/scrapy-demo-beyebe/oss_aliyun/test/test2.jpg', path='beyebe/docker', isFileName=True))
     # print(fileUpdate('./test.txt'))
     # 文件夹上传,如果isFileName=True,那么地址会保留文件名,并且不会被文件系统去重逻辑去重
     # print(mkdirUpdate('./banner', isFileName=True))

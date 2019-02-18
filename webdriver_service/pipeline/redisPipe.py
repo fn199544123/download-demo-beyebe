@@ -9,6 +9,7 @@ import time
 import redis
 from pymongo.errors import DuplicateKeyError
 
+from logging_utils.cJsonEncoder import CJsonEncoder
 from logging_utils.log import mylog
 from webdriver_service.driver_pool.driverPool import WebDriverPool
 from webdriver_service.factory.fapiaoImpl import fapiaoImpl
@@ -56,5 +57,5 @@ if __name__ == '__main__':
     kjje = "351.69"
 
     data = {'fpdm': fpdm, 'fphm': fphm, 'kprq': kprq, 'kjje': kjje}
-    r15.lpush(redisKey, json.dumps(data, ensure_ascii=False))
+    r15.lpush(redisKey, json.dumps(data, cls=CJsonEncoder, ensure_ascii=False))
     getMission(redisKey, fapiaoImpl, 5)

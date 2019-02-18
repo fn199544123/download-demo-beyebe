@@ -11,6 +11,7 @@ import uuid
 import requests
 import sys
 from PIL import Image
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 
 from logging_utils.log import mylog
@@ -37,6 +38,7 @@ top_Moren = 0
 
 # 有远程遥控Driver和本地Driver两种模拟形式
 # class fapiaoImpl(WebDriverImp):
+
 class fapiaoImpl(WebDriverRemoteImp):
 
     def _deal(self, input):
@@ -44,13 +46,19 @@ class fapiaoImpl(WebDriverRemoteImp):
         while True:
             try:
                 dictNow = input
-                driver.get('https://inv-veri.chinatax.gov.cn/index.html')
+                try:
+                    driver.get('https://inv-veri.chinatax.gov.cn/index.html')
+                except TimeoutException:
+                    print("driver超时异常,忽略并尝试提取内容")
                 print("正在输入发票信息")
                 # 1
                 fpdm = input['fpdm']
                 fphm = input['fphm']
                 kprq = input['kprq']
-                kjje = input['kjje']
+                if input.get('jym') is not None and len(input.get('jym')) >= 6:
+                    kjje = input['jym'][-6:]
+                else:
+                    kjje = input['kjje']
 
                 # 发票代码
                 driver.find_element_by_id('fpdm').clear()
@@ -107,7 +115,7 @@ class fapiaoImpl(WebDriverRemoteImp):
                 driver.find_element_by_id('yzm').clear()
                 driver.find_element_by_id('yzm').send_keys(inputa)
                 print("【验证】已经完成所有信息输入")
-                time.sleep(1.5)  # 这里延时未来可以调低一点,为了录屏
+                time.sleep(1)  # 这里延时未来可以调低一点,为了录屏
                 action_chains = ActionChains(self.driver)
                 action_chains.double_click(driver.find_element_by_id('checkfp')).perform()
                 print("正在进行查验")
@@ -119,6 +127,14 @@ class fapiaoImpl(WebDriverRemoteImp):
                 if '超过该张发票当日查验次数' in driver.page_source:
                     print("超过次数")
                     dictNow = {'errMsg': "超过次数！无法返回信息", 'state': 601}
+                    return dictNow
+                elif '开票日期有误' in driver.page_source:
+                    print("开票日期有误")
+                    dictNow = {'errMsg': "开票日期有误！无法返回信息，请输入正确的数据或格式，例如20190101", 'state': 602}
+                    return dictNow
+                elif '校验码有误!' in driver.page_source:
+                    print("校验码有误")
+                    dictNow = {'errMsg': "校验码有误！无法返回信息,请输入校验码或查看是否正确", 'state': 602}
                     return dictNow
                 elif '一分钟' in driver.page_source:
                     print("访问过于频繁，休息60秒后再试")
@@ -163,13 +179,17 @@ class fapiaoImpl(WebDriverRemoteImp):
         else:
             return False
 
+    """
+    获取验证码主方法,直接被deal调用
+    """
+
     def getCodeString(self):
 
         url_cw = "http://121.9.245.186:9020/middleware/identifyingChinese/upload.go"  # 中文外网
         url_ew = "http://121.9.245.186:9021/middleware/identifyingEnglish/upload.go"  # 英文外网
-        url_c = "http://192.168.10.212:9020/middleware/identifyingChinese/upload.go"  # 中文本地
-        url_e = "http://192.168.10.212:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
-        urlList = [url_c, url_e, url_cw, url_ew]
+        # url_c = "http://192.168.10.212:9020/middleware/identifyingChinese/upload.go"  # 中文本地
+        # url_e = "http://192.168.10.212:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
+        urlList = [url_cw, url_ew]
         ansList = []
 
         while True:
@@ -209,19 +229,9 @@ class fapiaoImpl(WebDriverRemoteImp):
             # 更换图片再来一次
             self.click100('yzm_img')
 
-    def get_snap(self):  # 对目标网页进行截屏.这里截的是全屏
-        fileName = str(uuid.uuid1()) + 'full_snap.png'
-        self.driver.save_screenshot(fileName)
-        page_snap_obj = Image.open(fileName)
-        os.remove(fileName)
-        return page_snap_obj
-
-    def setAttribute(self, elementObj, attributeName, value):
-        # 封装设置页面对象的属性值的方法
-        # 调用JavaScript代码修改页面元素的属性值，arguments[0]－［2］分别会用后面的
-        # element、attributeName和value参数值进行替换，并执行该JavaScript代码
-        self.driver.execute_script("arguments[0].setAttribute\
-     (arguments[1],arguments[2])", elementObj, attributeName, value)
+    """
+    获取验证码图片
+    """
 
     def get_image(self):
         global left_Moren, top_Moren
@@ -244,6 +254,20 @@ class fapiaoImpl(WebDriverRemoteImp):
 
         # 验证码识别
         return filePath  # 得到的就是验证码
+
+    def get_snap(self):  # 对目标网页进行截屏.这里截的是全屏
+        fileName = str(uuid.uuid1()) + 'full_snap.png'
+        self.driver.save_screenshot(fileName)
+        page_snap_obj = Image.open(fileName)
+        os.remove(fileName)
+        return page_snap_obj
+
+    def setAttribute(self, elementObj, attributeName, value):
+        # 封装设置页面对象的属性值的方法
+        # 调用JavaScript代码修改页面元素的属性值，arguments[0]－［2］分别会用后面的
+        # element、attributeName和value参数值进行替换，并执行该JavaScript代码
+        self.driver.execute_script("arguments[0].setAttribute\
+     (arguments[1],arguments[2])", elementObj, attributeName, value)
 
     def get_image_old(self):  # 对验证码所在位置进行定位，然后截取验证码图片
         global left_Moren, top_Moren

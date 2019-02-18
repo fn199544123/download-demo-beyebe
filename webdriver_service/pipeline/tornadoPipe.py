@@ -15,14 +15,21 @@ class ChangeModel(tornado.web.RequestHandler):
     def post(self):
         return self.get()
 
+    @tornado.web.asynchronous
     def get(self):
         try:
             arguments = self.request.arguments
             for key in arguments:
                 arguments[key] = arguments[key][-1].decode()
-            msg = WebDriverPool().getOneDriverNoWait().deal(arguments)
-            self.write(json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder))
-
+            if WebDriverPool().queueSize() > 0:
+                msg = WebDriverPool().getOneDriverNoWait().deal(arguments)
+            else:
+                # 现在没有可用driver,所以暂时不下发任务
+                msg = {"state": 577,
+                       "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。"}
+            jsonStr=json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
+            self.write(jsonStr)
+            return
         except:
             if 'Empty' in traceback.format_exc():
                 self.write({'state': 701, 'errMsg': "系统繁忙！无空闲实例,请稍后再试"})

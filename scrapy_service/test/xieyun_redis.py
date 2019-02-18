@@ -4,6 +4,7 @@ from _md5 import md5
 
 import redis
 
+from logging_utils.cJsonEncoder import CJsonEncoder
 from logging_utils.log import mylog
 
 start_urls = ['https://www.qichacha.com/firm_182249d7736fdb68960201022c19647a.html']
@@ -21,7 +22,7 @@ if __name__ == '__main__':
     for url in start_urls:
         print("上传任务", redis_key, url)
         dictNow = {'url': url, 'mid': 1, 'etc': ''}
-        r.lpush(redis_key, json.dumps(dictNow))
+        r.lpush(redis_key, json.dumps(dictNow, cls=CJsonEncoder, ensure_ascii=False))
 
     print("上传一批任务成功")
 

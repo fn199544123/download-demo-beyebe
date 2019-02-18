@@ -1,0 +1,4 @@
+[2019-01-23 11:57:17,659] - log.py [Line:45] - [INFO]-[thread:4699473344]-[process:36688] - ('正在尝试创建一个Driver实例',)
+[2019-01-23 11:57:17,659] - log.py [Line:45] - [INFO]-[thread:4699473344]-[process:36688] - ('正在尝试使用', 'localhost')
+[2019-01-23 11:57:20,230] - log.py [Line:45] - [INFO]-[thread:4699473344]-[process:36688] - ('尝试失败,尝试使用下一个', 'localhost')
+[2019-01-23 11:57:20,230] - log.py [Line:45] - [INFO]-[thread:4699473344]-[process:36688] - ('正在尝试使用', 'dockerhost')

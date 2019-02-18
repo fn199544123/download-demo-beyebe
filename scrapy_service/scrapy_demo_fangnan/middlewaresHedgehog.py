@@ -14,7 +14,7 @@ from scrapy.http import HtmlResponse
 
 from logging_utils.log import mylog
 
-redisPool14 = redis.ConnectionPool(host="192.168.10.9", password="123456", port=6379, db=14)
+
 redisPool15 = redis.ConnectionPool(host="192.168.10.9", password="123456", port=6379, db=15)
 redis_key = 'requests:requests_start_urls'
 
