@@ -41,6 +41,9 @@ top_Moren = 0
 
 class fapiaoImpl(WebDriverRemoteImp):
 
+    def getDriverPort(self):
+        return 5440
+
     def _deal(self, input):
         driver = self.driver
         while True:

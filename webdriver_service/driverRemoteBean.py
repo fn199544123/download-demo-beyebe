@@ -34,7 +34,7 @@ class WebDriverRemoteImp(WebDriverImp):
                       ]
 
             for ip in ipList:
-                urlTest = "http://{}:4444/".format(ip)
+                urlTest = "http://{}:{}/".format(ip, str(self.getDriverPort()))
                 try:
                     requests.get(urlTest, timeout=3)
                 except:
@@ -42,8 +42,9 @@ class WebDriverRemoteImp(WebDriverImp):
                     continue
                 try:
                     mylog.info("正在尝试使用", ip)
-                    self.driver = webdriver.Remote(command_executor="http://{}:4444/wd/hub".format(ip),
-                                                   desired_capabilities=DesiredCapabilities.CHROME)
+                    self.driver = webdriver.Remote(
+                        command_executor="http://{}:{}/wd/hub".format(ip, str(self.getDriverPort())),
+                        desired_capabilities=DesiredCapabilities.CHROME)
                     self.driver.maximize_window()
                     self.driver.implicitly_wait(7)
                     self.driver.set_page_load_timeout(7)  # 数据库加载
@@ -74,3 +75,6 @@ class WebDriverRemoteImp(WebDriverImp):
         [2019-01-21 10:58:44,829] - log.py [Line:45] - [INFO]-[thread:139682587109120]-[process:1] - ('宿主机量获取成功', '172.17.0.1 \tdockerhost\n')
         """
         return self.__getIP(ipStr)
+
+    def getDriverPort(self):
+        return 4444

@@ -46,6 +46,9 @@ tableName = "file_zhongdeng"
 # class zhongDengImpl(LoginDriverImp):
 class zhongDengImpl(LoginDriverRomoteImp):
 
+    def getDriverPort(self):
+        return 5441
+
     def __init__(self, MyPool, driver=None, headless=False):
         super().__init__(MyPool, driver, headless)
 
