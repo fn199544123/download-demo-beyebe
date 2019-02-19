@@ -43,7 +43,7 @@ class JieXi():
       display: block;
     }
 
-    .ng-animate-start {
+    .ng-animate-tornado_start {
       clip: rect(0, auto, auto, 0);
       -ms-zoom: 1.0001;
     }
@@ -1027,5 +1027,5 @@ jiexi.parse(resp=1)
 # for _ in range(30):
 #     t1 = Thread(target=jiexi.tianyancha_save,)
 #     t1.setDaemon(True)
-#     t1.start()
+#     t1.tornado_start()
 # t1.join()

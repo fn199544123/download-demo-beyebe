@@ -1,12 +1,6 @@
 小刺猬Scrapy最小单元
 简单修改快速投产
 
-
-三个模块
-1
-2
-3 requetsModel
-
 Demo说明：
 1、单次下发任务:新浪搜狐新闻列表抓取。
 2、循环抓取任务:百度热词抓取。
@@ -49,3 +43,13 @@ Demo说明：
 （1）使用Docker封装服务，去环境。
 （2）完善必要的文档，上传技术沉淀平台。
 （3）向我分享最小单元改进建议。
+
+
+完成的项目
+WebDriver
+1、发票验证平台Django同步抓取接口
+|集成的生产环境项目|
+|:--|:--|:--|:--|
+|继承类别|项目名|端口|是否支持docker|启动类|
+|WebDriver|发票识别爬虫|9088|是|webdriver_service.django_start.manage_fapiao
+|WebDriver|中登网发票查询爬虫|9089|是|webdriver_service.django_start.manage_zhongdeng
