@@ -40,11 +40,12 @@ top_Moren = 0
 
 # 有远程遥控Driver和本地Driver两种模拟形式
 # class fapiaoImpl(WebDriverImp):
+
 tableName = "file_zhongdeng"
 
 
-# class zhongDengImpl(LoginDriverImp):
-class zhongDengImpl(LoginDriverRomoteImp):
+class zhongDengImpl(LoginDriverImp):
+    # class zhongDengImpl(LoginDriverRomoteImp):
 
     def getDriverPort(self):
         return 5441
@@ -95,7 +96,10 @@ class zhongDengImpl(LoginDriverRomoteImp):
                 driver.find_element_by_id('validateCode').send_keys(inputa)
                 time.sleep(0.5)
                 print("【验证】已经完成账号密码输入")
-                driver.find_element_by_id('login_btn').click()  # 点击搜索按钮
+                try:
+                    driver.find_element_by_id('login_btn').click()  # 点击搜索按钮
+                except TimeoutException:
+                    pass
                 print("正在进行登录")
                 if '校验码错误' in driver.page_source:
                     print("验证码输入错误,重试流程")
@@ -106,6 +110,7 @@ class zhongDengImpl(LoginDriverRomoteImp):
             except:
                 traceback.print_exc()
                 print("本次登录失败,正在尝试重试!")
+                driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
 
     def _deal(self, input):
         companyName = input['companyName']
@@ -116,10 +121,12 @@ class zhongDengImpl(LoginDriverRomoteImp):
         """
         print("按金融融资方查询")
         try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init")
+            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
+                time.time())))
         except TimeoutException:
             print("driver超时异常,忽略并尝试提取内容")
         # 查询校验码识别
+        self._state = "[中登网登记]正在查询的公司是:{},正在验证码查询阶段,进度1/4".format(input['companyName'])
         while True:
             try:
                 driver.find_element_by_id('name').clear()
@@ -188,9 +195,14 @@ class zhongDengImpl(LoginDriverRomoteImp):
             time.sleep(0.5)
         print("登记证明编号记录完成", lstRegno)
         print("正在依次下载")
+        self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
+                                                                                     len(lstRegno))
+
         ansList = []
         for i, regno in enumerate(lstRegno):
             # 大量下载极易造成卡死,要进行重试,最次最多重试5次
+            self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(input['companyName'],
+                                                                                                  len(lstRegno), i)
             dbItem = self.db[tableName].find_one({'regno': regno})
             if dbItem is not None:
                 print(dbItem['regno'], "已经下载过了,走缓存")
@@ -235,12 +247,18 @@ class zhongDengImpl(LoginDriverRomoteImp):
                 # 这里只下载第一个,所以第一个就Break
                 name = item.text
                 print("获取文件名", name)
-                for i in range(100):
-                    filePath = "./webDriver_download/" + name
-
-                    print(name, "尚未缓存,走下载上传路线")
-                    item.click()
+                filePath = "./webDriver_download/" + name
+                print(name, "尚未缓存,走下载上传路线")
+                # 下载
+                # item.click()
+                # href="javascript:download('02973013000359528048');"
+                """
+                使用docker下载文件怎么都不好使，妈蛋！！！
+                """
+                driver.execute_script("download('{}');".format(name.replace('.pdf', '')))
+                for i in range(10):
                     if os.path.exists(filePath):
+                        time.sleep(0.2)
                         ossPath = fileUpdate(filePath)
                         # 上传成功后删除oss对象
                         os.remove(filePath)
@@ -255,7 +273,7 @@ class zhongDengImpl(LoginDriverRomoteImp):
                         return
                     else:
                         print("文件还在浏览器下载中,请稍后！")
-                        time.sleep(0.1)  # 100次0.1秒，共10秒
+                        time.sleep(0.8)  # 100次0.1秒，共10秒
                 if dictNow == {}:
                     print("10秒都没有下载成功,下载异常")
                     dictNow['regno'] = regno

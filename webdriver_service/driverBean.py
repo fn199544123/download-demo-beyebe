@@ -29,7 +29,7 @@ redisPool14 = redis.ConnectionPool(host="121.9.245.183", password="BybAZ!@12", p
 class WebDriverImp():
     __instance = None
     myPool = None
-    __state = {}
+    _state = "正在工作中...开发者并没有特别标记该实例的工作状态"
     # MONGODB_HOST = '192.168.10.9'
     # MONGODB_USER = 'fangnan'
     # MONGODB_PASSWORD = 'Fang135'
@@ -51,8 +51,10 @@ class WebDriverImp():
         store_path = './webDriver_download'
         if not os.path.exists(store_path):
             os.makedirs(store_path)
+
         prefs = {'download.default_directory': store_path,
-                 'profile.default_content_settings.popups': 0}
+                 'profile.default_content_settings.popups': 0,
+                 "download.prompt_for_download": False}
         options.add_experimental_option("prefs", prefs)
         if headless:
             options.add_argument('--headless')
@@ -142,7 +144,7 @@ class WebDriverImp():
         if bufferItem is not None:
             print("已存在缓存,进一步确定缓存形式")
             if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
-                raise Exception("数据正在处理!,请稍后再试(60秒只能请求一次任务)" + bufferItem)
+                raise Exception("数据正在处理!,请稍后再试(相同任务60秒只能请求一次)" + bufferItem)
             else:
                 print("走缓存返回结果")
                 bufferItemStr = bufferItem.decode()
@@ -203,8 +205,9 @@ class WebDriverImp():
         os.remove(fileName)
         return page_snap_obj  # 发票验真平台
 
+    # 如果在处理过程中覆写__state，那么在该实例工作过程中是可以查看该实例的状态的
     def getState(self):
-        return self.__state
+        return self._state
 
     # 封装设置页面对象的属性值的方法
     # 调用JavaScript代码修改页面元素的属性值，arguments[0]－［2］分别会用后面的

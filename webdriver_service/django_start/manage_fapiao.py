@@ -24,7 +24,7 @@ from webdriver_service.django_start.django_start.view import changeModel
 
 if __name__ == '__main__':
 
-    WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
+    WebDriverPool(dBean=fapiaoImpl, num=1, headless=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:

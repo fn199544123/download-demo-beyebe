@@ -15,7 +15,7 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 
 #中登网
 if __name__ == '__main__':
-    WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+    WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:
