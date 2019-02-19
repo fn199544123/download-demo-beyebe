@@ -3,3 +3,4 @@
 [2019-02-18 17:56:58,936] - log.py [Line:45] - [INFO]-[thread:4598519232]-[process:741] - ('正在尝试创建一个Driver实例',)
 [2019-02-18 17:57:18,483] - log.py [Line:45] - [INFO]-[thread:4745131456]-[process:762] - ('正在尝试创建一个Driver实例',)
 [2019-02-18 17:57:18,623] - log.py [Line:45] - [INFO]-[thread:4745131456]-[process:762] - ('正在尝试使用', 'localhost')
+[2019-02-19 11:07:56,919] - log.py [Line:45] - [INFO]-[thread:4693915072]-[process:43443] - ('正在尝试创建一个Driver实例',)

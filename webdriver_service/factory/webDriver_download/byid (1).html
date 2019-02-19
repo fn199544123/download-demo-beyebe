@@ -1,0 +1,26 @@
+
+
+
+<html>
+<head>
+<title>动产融资统一登记公示系统</title>
+<script type="text/javascript" src="/rs/js/jquery-1.12.4.min.js"></script><script type="text/javascript" src="/rs/js/jquery-migrate-1.4.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var errorMsg = "同名用户已在别处登录";
+	if (errorMsg != ""){
+		alert("同名用户已在别处登录");
+	}
+	
+	var form = $("<form></form>");
+	form.attr("method","post");
+	form.attr("target","_top");
+	form.attr("action","/rs/login.jsp");
+	form.appendTo('body');
+	form.submit();
+});
+</script>
+</head>
+<body>
+</body>
+</html>
