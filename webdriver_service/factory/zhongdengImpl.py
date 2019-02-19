@@ -242,6 +242,8 @@ class zhongDengImpl(LoginDriverRomoteImp):
                     item.click()
                     if os.path.exists(filePath):
                         ossPath = fileUpdate(filePath)
+                        # 上传成功后删除oss对象
+                        os.remove(filePath)
                         dictNow['regno'] = regno
                         dictNow['name'] = name
                         dictNow['companyName'] = companyName
