@@ -6,8 +6,12 @@ sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 
 from webdriver_service.factory.zhongdengImpl import zhongDengImpl
 from webdriver_service.driver_pool.driverPool import WebDriverPool
-
+"""
+启动selenium
+docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
+"""
 # http://localhost:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
+# http://192.168.10.54:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 
 #中登网
 if __name__ == '__main__':

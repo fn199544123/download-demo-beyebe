@@ -263,7 +263,7 @@ class zhongDengImpl(LoginDriverRomoteImp):
                     dictNow['companyName'] = companyName
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
-                    dictNow['errMsg'] = "下载10秒都没有下载完,可能是中登网下载链接失效无法下载"
+                    dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"
                     ansList.append(dictNow)
                     # 只采集第一个,其他的不采集,于是break
                     return

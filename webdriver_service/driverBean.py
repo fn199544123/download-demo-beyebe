@@ -99,11 +99,15 @@ class WebDriverImp():
                 inputMD5 = self.__getInputMD5(input)
                 input.update(self._deal(input))
                 self.save(input)
-                r = redis.Redis(connection_pool=redisPool14)
-                pipe = r.pipeline()
-                pipe.set(inputMD5, json.dumps(input, cls=CJsonEncoder, ensure_ascii=False))
-                pipe.expire(inputMD5, 60 * 60 * 24)
-                pipe.execute()
+                if 'ERROR' not in str(input):
+                    print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储')
+                    r = redis.Redis(connection_pool=redisPool14)
+                    pipe = r.pipeline()
+                    pipe.set(inputMD5, json.dumps(input, cls=CJsonEncoder, ensure_ascii=False))
+                    pipe.expire(inputMD5, 60 * 60 * 24)
+                    pipe.execute()
+                else:
+                    print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
                 print("数据存储成功")
                 return input
             elif isDup == True:
