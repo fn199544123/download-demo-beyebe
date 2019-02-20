@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 import sys
 import os
+
 sys.path.append("../../")  # 解决潜在的路径依赖问题
 sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 
 from webdriver_service.factory.zhongdengImpl import zhongDengImpl
 from webdriver_service.driver_pool.driverPool import WebDriverPool
+
 """
 启动selenium
 docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
@@ -13,8 +15,11 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 # http://localhost:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 # http://192.168.10.54:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 
-#中登网
+# 中登网
 if __name__ == '__main__':
+    # 测试使用
+    # WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+
     WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
@@ -26,6 +31,6 @@ if __name__ == '__main__':
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    args = [sys.argv[0], "runserver", "0.0.0.0:9089", "--noreload"]
+    args = [sys.argv[0], "runserver", "0.0.0.0:9189", "--noreload"]
     print(args)
     execute_from_command_line(args)
