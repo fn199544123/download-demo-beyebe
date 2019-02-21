@@ -39,8 +39,6 @@ pytz==2018.9
 queuelib==1.5.0
 redis==2.10.6
 requests==2.21.0
-Scrapy==1.5.1
-scrapy-redis==0.6.8
 selenium==3.141.0
 service-identity==17.0.0
 six==1.11.0
@@ -48,3 +46,6 @@ tornado==5.1.1
 urllib3==1.24.1
 w3lib==1.19.0
 zope.interface==4.5.0
+
+Scrapy==1.5.1
+scrapy-redis==0.6.8

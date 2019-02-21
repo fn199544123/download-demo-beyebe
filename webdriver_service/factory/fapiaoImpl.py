@@ -39,7 +39,7 @@ top_Moren = 0
 # 有远程遥控Driver和本地Driver两种模拟形式
 class fapiaoImpl(WebDriverImp):
 
-# class fapiaoImpl(WebDriverRemoteImp):
+    # class fapiaoImpl(WebDriverRemoteImp):
 
     def getDriverPort(self):
         return 5440
@@ -62,7 +62,10 @@ class fapiaoImpl(WebDriverImp):
                     kjje = input['jym'][-6:]
                 else:
                     kjje = input['kjje']
-
+                for i in range(100):
+                    if 'fpdm' in driver.page_source:
+                        break
+                    time.sleep(0.1)
                 # 发票代码
                 driver.find_element_by_id('fpdm').clear()
                 driver.find_element_by_id('fpdm').send_keys(fpdm)

@@ -18,6 +18,7 @@ docker run -d -p 5440:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 # http://localhost:9088/spider/fapiao.go?fpdm=4403174320&fphm=03738308&kprq=20181010&jym=964175
 # http://localhost:9088/spider/fapiao.go?fpdm=4403181130&fphm=27671246&kprq=20180920&kjje=351.69
 # http://localhost:9088/spider/fapiao.go?fpdm=011001800211&fphm=28519832&kprq=20190109&kjje=1020&jym=07842591941327323876
+# http://192.168.10.54:9088/spider/fapiao.go?fpdm=011001800211&fphm=28519832&kprq=20190109&kjje=1020&jym=07842591941327323876
 
 from django.conf.urls import url
 from webdriver_service.django_start.django_start.urls import urlpatterns
@@ -26,7 +27,7 @@ from webdriver_service.django_start.django_start.view import changeModel
 if __name__ == '__main__':
     # 演示时使用下面的代码
     # WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
-    WebDriverPool(dBean=fapiaoImpl, num=1, headless=True)
+    WebDriverPool(dBean=fapiaoImpl, num=3, headless=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:
