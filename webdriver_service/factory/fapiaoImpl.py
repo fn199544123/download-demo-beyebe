@@ -193,9 +193,9 @@ class fapiaoImpl(WebDriverImp):
 
         url_cw = "http://121.9.245.186:9020/middleware/identifyingChinese/upload.go"  # 中文外网
         url_ew = "http://121.9.245.186:9021/middleware/identifyingEnglish/upload.go"  # 英文外网
-        # url_c = "http://192.168.10.212:9020/middleware/identifyingChinese/upload.go"  # 中文本地
-        # url_e = "http://192.168.10.212:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
-        urlList = [url_cw, url_ew]
+        url_c = "http://localhost:9020/middleware/identifyingChinese/upload.go"  # 中文本地
+        url_e = "http://localhost:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
+        urlList = [url_c, url_e, url_cw, url_ew]
         ansList = []
 
         while True:

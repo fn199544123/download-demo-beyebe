@@ -13,9 +13,9 @@ import sys
 
 from logging_utils.log import mylog
 
-MONGODB_HOST = '192.168.10.9'
-MONGODB_USER = 'fangnan'
-MONGODB_PASSWORD = 'Fang135'
+MONGODB_HOST = '58.221.49.26'
+MONGODB_USER = 'developer'
+MONGODB_PASSWORD = '123!@#qaz'
 MONGODB_PORT = 27017
 MONGODB_DBNAME = 'hedgehog_spider'
 
