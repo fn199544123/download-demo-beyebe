@@ -37,9 +37,9 @@ top_Moren = 0
 
 
 # 有远程遥控Driver和本地Driver两种模拟形式
-# class fapiaoImpl(WebDriverImp):
+class fapiaoImpl(WebDriverImp):
 
-class fapiaoImpl(WebDriverRemoteImp):
+# class fapiaoImpl(WebDriverRemoteImp):
 
     def getDriverPort(self):
         return 5440
