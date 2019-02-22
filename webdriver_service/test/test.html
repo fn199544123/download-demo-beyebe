@@ -1,228 +1,253 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>国家税务总局全国增值税发票查验平台</title>
-    <meta name="keywords" content="" />
-	<meta http-equiv="pragma" content="no-cache" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
 	<meta http-equiv="expires" content="0" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta property="wb:webmaster" content="" />
-    <script language="javascript">
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
     document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
-    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/jquery.alerts.css?"+Math.random()+"' media='screen' /&gt;");
-    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/bootstrap-datepicker.min.css' /&gt;");
-
-
-
-      if(top != self){
-          location.href = "about:blank";
-      }
-
-
   document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;");
   document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.alerts.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.md5.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/showModalDialog.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/aes.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/pbkdf2.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/AesUtil.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/common.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/validate.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
   document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript type='text/javascript' language='javascript' src='js/bootstrap-datepicker.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript type='text/javascript' language='javascript' src='js/bootstrap-datepicker.zh-CN.min.js'&gt;&lt;/scr"+"ipt&gt;");
-
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/m.q.d.min.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/q.b.a.min.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/s.d.b.min.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/t.q.b.min.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/t.q.d.min.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/t.q.e.min.js'&gt;&lt;/sc"+"ript&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/t.q.z.min.js'&gt;&lt;/scr"+"ipt&gt;");
-</script><link rel="stylesheet" type="text/css" href="css/common.css?0.116519440030179" /><link rel="stylesheet" type="text/css" href="css/jquery.alerts.css?0.43198284847670965" media="screen" /><link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.min.css" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.alerts.js?0.6792487942754828"></script><script charset="utf-8" type="text/javascript" src="js/jquery.md5.js"></script><script charset="utf-8" type="text/javascript" src="js/showModalDialog.js?0.6696753986669495"></script><script charset="utf-8" type="text/javascript" src="js/aes.js"></script><script charset="utf-8" type="text/javascript" src="js/pbkdf2.js"></script><script charset="utf-8" type="text/javascript" src="js/AesUtil.js"></script><script charset="utf-8" type="text/javascript" src="js/common.js?0.14526607270235736"></script><script charset="utf-8" type="text/javascript" src="js/validate.js?0.4531131971753999"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.2795094332010768"></script><script type="text/javascript" language="javascript" src="js/bootstrap-datepicker.js"></script><script type="text/javascript" language="javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script><script charset="utf-8" type="text/javascript" src="js/m.q.d.min.js"></script><script charset="utf-8" type="text/javascript" src="js/q.b.a.min.js"></script><script charset="utf-8" type="text/javascript" src="js/s.d.b.min.js"></script><script charset="utf-8" type="text/javascript" src="js/t.q.b.min.js"></script><script charset="utf-8" type="text/javascript" src="js/t.q.d.min.js"></script><script charset="utf-8" type="text/javascript" src="js/t.q.e.min.js"></script><script charset="utf-8" type="text/javascript" src="js/t.q.z.min.js"></script>
-<noscript>
-
-     &lt;div class="timeline"&gt;
-      &lt;div class="timeline_tip"&gt;
-                &lt;h3&gt;尊敬的纳税人：&lt;/h3&gt;
-                &lt;p&gt;请您确认当前浏览器是否禁用了js相关脚本，禁用js相关脚本会导致“增值税发票查验平台”功能无法正常使用。如您禁用了js相关脚本，请更改浏览器设置启用相关脚本后，重新打开浏览器，登录本平台。&lt;/p&gt;
-            &lt;/div&gt;
-      &lt;div class="timeline-date"&gt;
-        &lt;ul&gt;
-          &lt;div class="second" style="position: relative;"&gt;
-            &lt;span&gt;具体浏览器设置修改步骤（以ie浏览器为例）：&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;li class="clearfix"&gt;
-            &lt;h3&gt;1&lt;span&gt;步骤&lt;/span&gt;&lt;/h3&gt;
-            &lt;dl class="right"&gt;
-              &lt;span&gt;点击ie浏览器工具菜单internet选项命令；&lt;/span&gt;
-            &lt;/dl&gt;
-          &lt;/li&gt;
-          &lt;li class="clearfix"&gt;
-            &lt;h3&gt;2&lt;span&gt;步骤&lt;/span&gt;&lt;/h3&gt;
-            &lt;dl class="right"&gt;
-              &lt;span&gt;点击安全选项卡，选中internet区域，点击自定义级别按钮；&lt;/span&gt;
-            &lt;/dl&gt;
-          &lt;/li&gt;
-          &lt;li class="clearfix"&gt;
-            &lt;h3&gt;3&lt;span&gt;步骤&lt;/span&gt;&lt;/h3&gt;
-            &lt;dl class="right"&gt;
-              &lt;span&gt;设置列表找到脚本项，其中java小程序脚本和活动脚本都设置为启用，点击确定；&lt;/span&gt;
-            &lt;/dl&gt;
-          &lt;/li&gt;
-          &lt;li class="clearfix"&gt;
-            &lt;h3&gt;4&lt;span&gt;步骤&lt;/span&gt;&lt;/h3&gt;
-            &lt;dl class="right"&gt;
-              &lt;span&gt;点击确定关闭internet选项对话框；&lt;/span&gt;
-            &lt;/dl&gt;
-          &lt;/li&gt;
-          &lt;li class="clearfix"&gt;
-            &lt;h3&gt;5&lt;span&gt;步骤&lt;/span&gt;&lt;/h3&gt;
-            &lt;dl class="right"&gt;
-              &lt;span&gt;重启浏览器。&lt;/span&gt;
-            &lt;/dl&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-
-    &lt;/div&gt;
-</noscript>
-<script>
-  var browser = "";
-  browser = getBrowser();
-    function pad(num, n) {
-       var len = num.toString().length;
-       while(len &lt; n) {
-          num = "0" + num;
-          len++;
-      }
-      return num;
-  }
-
-  var jsname = "";
-</script>
-
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.9225743763324521" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.7772349474425848"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
 </head>
 
-<body onload="arw();" style="">
-    <div id="pageshow" style="">
-    <div id="top">
-<div id="headerbox"><div id="header">
-  <div class="logo"><img src="images/cy_logo_title.png" /></div>
-  <span id="Hotnews">支持增值税专用发票、增值税普通发票、增值税普通发票（卷票）、增值税电子普通发票、增值税电子普通发票（通行费）、机动车销售统一发票、二手车销售统一发票、货物运输业增值税专用发票在线查验。</span>
-</div>
-<div id="navbox">
-    <div id="nav">
-      <ul class="nav_main">
-        <li> <a href="index.html" class="wid100">首页</a> </li>
-        <li class="nav_ge"></li>
-        <li> <a href="#" class="hasSub">发票常识</a>
-          <ul>
-             <li><a href="fpcs/fpzl.html">发票种类</a></li>
-            <li><a href="fpcs/fpbs.html">发票版式</a></li>
-            <li><a href="fpcs/fpzwsbff.html">防伪措施</a></li>
-          </ul>
-        </li>
-        <li class="nav_ge"></li>
-        <li> <a href="cjwt.html" class=" ">常见问题</a>
-        </li>
-        <li class="nav_ge"></li>
-        <li> <a href="czsm.html" class=" ">操作说明</a> </li>
-        <li class="nav_ge"></li>
-      </ul>
+<body style="">
+
+
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第31次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-02-21 17:02:49</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+
+        <div id="bg_div" class="shuiyin" style="height: 595px;"></div>
+          <div id="tabPage2">
+            <div id="tabPage-zzszyfp">
+              <h1 id="fpcc_zp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">深圳增值税专用发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">
+                  <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_zp">4403181130</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_zp">27671246</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_zp">2018年09月20日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_zp">52524343580200259673</span></td>
+                  <td> </td>
+                  <td class="align_left" id="jqxx_zp" style="">机器编号：<span class="content_td_blue" id="jqbh_zp">661702134095</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_zp">深圳市比一比网络科技有限公司</span></td>
+
+                <td rowspan="4" class="align_center" width="20">
+                <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td id="password_zp" rowspan="4" nowrap="" class="align_left " width="350"> </td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_zp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_zp">深圳市南山区粤海街道高新技术园中区科苑大道讯美科技广场1栋3楼306</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_zp">兴业银行深圳天安支行 337110100100124813</span></td>
+
+                </tr>
+
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_zp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*水果*甜石榴</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">3.492822966507177</span></td><td class="align_right borderRight"><span class="content_td_blue">132.73</span></td><td class="align_right borderRight"><span class="content_td_blue">10%</span></td><td class="align_right"><span class="content_td_blue">13.27</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*阿扁面包</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">份</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">4.310344827586207</span></td><td class="align_right borderRight"><span class="content_td_blue">163.79</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">26.21</span></td></tr><tr><td class="align_left borderRight"><span class="content_td_blue">*方便食品*蒙牛风味酸奶</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue">杯</span></td><td class="align_right borderRight"><span class="content_td_blue">38</span></td><td class="align_right borderRight"><span class="content_td_blue">1.451905626134301</span></td><td class="align_right borderRight"><span class="content_td_blue">55.17</span></td><td class="align_right borderRight"><span class="content_td_blue">16%</span></td><td class="align_right"><span class="content_td_blue">8.83</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_zp">￥351.69</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_zp">￥48.31</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="content_td_blue" id="jshjdx_zp">⊗肆佰圆整</span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_zp">￥400.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr>
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_zp">深圳易汇际网络科技有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_zp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_zp">91440300580050038A</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_zp">深圳市南山区桃源街道留仙大道1213号众冠红花岭工业南区2区7栋8楼 0755-86566820</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_zp">中国银行深圳梅丽支行 756259173877</span></td>
+                </tr>
+              </tbody></table>
+
+            </div>
+          </div>
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+
+      </div>
+
+
+
     </div>
   </div>
+
 </div>
-<script>
-$(document).ready(function(){
-	$('.nav_main &gt; li').bind('mouseenter', menu_open);
-	$('.nav_main &gt; li').bind('mouseleave',  menu_close);
-  shownew();
-});
-</script> </div>
 
-    <div id="content2" class="pad_t_50 clearfix" style="">
-      <div class="ktsm" id="ktsm_tip" style="display: block;"><p><b>提示：</b>您使用的是谷歌 55版本浏览器，请参照操作说明安装根证书再进行发票查验操作！</p><span class="close_ktsm"></span></div>
-        <div class="sm_box">
-            <a href="fpcysm.html" class="sm_btn sm_btn1">发票查验说明<span class="arrow-right"></span></a>
-            <a href="cjwt/fpjgsm.html" class="sm_btn sm_btn2">查验结果说明<span class="arrow-right"></span></a>
-            <a href="fpcs/fpzwsbff.html" class="sm_btn sm_btn3">发票真伪识别方法<span class="arrow-right"></span></a>
-            <div class="cont_ps">
-              <p><span class="font_red">1、<a href="zdaz.html">首次查验前请点此安装根证书。</a></span><br />2、当日开具发票最快可于次日进行查验。 <br />3、每份发票每天最多可查验5次。<br />4、可查验最近1年内增值税发票管理新系统开具的发票。<br />5、纳税咨询服务，可拨打<span class="font_red">12366</span>。</p>
-          </div>
-      </div>
-      <table border="0" class="comm_table2 fr">
-          <tbody><tr>
-            <td class="align_right2"><span class="font_red">*</span>发票代码：</td>
-            <td><input type="text" id="fpdm" maxlength="12" autocomplete="off" /></td>
-            <td width="200"><div id="fpdmjy" class="tip_common_right"> </div></td>
-        </tr>
-        <tr>
-            <td class="align_right2"><span class="font_red">*</span>发票号码：</td>
-            <td><input type="text" id="fphm" maxlength="8" autocomplete="off" /></td>
-            <td><div id="fphmjy" class="tip_common_right"> </div></td>
-        </tr>
-        <tr>
-            <td class="align_right2"><span class="font_red">*</span>开票日期：</td>
-            <td>
-              <label>
-                <input type="text" id="kprq" class="form-control" maxlength="8" value="YYYYMMDD" style="color: rgb(85, 85, 85);" autocomplete="off" />
-            </label>
-        </td>
-        <td><div id="kprqjy" class="tip_common_right"> </div></td>
-    </tr>
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/01.js'&gt;&lt;/scr"+"ipt&gt;");
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/01.js"></script>
+<div id="hwmxqd" style="padding:10px;position:absolute;width:1000px;border:1px solid #ccc;background:#fff;  display:none;">
 
+<div id="print_areamx">
+
+
+<h1 id="fpcc_zp" style="color:#574B9D;padding:5px 0px 15px 0px; text-align:center;"><strong>销 售 货 物 或 提 供 应 税 劳 务 清 单</strong></h1>
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">
+  <td class="align_left" colspan="3">购买方名称：<span class="content_td_blue" id="fpmx_gfmc">深圳市比一比网络科技有限公司</span></td>
+</tr>
+<tr height="30">
+  <td class="align_left" colspan="3">销售方名称：<span class="content_td_blue" id="fpmx_xfmc">深圳易汇际网络科技有限公司</span></td>
+</tr>
+<tr height="30">
+  <td class="align_left"><span id="fpmx_fpdminfo">所属增值税专用发票代码：</span><span class="content_td_blue" id="fpmx_fpdm">4403181130</span></td>
+  <td class="align_left">号码：<span class="content_td_blue" id="fpmx_fphm">27671246</span></td>
+  <td class="align_right">共1页 第1页</td>
+  <td>  </td>
+</tr>
+</tbody></table>
+<table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+	<tbody><tr id="tab_head_mx">
+	  <td width="60"> 序号</td>
+	  <td width="240">货物（劳务）名称</td>
+	  <td width="100">规格型号</td>
+	  <td width="60"> 单位</td>
+	  <td width="100">数量</td>
+	  <td width="100">单价</td>
+	  <td width="100">金额</td>
+	  <td width="40"> 税率</td>
+	  <td width="100">税额</td>
+	</tr>
     <tr>
-        <td class="align_right2"><span class="font_red">*</span><span id="context">开具金额(不含税)：</span></td>
-        <td><input type="text" id="kjje" autocomplete="off" maxlength="20" /></td>
-        <td><div id="kjjejy" class="tip_common_right"> </div></td>
-    </tr>
-
+	  <td width="60" class="borderHaveTop"> 小计</td>
+	  <td width="240" class="borderHaveTop align_left"></td>
+	  <td width="100" class="borderHaveTop"></td>
+	  <td width="60" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji1"></td>
+	  <td width="40" class="borderHaveTop"></td>
+	  <td width="100" class="borderHaveTop align_right content_td_blue" id="xiaoji2"></td>
+	</tr>
     <tr>
-        <td class="align_right2"><span class="font_red">*</span>验证码：</td>
-        <td><input type="text" style="color:#999999" value="请输入验证码" id="yzm" autocomplete="off" />
+	  <td width="60" class="borderBottomTopNo"> 总计</td>
+	  <td width="240" class="borderBottomTopNo align_left"></td>
+	  <td width="100" class="borderBottomTopNo"></td>
+	  <td width="60" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji1"></td>
+	  <td width="40" class="borderBottomTopNo"></td>
+	  <td width="100" class="borderBottomTopNo align_right content_td_blue" id="zongji2"></td>
+	</tr>
+    <tr>
+	  <td class="borderTop">备注</td>
+	  <td class="borderTop align_left content_td_blue" colspan="8"></td>
+	</tr>
+</tbody></table>
+<br />
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tbody><tr height="30">
+  <td class="align_left">销售方（章）：</td>
+  <td class="align_right">填开日期：<span class="content_td_blue" id="fpmx_kprq">2018年09月20日</span></td>
+  <td> </td>
+</tr>
+</tbody></table>
+</div>
 
-      </td>
-      <td id="yzminfo" style="font-size: 14px;">请输入验证码图片中<font color="red" size="4" style="background:#C0C0C0">红色</font>文字</td>
-  </tr>
-  <tr>
-      <td> </td>
-      <td id="imgarea"><div><a href="javascript:void(0);"><img width="120" height="50" src="data:image/png;base64,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" id="yzm_img" style="cursor: pointer; vertical-align: top; display: inline;" />
-       <img width="120" height="50" src="data:image/png;base64,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" id="yzm_unuse_img" style="cursor: pointer; vertical-align: top; display: none;" /></a><div style="float:right;margin-right: 20px;margin-top: 10px;"><span class="tip_yzm">点击图片刷新</span></div></div></td>
-       <td> </td>
-   </tr>
-   <tr>
-    <td colspan="3">
-        <div class="comm_btn_div2 clearfix">
-          <button class="gray_button" style="cursor: default; display: none;" id="uncheckfp" disabled="true">查 验</button>
-          <button class="blue_button" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';" id="checkfp" style="display: inline-block;">查 验</button>
-              
-          <button class="blue_button" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';" id="reset">重 置</button></div>
-      </td>
-  </tr>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+	<tbody><tr id="goods">
+		<td>   </td>
+	</tr>
+	<tr>
+		<td style="text-align:center; height:60px;">
+			<button id="printfpmx" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">打印</button><button id="mxclose" class="blue_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='blue_button';">关闭</button>
+		</td>
+	</tr>
 </tbody></table>
 
 </div>
-<div id="foot">
-<div id="footerbox">
-<div id="footer">
-  <p>本查询由国家税务总局电子税务管理中心提供<!--研发单位：长城计算机软件与系统有限公司--></p>
-  <p>版本：1.0.06    支持火狐（50.1）、谷歌（55.0）、IE8及以上版本浏览器    建议分辨率：1280*768</p>
-</div></div> </div>
+<script src="https://inv-veri.chinatax.gov.cn/pepp4_clippers3?time=1550220749"></script><a href="/pepp4_thunder" style="position:absolute;left:-3000px;">MKGO</a>
 
-<div id="cover" style="width: 1200px; height: 1080px;"></div>
-<div id="floatwin">
-</div>
-<div id="floatwin1">
-</div>
-</div>
-<script language="javascript">
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/eab23.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/indexfunc.js'&gt;&lt;/scr"+"ipt&gt;");
-  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/90a1c.js'&gt;&lt;/scr"+"ipt&gt;");
-</script><script charset="utf-8" type="text/javascript" src="js/eab23.js"></script><script charset="utf-8" type="text/javascript" src="js/indexfunc.js"></script><script charset="utf-8" type="text/javascript" src="js/90a1c.js"></script>
-
-
-<dialog style="Top:10px;Width:1100px;Height:700px;" open=""><iframe id="dialog-body" src="cyjg01.html" style="border: 0; width: 100%; height: 100%;"></iframe></dialog></body></html>
+</body></html>

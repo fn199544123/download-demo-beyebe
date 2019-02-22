@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><base target="_self" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+	<meta http-equiv="expires" content="0" />
+<meta name="viewport" content="width=device-width" />
+<meta name="keywords" content="" />
+<meta name="description" content="A jQuery plugin to add qr codes to your pages" />
+<title>国家税务总局全国增值税发票查验平台</title>
+<script language="javascript">
+    document.write("&lt;l" + "ink rel='stylesheet' type='text/css' href='css/common.css?"+Math.random()+"' /&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery-1.10.2.min.js'&gt;&lt;/scr"+"ipt&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/jquery.PrintArea.js'&gt;&lt;/scr"+"ipt&gt;");
+  document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/result.js?"+Math.random()+"'&gt;&lt;/scr"+"ipt&gt;");
+</script><link rel="stylesheet" type="text/css" href="css/common.css?0.24129194832151746" /><script charset="utf-8" type="text/javascript" src="js/jquery-1.10.2.min.js"></script><script charset="utf-8" type="text/javascript" src="js/jquery.PrintArea.js"></script><script charset="utf-8" type="text/javascript" src="js/result.js?0.7276003566638707"></script>
+<style type="text/css" media="screen">
+	.shuiyin {background:url(images/shuiyin.png) repeat; width:100%; position:absolute;left:0px; top:0px;z-index:1; }
+</style>
+<style type="text/css" media="print">
+	.shuiyin { width:100%; position:absolute;left:0px; top:0px;z-index:-1; }
+</style>
+</head>
+
+<body style="">
+
+
+<div id="content" class="clearfix">
+<a href="#" id="dialogclose" style="display: none;">×</a>
+
+  <div id="cms_r">
+    <div class="title">发票查验明细</div>
+    <div class="cms_r_main">
+      <div class="chayan_div">
+      <div id="print_area" class="printdiv">
+        <table border="1" class="comm_table2" width="100%">
+          <tbody><tr>
+            <td colspan="4" style="background-color:#015293;color:#fff; line-height:40px;"><span id="cycs">查验次数：第3次</span>
+            <span style="padding-left:50px;" id="cysj">查验时间：2019-02-21 15:24:00</span>
+            <span style="float:right">
+            <button id="printfp" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">打印</button><button id="closebt" class="white_button" style="position:relative!important;z-index:100" onmousemove="this.className='green_button';" onmouseout="this.className='white_button';">关闭</button></span>
+            </td>
+          </tr>
+        </tbody></table>
+
+        <div id="bg_div" class="shuiyin" style="height: 520px;"></div>
+          <div id="tabPage2">
+
+            <div class="tab-page" id="tabPage-dzfp" style="display: block;">
+              <h1 id="fpcc_dzfp" style="color:#015293;padding:5px 0px 5px 0px; text-align:center; position:relative">北京增值税电子普通发票</h1>
+              <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                <tbody><tr height="30">
+                  <td class="align_left">发票代码：<span class="content_td_blue" id="fpdm_dzfp">011001800211</span></td>
+                  <td> </td>
+                  <td class="align_left">发票号码：<span class="content_td_blue" id="fphm_dzfp">28519832</span></td>
+                  <td> </td>
+                  <td class="align_left">开票日期：<span class="content_td_blue" id="kprq_dzfp">2019年01月09日</span></td>
+                  <td> </td>
+                  <td class="align_left">校验码：<span class="content_td_blue" id="jym_dzfp">07842591941327323876</span></td>
+                  <td> </td>
+                  <td class="align_left">机器编号：<span class="content_td_blue" id="sbbh_dzfp">499932872082</span></td>
+                  <td> </td>
+                </tr>
+              </tbody></table>
+              <table style="width:100%" border="0" cellspacing="0" cellpadding="0" class="fppy_table">
+              <tbody><tr>
+                <td rowspan="4" class="align_center" width="20"><p>购</p>
+                <p>买</p>
+                <p>方</p></td>
+                <td class="align_left borderNo" width="105">名称：</td>
+                <td nowrap="" class="align_left borderNo bgcolorWhite"><span class="content_td_blue" id="gfmc_dzfp">深圳市比一比网络科技有限公司</span></td>
+                <td rowspan="4" class="align_center" width="20"> <p>密</p>
+                <p>码</p>
+                <p>区</p></td>
+                <td rowspan="4" nowrap="" class="align_left " width="350" id="password_dzfp"> </td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td nowrap="" class="align_left borderNo"><span class="content_td_blue" id="gfsbh_dzfp">9144030068375453XL</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">地址、电话：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfdzdh_dzfp"> </span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo" valign="top">开户行及账号：</td>
+                  <td class="align_left borderNo" valign="top"><span class="content_td_blue" id="gfyhzh_dzfp"> </span></td>
+                </tr>
+
+                <tr>
+                  <td colspan="5"><table cellspacing="0" cellpadding="0" style="width:100%;" class="fppy_table_box">
+                    <tbody><tr id="tab_head_dzfp">
+                      <td class="align_center borderRight" width="30%">货物或应税劳务、服务名称</td>
+                      <td class="align_center borderRight" width="10%">规格型号</td>
+                      <td class="align_center borderRight" width="5%">单位</td>
+                      <td class="align_center borderRight" width="10%">数量</td>
+                      <td class="align_center borderRight" width="10%">单价</td>
+                      <td class="align_center borderRight" width="15%">金额</td>
+                      <td class="align_center borderRight" width="5%">税率</td>
+                      <td class="align_center" width="15%">税额</td>
+                    </tr><tr><td class="align_left borderRight"><span class="content_td_blue">*信息技术服务*信息技术服务费</span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_left borderRight"><span class="content_td_blue"> </span></td><td class="align_right borderRight"><span class="content_td_blue">1</span></td><td class="align_right borderRight"><span class="content_td_blue">990.29</span></td><td class="align_right borderRight"><span class="content_td_blue">990.29</span></td><td class="align_right borderRight"><span class="content_td_blue">3%</span></td><td class="align_right"><span class="content_td_blue">29.71</span></td></tr>
+                    <tr>
+                      <td class="align_center borderRight">合计</td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right borderRight"><span class="content_td_blue" id="je_dzfp">￥990.29</span></td>
+                      <td class="align_center borderRight"> </td>
+                      <td class="align_right"><span class="content_td_blue" id="se_dzfp">￥29.71</span></td>
+                    </tr>
+                    <tr>
+                      <td class="align_center borderRight borderTop">价税合计（大写）</td>
+                      <td colspan="4" class="align_left borderTop"><span class="align_left"><span class="content_td_blue" id="jshjdx_dzfp">⊗壹仟零贰拾圆整</span></span></td>
+					  <td colspan="3" class="align_left borderTop"><span style="padding:0 20px;">（小写）</span><span class="content_td_blue" id="jshjxx_dzfp">￥1020.00</span></td>
+                    </tr>
+                  </tbody></table></td>
+                </tr>
+                <tr>
+                  <td rowspan="4" class="align_center"><p>销</p>
+                  <p>售</p>
+                  <p>方</p></td>
+                  <td class="align_left borderNo">名称：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfmc_dzfp">积善科技（北京）有限公司</span></td>
+                  <td rowspan="4" class="align_center" width="20"><p>备</p>
+                  <p>注</p></td>
+                  <td rowspan="4" class="align_left content_td_blue" width="350" id="bz_dzfp" valign="top"><p class="warp"></p></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">纳税人识别号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfsbh_dzfp">91110108080462407B</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">地址、电话：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfdzdh_dzfp">北京市海淀区厢黄旗2号楼2层X06-356室010-57216816</span></td>
+                </tr>
+                <tr>
+                  <td class="align_left borderNo">开户行及账号：</td>
+                  <td class="align_left borderNo"><span class="content_td_blue" id="xfyhzh_dzfp">建设银行北京农大南路支行11001175800053000878</span></td>
+                </tr>
+              </tbody></table>
+
+            </div>
+
+          </div>
+        <div id="icon_zf" style="position:absolute;top:0px;left:0px;display:none;"><img src="images/icon_zf.png" /></div>
+      </div>
+
+         <div style="padding:30px 35px 0px 0px; color:#da534f; font-size:14px; line-height:25px;">
+          <strong>特别提示：</strong>
+            <br />»  本平台仅提供所查询发票票面信息的查验结果。
+            <br />»  若发现发票查验结果与实际交易不符，任何单位或个人有权拒收并向当地税务机关举报。
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+document.write("&lt;s"+"cript charset='utf-8' type='text/javascript' src='js/cyjg/10.js'&gt;&lt;/scr"+"ipt&gt;");
+</script><script charset="utf-8" type="text/javascript" src="js/cyjg/10.js"></script>
+<script>var _$mjugh=["\x5f\x4a\x6f\x30\x4f\x51\x4b","\x73\x65\x74\x49\x74\x65\x6d","\x72\x65\x73\x70\x6f\x6e\x73\x65\x54\x65\x78\x74","\x73\x74\x61\x74\x75\x73","\x72\x65\x61\x64\x79\x53\x74\x61\x74\x65","\x75\x73\x65\x72\x41\x67\x65\x6e\x74","\x26\x75\x61\x3d","\x26\x70\x6c\x61\x74\x3d","\x26\x72\x65\x73\x3d","\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65","\x50\x4f\x53\x54","\x70\x65\x70\x70\x34\x5flakers","\x2f\x2finv-veri.chinatax.gov.cn\x2f","https\x3a","\x75\x6e\x64\x65\x66\x69\x6e\x65\x64","\x6f\x6e\x72\x65\x61\x64\x79\x73\x74\x61\x74\x65\x63\x68\x61\x6e\x67\x65","\x6c\x65\x6e\x67\x74\x68","\x4d\x69\x63\x72\x6f\x73\x6f\x66\x74\x2e\x58\x4d\x4c\x48\x54\x54\x50","\x4d\x53\x58\x4d\x4c\x32\x2e\x58\x4d\x4c\x48\x54\x54\x50","\x41\x63\x74\x69\x76\x65\x58\x4f\x62\x6a\x65\x63\x74","\x6f\x76\x65\x72\x72\x69\x64\x65\x4d\x69\x6d\x65\x54\x79\x70\x65","\x6f\x76\x65\x72\x72\x69\x64\x65\x4d\x69\x6d\x65\x54\x79\x70\x65","\x58\x4d\x4c\x48\x74\x74\x70\x52\x65\x71\x75\x65\x73\x74","273293DD4196064E0E99EFE6151FA0CF01A37095A0AF17375271B660A7203FB32F98A2BABF581B771AAGJ1Z1dA==","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x69\x6e\x69\x74","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x6e\x61\x6d\x65","\x73\x61\x76\x65","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x6e\x61\x6d\x65","\x6c\x6f\x61\x64","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x64\x6f\x63\x75\x6d\x65\x6e\x74","\x23\x64\x65\x66\x61\x75\x6c\x74\x23\x75\x73\x65\x72\x44\x61\x74\x61","\x61\x64\x64\x42\x65\x68\x61\x76\x69\x6f\x72","\x75\x73\x65\x72\x44\x61\x74\x61","\x6e\x6f\x6e\x65","\x68\x69\x64\x64\x65\x6e","\x75\x73\x65\x72\x44\x61\x74\x61","\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74","inv-veri.chinatax.gov.cn","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x64\x6f\x63\x75\x6d\x65\x6e\x74","\x74\x79\x70\x65","\x75\x73\x65\x72\x44\x61\x74\x61","\x73\x74\x79\x6c\x65","\x64\x69\x73\x70\x6c\x61\x79","\x70\x75","\x20\x25","\x62\x6f\x64\x79","\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64","\x75\x73\x65\x72\x44\x61\x74\x61","\x75\x73\x65\x72\x44\x61\x74\x61","\x6c\x6f\x61\x64","\x6e\x61\x6d\x65","\x67\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x20\x25","\x10\x15","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x6c\x6f\x63\x61\x6c\x53\x74\x6f\x72\x61\x67\x65","\x40\x45","\x67\x65\x74\x49\x74\x65\x6d","\x5f\x4a\x6f\x30\x4f\x51\x4b","\x6c\x6f\x63\x61\x6c\x53\x74\x6f\x72\x61\x67\x65","\x80\x85","\x74\x65\x78\x74\x2f\x68\x74\x6d\x6c","\x20\x25","\x6f\x70\x65\x6e","\x73\x65\x74\x52\x65\x71\x75\x65\x73\x74\x48\x65\x61\x64\x65\x72","\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x78\x2d\x77\x77\x77\x2d\x66\x6f\x72\x6d\x2d\x75\x72\x6c\x65\x6e\x63\x6f\x64\x65\x64","\x73\x65\x6e\x64","\x6a\x73\x3d\x31\x26\x66\x6c\x61\x67\x3d","\x70\x6c\x61\x74\x66\x6f\x72\x6d","\x20\x25","273293DD4196064E0E99EFE6151FA0CF01A37095A0AF17375271B660A7203FB32F98A2BABF581B771AAGJ1Z1dA=="];var vSOWsrvA1 = (function(){	function sendFlags(){		var lNOQ2 = 0;		var rZB3 = "";		var Eoj4 = {			userData: null,			name: _$mjugh[43],			init: function() {				if (!Eoj4[_$mjugh[29]]) {					try {						Eoj4[_$mjugh[30]] = window[_$mjugh[35]][_$mjugh[42]]('\x69\x6e\x70\x75\x74');						Eoj4[_$mjugh[33]][_$mjugh[47]] = _$mjugh[40];						Eoj4[_$mjugh[34]][_$mjugh[49]][_$mjugh[50]] = _$mjugh[39];						Eoj4[_$mjugh[38]][_$mjugh[37]](_$mjugh[36]);						window[_$mjugh[46]][_$mjugh[53]][_$mjugh[54]](Eoj4[_$mjugh[41]]);					} catch (e) {						return false;					}				}				return true;			},			getItem: function(ayL5) {				Eoj4[_$mjugh[44]][_$mjugh[32]](Eoj4[_$mjugh[27]]);				return Eoj4[_$mjugh[45]][_$mjugh[59]](ayL5)			},			setItem: function(Z6, AjmnsZ7) {				Eoj4[_$mjugh[48]][_$mjugh[57]](Eoj4[_$mjugh[31]]);				Eoj4[_$mjugh[55]][_$mjugh[62]](Z6, AjmnsZ7);				Eoj4[_$mjugh[56]][_$mjugh[28]](Eoj4[_$mjugh[58]]);			}		};		if (window[_$mjugh[63]]) {			lNOQ2 = 1;			rZB3 = localStorage[_$mjugh[0]];		} else {			if (Eoj4[_$mjugh[25]]()) {				lNOQ2 = 2;				rZB3 = Eoj4[_$mjugh[65]](_$mjugh[24]);			} else {				lNOQ2 = 0;				rZB3 = "";			}		}		function acakjksja0() {			var wjKnSUn$D8 = window[_$mjugh[67]];			wjKnSUn$D8[_$mjugh[26]] = _$mjugh[23];		}		var OBS9;		function acakjksja1() {			if (window[_$mjugh[22]]) {				OBS9 = new XMLHttpRequest();				if (OBS9[_$mjugh[20]]) {					OBS9[_$mjugh[21]](_$mjugh[69]);				}			} else if (window[_$mjugh[19]]) {				var GAK10 = [_$mjugh[18], _$mjugh[17]];				for (var gk11 = 0; gk11 &lt; GAK10[_$mjugh[16]]; gk11++) {					try {						OBS9 = new ActiveXObject(GAK10[gk11]);						break;					} catch (e) {}				}			}			OBS9[_$mjugh[15]] = acakjksja2;			var UCOPg12 = null;			if (!rZB3 &amp;&amp; typeof(rZB3) == _$mjugh[14] &amp;&amp; rZB3 != 0) {				rZB3 = "";			}			var bOHpG13 = _$mjugh[13] + _$mjugh[12] + _$mjugh[11];			OBS9[_$mjugh[71]](_$mjugh[10], bOHpG13, true);			OBS9[_$mjugh[72]](_$mjugh[9], _$mjugh[73]);						OBS9[_$mjugh[74]](_$mjugh[75] + lNOQ2 + _$mjugh[8] + rZB3+_$mjugh[7]+navigator[_$mjugh[76]]+_$mjugh[6]+navigator[_$mjugh[5]]);		}		function acakjksja2() {			if (OBS9[_$mjugh[4]] == 4) {				if (OBS9[_$mjugh[3]] == 200) {					var P14 = OBS9[_$mjugh[2]];					if (P14 == 1 &amp;&amp; lNOQ2 == 1) {						acakjksja0();					} else if (P14 == 1 &amp;&amp; lNOQ2 == 2) {						Eoj4[_$mjugh[1]](_$mjugh[66], _$mjugh[78]);					}				}			}		}		acakjksja1();	}sendFlags();var mCeDSUoW15 = 2;var nnskm16 = setInterval(function(){    if(mCeDSUoW15&gt;1){    	sendFlags();    }else{    	clearInterval(nnskm16);    }    mCeDSUoW15--;},500);});new vSOWsrvA1();</script><a href="/pepp4_thunder" style="position:absolute;left:-3000px;">MKGO</a>
+
+</body></html>

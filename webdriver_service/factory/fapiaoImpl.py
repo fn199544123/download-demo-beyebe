@@ -11,6 +11,7 @@ import uuid
 import requests
 import sys
 from PIL import Image
+from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 
@@ -40,6 +41,56 @@ top_Moren = 0
 class fapiaoImpl(WebDriverImp):
 
     # class fapiaoImpl(WebDriverRemoteImp):
+    def _parseInvoice(self, html):
+        data = {'goods': []}
+        soup = BeautifulSoup(html, 'lxml')
+        idH1 = soup.select_one('h1')['id']
+        idkey = idH1.split('_')[1]
+        data['invoiceType'] = soup.select_one("h1[id=\"fpcc_{}\"]".format(idkey)).text  # 发票类型
+        data['invoiceDate'] = soup.select_one("#kprq_{}".format(idkey)).text  # 开票日期
+        data['invoiceNo'] = soup.select_one("#fphm_{}".format(idkey)).text  # 发票号
+        data['invoiceNumber'] = soup.select_one("#fpdm_{}".format(idkey)).text  # 发票代码
+        data['cheakNumber'] = soup.select_one("#jym_{}".format(idkey)).text  # 校验码
+        try:
+            data['machineNumber'] = soup.select_one("#sbbh_{}".format(idkey)).text  # 机器编号
+        except:
+            data['machineNumber'] = soup.select_one("#jqbh_{}".format(idkey)).text  # 机器编号
+
+        data['buyer'] = soup.select_one("#gfmc_{}".format(idkey)).text  # 购买方 add
+        data['borderNo'] = soup.select_one("#gfsbh_{}".format(idkey)).text  # 纳税人识别号add
+        for i, tr in enumerate(soup.select_one("table[class=\"fppy_table_box\"]").select('tr')):
+            # 第一行是标题，倒数第二行是合计，倒数第一行是价税合计
+            if i == 0:
+                continue
+            item = {}
+            key = tr.select_one("span").text
+            if key == '合计':
+                data['totalPrice'] = soup.select_one("#je_{}".format(idkey)).text  # 合计
+                continue
+            elif key == '价税合计（大写）':
+                data['totalTaxAndPrice'] = soup.select_one("#jshjxx_{}".format(idkey)).text  # 价税合计
+                data['totalTaxAndPriceChinese'] = soup.select_one("#jshjdx_{}".format(idkey)).text  # 价税合计(大写)
+                continue
+            else:
+                for i, span in enumerate(tr.select('span')):
+                    if i == 0:
+                        item['goodsName'] = key  # 货物或应税劳务、服务名称
+                    if i == 1:
+                        item['goodsType'] = span.text  # 规格型号
+                    if i == 2:
+                        item['unit'] = span.text  # 单位
+                    if i == 3:
+                        item['num'] = span.text  # 数量
+                    if i == 4:
+                        item['unitPrice'] = span.text  # 单价
+                    if i == 5:
+                        item['billPrice'] = span.text  # 金额
+                    if i == 6:
+                        item['taxRate'] = span.text  # 税率(%)
+                    if i == 7:
+                        item['taxPrice'] = span.text  # 税额
+                data['goods'].append(item)
+        return data
 
     def getDriverPort(self):
         return 5440
@@ -132,11 +183,11 @@ class fapiaoImpl(WebDriverImp):
                     time.sleep(0.1)
                 if '超过该张发票当日查验次数' in driver.page_source:
                     print("超过次数")
-                    dictNow = {'errMsg': "超过次数！无法返回信息", 'state': 601}
+                    dictNow = {'errMsg': "ERROR超过次数！无法返回信息", 'state': 601}
                     return dictNow
                 elif '开票日期有误' in driver.page_source:
                     print("开票日期有误")
-                    dictNow = {'errMsg': "开票日期有误！无法返回信息，请输入正确的数据或格式，例如20190101", 'state': 602}
+                    dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式，例如20190101", 'state': 602}
                     return dictNow
                 elif '校验码有误!' in driver.page_source:
                     print("校验码有误")
@@ -158,7 +209,14 @@ class fapiaoImpl(WebDriverImp):
                     filePath = 'fapiao/' + fpdm + '.png'
                     driver.save_screenshot(filePath)
                     ossPath = fileUpdate(filePath)
-                    dictNow.update({'html': driver.page_source,
+                    try:
+                        invoiceData = self._parseInvoice(driver.page_source)
+                    except:
+                        invoiceData['errMsg'] = "ERROR解析结构异常,发现新模板或者改版,请将这个返回交付开发者进行模板添加"
+                        invoiceData['html'] = driver.page_source
+                        invoiceData['errMsgText'] = traceback.format_exc()
+                    dictNow.update({'html': '由于接口传html太重,可根据_id字段mongo数据库查询',
+                                    'data': invoiceData,
                                     'imgFile': ossPath,
                                     'errMsg': "success!",
                                     'state': 200})
@@ -191,11 +249,13 @@ class fapiaoImpl(WebDriverImp):
 
     def getCodeString(self):
 
-        url_cw = "http://121.9.245.186:9020/middleware/identifyingChinese/upload.go"  # 中文外网
-        url_ew = "http://121.9.245.186:9021/middleware/identifyingEnglish/upload.go"  # 英文外网
-        url_c = "http://localhost:9020/middleware/identifyingChinese/upload.go"  # 中文本地
-        url_e = "http://localhost:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
-        urlList = [url_c, url_e, url_cw, url_ew]
+        url_cw = "http://39.108.188.34:9020/middleware/identifyingChinese/upload.go?filename=fapiao"  # 中文外网
+        url_ew = "http://39.108.188.34:9021/middleware/identifyingEnglish/upload.go?filename=fapiao"  # 英文外网
+        # url_c = "http://localhost:9020/middleware/identifyingChinese/upload.go"  # 中文本地
+        # url_e = "http://localhost:9021/middleware/identifyingEnglish/upload.go"  # 英文本地
+        urlList = [url_cw, url_ew]
+        # urlList = [url_c, url_e, url_cw, url_ew]
+
         ansList = []
 
         while True:
