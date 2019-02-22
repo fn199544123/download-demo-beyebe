@@ -63,7 +63,7 @@ class fapiaoImpl(WebDriverImp):
             if i == 0:
                 continue
             item = {}
-            key = tr.select_one("span").text
+            key = tr.select_one("td").text
             if key == '合计':
                 data['totalPrice'] = soup.select_one("#je_{}".format(idkey)).text  # 合计
                 continue
