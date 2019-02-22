@@ -146,7 +146,7 @@ class WebDriverImp():
         if bufferItem is not None:
             print("已存在缓存,进一步确定缓存形式")
             if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
-                raise Exception("数据正在处理!,请稍后再试(相同任务60秒只能请求一次)" + bufferItem)
+                raise Exception("数据正在处理!,请稍后再试(相同任务3秒内只能请求一次)" + bufferItem)
             else:
                 print("走缓存返回结果")
                 bufferItemStr = bufferItem.decode()
@@ -156,7 +156,7 @@ class WebDriverImp():
             pipe = r.pipeline()
             pipe.set(inputMD5,
                      "DOING_MISSION!!wait_for_few_time!\n" + str(datetime.datetime.now()))
-            pipe.expire(inputMD5, 60)
+            pipe.expire(inputMD5, 3)
             pipe.execute()
             return False
 
