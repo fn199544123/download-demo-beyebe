@@ -54,3 +54,8 @@ WebDriver
 |继承类别|项目名|端口|是否支持docker|启动类|
 |WebDriver|发票识别爬虫|9088|是|webdriver_service.django_start.manage_fapiao
 |WebDriver|中登网发票查询爬虫|9089|是|webdriver_service.django_start.manage_zhongdeng
+
+
+git fetch --all 
+git reset --hard origin/master
+git pull
