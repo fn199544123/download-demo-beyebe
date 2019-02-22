@@ -14,6 +14,7 @@ import sys
 from PIL import Image
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.select import Select
 
 from logging_utils.cJsonEncoder import CJsonEncoder
 from logging_utils.log import mylog
@@ -27,24 +28,13 @@ from webdriver_service.loginDriverRomoteImp import LoginDriverRomoteImp
 left_Moren = 0
 top_Moren = 0
 
-"""
-   fpdm = input['fpdm'] 发票代码 比较长
-   fphm = input['fphm'] 发票号码
-   kprq = input['kprq'] 开票日期
-   kjje = input['kjje'] 开具金额
-    # fpdm = "1100182130"
-    # fphm = "15024752"
-    # kprq = "20180614"
-    # kjje = "18679.25"
-"""
-
 # 有远程遥控Driver和本地Driver两种模拟形式
 # class fapiaoImpl(WebDriverImp):
 
 tableName = "file_zhongdeng"
 
 
-class zhongDengImpl(LoginDriverImp):
+class zhongDengDengJiImpl(LoginDriverImp):
     # class zhongDengImpl(LoginDriverRomoteImp):
 
     def getDriverPort(self):
@@ -54,8 +44,10 @@ class zhongDengImpl(LoginDriverImp):
         super().__init__(MyPool, driver, headless)
 
     def _login(self):
-        user = "beyebe"
-        password = "asdf1234"
+        user = "ytbl0010"
+        password = "ytbl0010aDmin"
+
+
         driver = self.driver
         """
         登录模块
@@ -112,122 +104,80 @@ class zhongDengImpl(LoginDriverImp):
             except:
                 traceback.print_exc()
                 print("本次登录失败,正在尝试重试!")
-                driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
+                driver.refresh()
 
     def _deal(self, input):
-        companyName = input['companyName']
+        djqx = 2
+        tbrgdh = "测试填表人归档号"
+        crrmc = '我是一家测试的企业'
+        zzjgdm = "abcdefg"
+        gszch = "abcdefg"
+        fddbr = "帅比"
+        shhy = 3
+        qygm = 1
+        zsList = [2, 2, 2]
+        zsText = "美丽的地球村"
+
         driver = self.driver
         # 按资金融入方名称查询
         """
         资金融入方
         """
-        print("按金融融资方查询")
+        print("初始登记")
         try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
+            driver.get("https://www.zhongdengwang.org.cn/rs/bigTypechoose.do?timeset={}".format(str(
                 time.time())))
         except TimeoutException:
             print("driver超时异常,忽略并尝试提取内容")
         # 查询校验码识别
-        self._state = "[中登网登记]正在查询的公司是:{},正在验证码查询阶段,进度1/4".format(input['companyName'])
+        self._state = "[中登网登记]正在进行登记,正在填写基本信息阶段,进度1/4"
         while True:
             try:
-                driver.find_element_by_id('name').clear()
-                driver.find_element_by_id('name').send_keys(companyName)
-                # 找到对应tr，从而定位验证码图片
-                imgCode = None
-                for item in driver.find_elements_by_css_selector('tr'):
-                    if imgCode is not None:
-                        break
-                    if '校验码' in item.text:
-                        # 继续定位img标签
-                        imgTag = item.find_element_by_css_selector('img')
-                        self.setAttribute(imgTag, "style", "")
-                        self.setAttribute(imgTag, "width", 150)
-                        self.setAttribute(imgTag, "height", 40)
-                        while True:
-                            try:
-                                # 如果为空,换一张验证码。不为空则直接输入
-                                imgCode = self.getCodeString(imgTag)
-                                if imgCode is None:
-                                    self.click100_by_tag(imgTag)
-                                else:
-                                    print("成功识别", imgCode)
-                                    break
-                            except:
-                                traceback.print_exc()
-                # 输入内容
-                driver.find_element_by_id('validateCode').send_keys(imgCode)
-                driver.find_element_by_id('query').click()
-                if '查看应收账款质押和转让登记' in driver.page_source:
-                    print("【查看应收账款质押和转让登记】进入成功")
-                    break
+                time.sleep(1)
+                driver.find_element_by_css_selector("#A00200").click()
+                time.sleep(1)
+                driver.find_element_by_css_selector(
+                    "body > div.main-table.hui > table:nth-child(4) > tbody > tr:nth-child(1) > td > input[type=\"radio\"]:nth-child(1)").click()
+                driver.find_element_by_css_selector("#next").click()
+                time.sleep(1)
+                Select(driver.find_element_by_css_selector('#timelimit')).select_by_index(djqx)
+                driver.find_element_by_css_selector('#title').send_keys(tbrgdh)
+                time.sleep(1)
+                driver.find_element_by_css_selector(
+                    "body > div.main-table.hui > form > div > input:nth-child(1)").click()
+                time.sleep(1)
+                # 增加出让人 #addDebtor
+                driver.find_element_by_css_selector("#addDebtor").click()
+                time.sleep(1)
+                # 出让人类型企业 #debtorType
+                Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(3)
+                time.sleep(2)
+                # 等待渲染内容
+                # 出让人名称 #debtorName
+                driver.find_element_by_css_selector('#debtorName').send_keys(crrmc)
+                # 组织机构代码 #orgCode
+                driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
+                # 工商注册号 #businessCode
+                driver.find_element_by_css_selector('##businessCode').send_keys(zzjgdm)
+                # 全球法人机构识别代码 #lei
+                driver.find_element_by_css_selector('#lei').send_keys(zzjgdm)
+                # 法定代表人 #responsiblePerson
+                driver.find_element_by_css_selector('#responsiblePerson').send_keys(zzjgdm)
+                # 所属行业 #industryCode
+                driver.find_element_by_css_selector('#industryCode').send_keys(zzjgdm)
+                # 企业规模 #scale
+                driver.find_element_by_css_selector('#scale').send_keys(zzjgdm)
+                # 住所选项 #country #province #city
+                driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
+                # 住所内容 #address
+                driver.find_element_by_css_selector('#address').send_keys(zzjgdm)
+
+
+
+
             except:
                 traceback.print_exc()
-                print("验证码错误,重试验证码")
-                driver.refresh()
-        # 查看应收账款质押和转让登记
-        for item in driver.find_elements_by_css_selector('a'):
-            if item.text == '查看应收账款质押和转让登记':
-                print("【点击】查看应收账款质押和转让登记")
-                item.click()
-                break
-        # 查看是否有记录
-
-        for tt in range(100):
-            if '下载' in driver.page_source:
-                break
-            if '本次查询共查询到登记0笔' in driver.page_source:
-                returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'ansList': []}
-                return returnObj
-            time.sleep(0.1)
-        # 记录所有regno
-        lstRegno = []
-        # 首先查看有几页,如果有n页,那么就要采集n次
-        try:
-            numTotal = int(driver.find_element_by_id("totalNum").text)
-        except:
-            numTotal = 1
-        for page in range(numTotal):
-            # 添加内容
-            for item in driver.find_elements_by_css_selector("td[name=\"no\"]"):
-                lstRegno.append(item.text)
-            # 点击下一页
-            self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
-            time.sleep(0.5)
-        print("登记证明编号记录完成", lstRegno)
-        print("正在依次下载")
-        self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
-                                                                                     len(lstRegno))
-
-        ansList = []
-        for i, regno in enumerate(lstRegno):
-            # 大量下载极易造成卡死,要进行重试,最次最多重试5次
-            self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(input['companyName'],
-                                                                                                  len(lstRegno), i)
-            dbItem = self.db[tableName].find_one({'regno': regno})
-            if dbItem is not None:
-                print(dbItem['regno'], "已经下载过了,走缓存")
-                # 已经下载过了,使用下载结果
-                dictNow = dbItem
-                dictNow['_id'] = str(dictNow['_id'])
-                ansList.append(dictNow)
-                continue
-
-            for h in range(5):
-                print(i, regno)
-                self.download_pdf(regno, companyName, ansList)
-                break
-            else:
-                print("5次重试失败,跳过该页")
-                traceback.print_exc()
-
-        # 全部完成并且回复代码至首页
-        try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init")
-        except TimeoutException:
-            print("driver超时异常,忽略并尝试提取内容")
-        returnObj = {'state': 200, 'errMsg': 'success!', 'regnoList': lstRegno, 'ansList': ansList}
-        return returnObj
+                print("操作出现意外错误错误")
 
     def download_pdf(self, regno, companyName, ansList):
         url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
@@ -315,9 +265,8 @@ class zhongDengImpl(LoginDriverImp):
     def getCodeString(self, imgTag):
         # 多地址容错
         url_l = "http://localhost:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
-
-        url = "http://121.9.245.186:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
-        urlList = [url_l, url]
+        url = "http://39.108.188.34:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
+        urlList = [url, url_l]
         ansList = []
 
         while True:
@@ -381,8 +330,8 @@ class zhongDengImpl(LoginDriverImp):
 
 
 if __name__ == '__main__':
-    pool = WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
+    pool = WebDriverPool(dBean=zhongDengDengJiImpl, num=1, headless=False)
     impl = WebDriverPool.getOneDriver(pool)
-    dictNow = impl.deal({'companyName': "上海中建航建筑工业发展有限公司"})
+    dictNow = impl.deal({'time': str(time.time())})
     print(json.dumps(dictNow, cls=CJsonEncoder, ensure_ascii=False))
     # impl.deal({'companyName': "深圳银泰保理有限公司"})
