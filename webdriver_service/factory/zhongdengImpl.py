@@ -11,6 +11,8 @@ import uuid
 
 import requests
 import sys
+
+import selenium
 from PIL import Image
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
@@ -161,6 +163,11 @@ class zhongDengImpl(LoginDriverImp):
                 if '查看应收账款质押和转让登记' in driver.page_source:
                     print("【查看应收账款质押和转让登记】进入成功")
                     break
+            except selenium.common.exceptions.NoSuchElementException:
+                traceback.print_exc()
+                print("出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                time.sleep(1)
+                self._login()
             except:
                 traceback.print_exc()
                 print("验证码错误,重试验证码")
