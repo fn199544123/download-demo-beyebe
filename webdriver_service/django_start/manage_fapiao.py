@@ -43,6 +43,6 @@ if __name__ == '__main__':
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    args = [sys.argv[0], "runserver", "0.0.0.0:9188", "--noreload"]
+    args = [sys.argv[0], "runserver", "0.0.0.0:9088", "--noreload"]
     print(args)
     execute_from_command_line(args)
