@@ -15,10 +15,6 @@ from webdriver_service.factory.fapiaoImpl import fapiaoImpl
 from webdriver_service.pipeline.tornadoPipe import make_app, ChangeModel
 
 
-# http://localhost:9088/spider/fapiao.go?fpdm=1100182130&fphm=15024752&kprq=20180614&kjje=18679.25
-# http://localhost:9088/spider/fapiao.go?fpdm=4403174320&fphm=03738308&kprq=20181010&jym=964175
-# http://localhost:9088/spider/fapiao.go?fpdm=4403181130&fphm=27671246&kprq=20180920&kjje=351.69
-# http://39.108.188.34:9088/spider/fapiao.go?fpdm=1100182130&fphm=15024752&kprq=20180614&kjje=18679.25
 def make_app_fapiao():
     return tornado.web.Application([
         (r"/spider/fapiao.go", ChangeModel),

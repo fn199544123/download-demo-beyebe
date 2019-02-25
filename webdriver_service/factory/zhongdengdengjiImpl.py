@@ -12,7 +12,7 @@ import uuid
 import requests
 import sys
 from PIL import Image
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
 
@@ -46,7 +46,6 @@ class zhongDengDengJiImpl(LoginDriverImp):
     def _login(self):
         user = "ytbl0010"
         password = "ytbl0010aDmin"
-
 
         driver = self.driver
         """
@@ -301,6 +300,12 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     finally:
                         os.remove(filePath)
                         print("删除验证码")
+                except NoSuchElementException:
+                    traceback.print_exc()
+                    print("出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    self.driver.refresh()
+                    time.sleep(1)
+                    self.driver._login()
                 except:
                     print("验证码接口请求异常", url)
                     traceback.print_exc()
