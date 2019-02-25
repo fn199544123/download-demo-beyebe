@@ -17,11 +17,12 @@ from webdriver_service.pipeline.tornadoPipe import make_app, ChangeModel
 启动selenium
 docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 """
+
+
 # http://localhost:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 # http://39.108.188.34:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 
 def make_app_zhongdeng():
-
     return tornado.web.Application([
         (r"/spider/zhongdeng.go", ChangeModel),
     ]
@@ -30,7 +31,7 @@ def make_app_zhongdeng():
 
 
 if __name__ == "__main__":
-    WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+    WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
     app = make_app_zhongdeng()
     sockets = tornado.netutil.bind_sockets(9089)
     http_server = tornado.httpserver.HTTPServer(app)

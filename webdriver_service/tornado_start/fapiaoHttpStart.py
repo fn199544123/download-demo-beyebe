@@ -26,7 +26,7 @@ def make_app_fapiao():
 
 
 if __name__ == "__main__":
-    WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
+    WebDriverPool(dBean=fapiaoImpl, num=1, headless=True)
 
     app = make_app_fapiao()
     sockets = tornado.netutil.bind_sockets(9088)

@@ -56,9 +56,12 @@ class WebDriverImp():
                  'profile.default_content_settings.popups': 0,
                  "download.prompt_for_download": False}
         options.add_experimental_option("prefs", prefs)
+        # options.add_argument('--headless')
+        # options.add_argument('--no-sandbox')
         if headless:
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
+
         # 浏览器加载
         if driver is None:
             print("系统检测", platform.system())
