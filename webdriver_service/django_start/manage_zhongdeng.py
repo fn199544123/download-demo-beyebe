@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os
-
+import platform
 sys.path.append("../../")  # 解决潜在的路径依赖问题
 sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 
@@ -19,7 +19,7 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 if __name__ == '__main__':
     # 测试使用
     # WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
-    if 'inux' in sys.platform.system():
+    if 'inux' in platform.system():
         WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
     else:
         WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
