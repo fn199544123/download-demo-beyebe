@@ -108,16 +108,35 @@ class zhongDengDengJiImpl(LoginDriverImp):
     def _deal(self, input):
         djqx = 2
         tbrgdh = "测试填表人归档号"
-        crrlx = 2
-        crrmc = '我是一家测试的企业'
-        zzjgdm = "abcdefg"
-        gszch = "abcdefghij"
-        qqfrjgsbbm=""
-        fddbr = "帅比"
-        shhy = 3
-        qygm = 1
-        zsList = [2, 2, 2]
-        zsText = "美丽的地球村"
+        # 下面的可能有多个【出让人信息】
+        crrxxList = [{
+            "crrlx": 2,
+            "crrmc": '我是一家测试的企业',
+            "zzjgdm": "abcdefg",
+            "gszch": "abcdefghij",
+            "qqfrjgsbbm": "",
+            "fddbr": "帅比",
+            "shhy": 3,
+            "qygm": 1,
+            "zsList": ["中国", "河北省", "石家庄市"],
+            "zsText": "美丽的地球村",
+        },
+            {
+                "crrlx": 2,
+                "crrmc": '我是第2家测试的企业',
+                "zzjgdm": "abcdefg",
+                "gszch": "abcdefghij",
+                "qqfrjgsbbm": "",
+                "fddbr": "丑比",
+                "shhy": 3,
+                "qygm": 1,
+                "zsList": ["其他国家和地区", "", ""],
+                "zsText": "美丽的地球村",
+            }
+
+        ]
+
+        # 受让人信息
 
         driver = self.driver
         # 按资金融入方名称查询
@@ -148,33 +167,46 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     "body > div.main-table.hui > form > div > input:nth-child(1)").click()
                 time.sleep(1)
                 # 增加出让人 #addDebtor
-                driver.find_element_by_css_selector("#addDebtor").click()
+                for item in crrxxList:
+                    driver.find_element_by_css_selector("#addDebtor").click()
+                    time.sleep(1)
+                    # 出让人类型企业 #debtorType
+                    Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(item["crrlx"])
+                    # 等待渲染内容
+                    time.sleep(0.5)
+                    # 出让人名称 #debtorName
+                    driver.find_element_by_css_selector('#debtorName').send_keys(item["crrmc"])
+                    # 组织机构代码 #orgCode
+                    driver.find_element_by_css_selector('#orgCode').send_keys(item["zzjgdm"])
+                    # 工商注册号 #businessCode
+                    driver.find_element_by_css_selector('#businessCode').send_keys(item["gszch"])
+                    # 全球法人机构识别代码 #lei
+                    driver.find_element_by_css_selector('#lei').send_keys(item["qqfrjgsbbm"])
+                    # 法定代表人 #responsiblePerson
+                    driver.find_element_by_css_selector('#responsiblePerson').send_keys(item["fddbr"])
+                    # 所属行业 #industryCode
+                    Select(driver.find_element_by_css_selector('#industryCode')).select_by_index(item["shhy"])
+                    # 企业规模 #scale
+                    Select(driver.find_element_by_css_selector('#scale')).select_by_index(item["qygm"])
+                    # 住所选项 #country #province #city
+                    Select(driver.find_element_by_css_selector('#country')).select_by_index(item["zsList"][0])
+                    time.sleep(0.5)
+                    if item["zsList"][0] == "中国":
+                        # 如果是中国
+                        Select(driver.find_element_by_css_selector('#province')).select_by_index(item["zsList"][1])
+                        time.sleep(0.5)
+                        Select(driver.find_element_by_css_selector('#city')).select_by_index(item["zsList"][2])
+                        # 住所内容 #address
+                    driver.find_element_by_css_selector('#address').send_keys(item["zsText"])
+                    driver.find_element_by_css_selector("#saveButton").click()
+                    time.sleep(1)
+                # 受让人信息
+                driver.find_element_by_css_selector("#secondName").click()
                 time.sleep(1)
-                # 出让人类型企业 #debtorType
-                Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(crrlx)
+                driver.find_element_by_css_selector("#addDebtorAuto").click()
                 time.sleep(1)
-                # 等待渲染内容
-
-                # 出让人名称 #debtorName
-                driver.find_element_by_css_selector('#debtorName').send_keys(crrmc)
-                # 组织机构代码 #orgCode
-                driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
-                # 工商注册号 #businessCode
-                driver.find_element_by_css_selector('#businessCode').send_keys(gszch)
-                # 全球法人机构识别代码 #lei
-                driver.find_element_by_css_selector('#lei').send_keys(qqfrjgsbbm)
-                # 法定代表人 #responsiblePerson
-                driver.find_element_by_css_selector('#responsiblePerson').send_keys(fddbr)
-                # 所属行业 #industryCode
-                Select(driver.find_element_by_css_selector('#industryCode')).select_by_index(shhy)
-                # 企业规模 #scale
-                Select(driver.find_element_by_css_selector('#scale')).select_by_index(qygm)
-                # 住所选项 #country #province #city
-                driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
-                # 住所内容 #address
-                driver.find_element_by_css_selector('#address').send_keys(zzjgdm)
-
-
+                # 转让财产信息
+                driver.find_element_by_css_selector("#typeName").click()
 
 
             except:

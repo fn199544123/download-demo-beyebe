@@ -155,6 +155,7 @@ class fapiaoImpl(WebDriverImp):
                         time.sleep(0.1)
                     else:
                         print("5秒钟验证码还没有出现,重启")
+                        print("错误截图", self.get_full_screen_oss())
                         self.driver.refresh()
                         continue
                     try:
