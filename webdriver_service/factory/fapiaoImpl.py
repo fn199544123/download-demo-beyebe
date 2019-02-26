@@ -304,7 +304,14 @@ class fapiaoImpl(WebDriverImp):
             # 尝试到成功为止
             for url in urlList:
                 try:  # 异常处理
-                    filePath = self.get_image()
+                    try:
+                        filePath = self.get_image()
+                    except:
+                        traceback.print_exc()
+                        filePath = self.get_image_old()
+                        # TODO 未来删除
+                        ossUrl = fileUpdate(filePath)
+                        self.db['test_yanzhengma'].insert_one({'ossUrl': ossUrl})
                     try:  # 图片删除
                         file = {'file': open(filePath, 'rb')}
                         colorStr = filePath.split('_')[-1].replace('.png', '')
