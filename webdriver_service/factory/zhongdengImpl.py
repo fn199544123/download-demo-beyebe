@@ -165,8 +165,10 @@ class zhongDengImpl(LoginDriverImp):
                     break
             except selenium.common.exceptions.NoSuchElementException:
                 traceback.print_exc()
-                print("出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
-                time.sleep(1)
+                print("【中登网】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                ossUrl = self.get_full_screen_oss()
+                print("截图ossURL,并休息3秒", ossUrl)
+                time.sleep(3)
                 self._login()
             except:
                 traceback.print_exc()
@@ -321,12 +323,10 @@ class zhongDengImpl(LoginDriverImp):
 
     def getCodeString(self, imgTag):
         # 多地址容错
-        url_l = "http://localhost:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
 
-        url = "http://121.9.245.186:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
-        urlList = [url_l, url]
+        url = "http://39.108.188.34:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
+        urlList = [url]
         ansList = []
-
         while True:
             # 尝试到成功为止
             for url in urlList:
@@ -360,8 +360,8 @@ class zhongDengImpl(LoginDriverImp):
                         os.remove(filePath)
                         print("删除验证码")
                 except:
-                    print("验证码接口请求异常", url)
-                    traceback.print_exc()
+                    print("WARNING验证码接口请求异常", url)
+                    # traceback.print_exc()
             if len(ansList) > 0:
                 print("至少有一个有正确结果,随机取一个返回")
                 ans = random.sample(ansList, 1)[0]

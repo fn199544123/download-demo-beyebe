@@ -108,9 +108,11 @@ class zhongDengDengJiImpl(LoginDriverImp):
     def _deal(self, input):
         djqx = 2
         tbrgdh = "测试填表人归档号"
+        crrlx = 2
         crrmc = '我是一家测试的企业'
         zzjgdm = "abcdefg"
-        gszch = "abcdefg"
+        gszch = "abcdefghij"
+        qqfrjgsbbm=""
         fddbr = "帅比"
         shhy = 3
         qygm = 1
@@ -149,23 +151,24 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 driver.find_element_by_css_selector("#addDebtor").click()
                 time.sleep(1)
                 # 出让人类型企业 #debtorType
-                Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(3)
-                time.sleep(2)
+                Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(crrlx)
+                time.sleep(1)
                 # 等待渲染内容
+
                 # 出让人名称 #debtorName
                 driver.find_element_by_css_selector('#debtorName').send_keys(crrmc)
                 # 组织机构代码 #orgCode
                 driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
                 # 工商注册号 #businessCode
-                driver.find_element_by_css_selector('##businessCode').send_keys(zzjgdm)
+                driver.find_element_by_css_selector('#businessCode').send_keys(gszch)
                 # 全球法人机构识别代码 #lei
-                driver.find_element_by_css_selector('#lei').send_keys(zzjgdm)
+                driver.find_element_by_css_selector('#lei').send_keys(qqfrjgsbbm)
                 # 法定代表人 #responsiblePerson
-                driver.find_element_by_css_selector('#responsiblePerson').send_keys(zzjgdm)
+                driver.find_element_by_css_selector('#responsiblePerson').send_keys(fddbr)
                 # 所属行业 #industryCode
-                driver.find_element_by_css_selector('#industryCode').send_keys(zzjgdm)
+                Select(driver.find_element_by_css_selector('#industryCode')).select_by_index(shhy)
                 # 企业规模 #scale
-                driver.find_element_by_css_selector('#scale').send_keys(zzjgdm)
+                Select(driver.find_element_by_css_selector('#scale')).select_by_index(qygm)
                 # 住所选项 #country #province #city
                 driver.find_element_by_css_selector('#orgCode').send_keys(zzjgdm)
                 # 住所内容 #address
@@ -302,9 +305,11 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         print("删除验证码")
                 except NoSuchElementException:
                     traceback.print_exc()
-                    print("出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    print("【中登网登记】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    ossUrl = self.get_full_screen_oss()
+                    print("截图ossURL,并休息3秒", ossUrl)
                     self.driver.refresh()
-                    time.sleep(1)
+                    time.sleep(3)
                     self.driver._login()
                 except:
                     print("验证码接口请求异常", url)

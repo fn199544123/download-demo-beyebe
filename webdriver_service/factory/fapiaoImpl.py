@@ -139,6 +139,7 @@ class fapiaoImpl(WebDriverImp):
                 # self.setAttribute(imgTag2, "height", 35)
                 while True:
                     if 'yzm_img' in driver.page_source:
+                        self._state = "已经出现验证码标签"
                         print("出现验证码标签")
                         break
                 """
@@ -146,11 +147,15 @@ class fapiaoImpl(WebDriverImp):
                 """
                 time.sleep(0.5)
                 try:
-                    for i in range(100):
+                    for i in range(50):
                         if '请输入验证码图片' in driver.page_source:
+                            self._state = "已经成功渲染验证码"
                             print("成功渲染验证码")
                             break
+                        time.sleep(0.1)
                     else:
+                        print("5秒钟验证码还没有出现,重启")
+                        self.driver.refresh()
                         continue
                     try:
                         # 不存在会抛异常
@@ -198,6 +203,7 @@ class fapiaoImpl(WebDriverImp):
                     print("访问过于频繁，休息60秒后再试")
                     # popup_ok
                     # driver.find_element_by_id('popup_ok').click()  # 点击搜索按钮
+                    self._state = "由于访问频率太快,系统强制占用进程休息60秒"
                     time.sleep(60)
                     continue
                 elif 'popup_ok' in driver.page_source:
@@ -216,17 +222,17 @@ class fapiaoImpl(WebDriverImp):
                         invoiceData['errMsg'] = "ERROR解析结构异常,发现新模板或者改版,请将这个返回交付开发者进行模板添加"
                         invoiceData['html'] = driver.page_source
                         invoiceData['errMsgText'] = traceback.format_exc()
-                    dictNow.update({'html': '由于接口传html太重,可根据_id字段mongo数据库查询',
-                                    'data': invoiceData,
+                    dictNow.update({'data': invoiceData,
                                     'imgFile': ossPath,
                                     'errMsg': "success!",
                                     'state': 200})
                     return dictNow
             except:
-                print("未知异常,暂停一分钟之后再进行")
+                print("未知异常,进行上报")
                 traceback.print_exc()
-                time.sleep(60)
-                continue
+                dictNow = {}
+                dictNow.update({'errMsg': traceback.format_exc(), 'state': 599})
+                return dictNow
 
     def duplicate(self, input):
         """
@@ -287,9 +293,12 @@ class fapiaoImpl(WebDriverImp):
                         print("删除验证码")
                 except NoSuchElementException:
                     traceback.print_exc()
-                    print("出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    print("【发票验真平台】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    ossUrl = self.get_full_screen_oss()
+                    print("截图ossURL,并休息3秒", ossUrl)
                     self.driver.refresh()
-                    time.sleep(1)
+                    time.sleep(3)
+
 
                 except:
                     print("验证码接口请求异常", url)
@@ -311,6 +320,11 @@ class fapiaoImpl(WebDriverImp):
 
         img = self.driver.find_elements_by_css_selector("img")[-1]
         pictureData = img.get_attribute('src').split('base64,')[-1]
+        # print("base64Encode", pictureData)
+        if (len(pictureData) % 3 == 1):
+            pictureData += "=="
+        elif (len(pictureData) % 3 == 2):
+            pictureData += "="
         pictureDataB64 = base64.b64decode(pictureData)
         colorStr = self.driver.find_element_by_id('yzminfo') \
             .find_element_by_css_selector('font') \

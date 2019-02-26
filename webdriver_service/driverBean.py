@@ -17,6 +17,7 @@ from selenium import webdriver
 from logging_utils import log
 from logging_utils.cJsonEncoder import CJsonEncoder
 from logging_utils.log import mylog
+from oss_aliyun.updateFileBeyebe import fileUpdate
 
 """
 WebDriver基类
@@ -103,7 +104,7 @@ class WebDriverImp():
             elif isDup == False:
                 inputMD5 = self.__getInputMD5(input)
                 input.update(self._deal(input))
-                if 'ERROR' not in str(input):
+                if 'ERROR' not in str(input) and 'Traceback' not in str(input):
                     print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储')
                     # MONGO缓存
                     self.save(input)
@@ -167,6 +168,7 @@ class WebDriverImp():
     def save(self, msg):
         self.db['auto_' + type(self).__name__].insert_one(msg)
 
+    # 获取浏览器标签截图（返回本地地址）
     def get_image_screen(self, imgTag):  # 对验证码所在位置进行定位，然后截取验证码图片
         global left_Moren, top_Moren
         while True:
@@ -202,6 +204,14 @@ class WebDriverImp():
             image_obj.save(filePath)
             # 验证码识别
             return filePath  # 得到的就是验证码文件地址
+
+    # 返回浏览器整个截图截图（返回OSS链接地址）
+    def get_full_screen_oss(self):
+        fileName = str(uuid.uuid1()) + 'full_snap.png'
+        self.driver.save_screenshot(fileName)
+        ossUrl = fileUpdate(fileName)
+        os.remove(fileName)
+        return ossUrl
 
     def get_snap(self):  # 对目标网页进行截屏.这里截的是全屏
         fileName = str(uuid.uuid1()) + 'full_snap.png'
