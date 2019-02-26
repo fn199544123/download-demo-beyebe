@@ -137,6 +137,24 @@ class fapiaoImpl(WebDriverImp):
                 # imgTag2 = driver.find_element_by_id('yzm_unuse_img')
                 # self.setAttribute(imgTag2, "width", 90)
                 # self.setAttribute(imgTag2, "height", 35)
+
+                # 看输入是否有错误
+                if "发票代码有误!":
+                    print("发票代码有误")
+                    dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                    return dictNow
+                if "发票号码有误!":
+                    print("发票号码有误")
+                    dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                    return dictNow
+                if "开票日期有误!":
+                    print("开票日期有误")
+                    dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                    return dictNow
+                if "开票金额有误!":
+                    print("开票金额有误")
+                    dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                    return dictNow
                 while True:
                     if 'yzm_img' in driver.page_source:
                         self._state = "已经出现验证码标签"
@@ -192,9 +210,22 @@ class fapiaoImpl(WebDriverImp):
                     print("超过次数")
                     dictNow = {'errMsg': "ERROR超过次数！无法返回信息", 'state': 601}
                     return dictNow
-                elif '开票日期有误' in driver.page_source:
+                    # 看输入是否有错误
+                elif "发票代码有误!":
+                    print("发票代码有误")
+                    dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                    return dictNow
+                elif "发票号码有误!":
+                    print("发票号码有误")
+                    dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                    return dictNow
+                elif "开票日期有误!":
                     print("开票日期有误")
-                    dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式，例如20190101", 'state': 602}
+                    dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                    return dictNow
+                elif "开票金额有误!":
+                    print("开票金额有误")
+                    dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
                     return dictNow
                 elif '校验码有误!' in driver.page_source:
                     print("校验码有误")
