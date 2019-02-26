@@ -42,7 +42,9 @@ class fapiaoImpl(WebDriverImp):
 
     # class fapiaoImpl(WebDriverRemoteImp):
     def _parseInvoice(self, html):
-        data = {'goods': []}
+        if '查无此票' in html:
+            return {'errMsg': '国家税务局返回查无此票'}
+        data = {'goods': [], 'errMsg': 'success!'}
         soup = BeautifulSoup(html, 'lxml')
         idH1 = soup.select_one('h1')['id']
         idkey = idH1.split('_')[1]
@@ -248,6 +250,7 @@ class fapiaoImpl(WebDriverImp):
                     filePath = 'fapiao/' + fpdm + '.png'
                     driver.save_screenshot(filePath)
                     ossPath = fileUpdate(filePath)
+                    invoiceData = {}
                     try:
                         invoiceData = self._parseInvoice(driver.page_source)
                     except:
@@ -275,7 +278,7 @@ class fapiaoImpl(WebDriverImp):
         :param input:
         :return:
         """
-        dictDup = {'fpdm': input['fpdm'], 'fphm': input['fphm']}
+        dictDup = {'fpdm': input['fpdm'], 'fphm': input['fphm'], 'kprq': input['kprq'], 'kjje': input['kjje']}
         item = self.db['auto_' + type(self).__name__].find_one(dictDup)
         if item is not None:
             return dict(item)
@@ -353,11 +356,14 @@ class fapiaoImpl(WebDriverImp):
         img = self.driver.find_elements_by_css_selector("img")[-1]
         pictureData = img.get_attribute('src').split('base64,')[-1]
         # print("base64Encode", pictureData)
-        if (len(pictureData) % 3 == 1):
-            pictureData += "=="
-        elif (len(pictureData) % 3 == 2):
-            pictureData += "="
-        pictureDataB64 = base64.b64decode(pictureData)
+        try:
+            pictureDataB64 = base64.b64decode(pictureData)
+        except:
+            if (len(pictureData) % 3 == 1):
+                pictureData += "=="
+            elif (len(pictureData) % 3 == 2):
+                pictureData += "="
+            pictureDataB64 = base64.b64decode(pictureData)
         colorStr = self.driver.find_element_by_id('yzminfo') \
             .find_element_by_css_selector('font') \
             .get_attribute('color')

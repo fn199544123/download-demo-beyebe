@@ -83,6 +83,7 @@ class WebDriverImp():
             self.driver.implicitly_wait(7)
             self.driver.set_page_load_timeout(7)
             self.driver.set_script_timeout(7)
+
             self.enable_download_in_headless_chrome(store_path)
         # 数据库加载
 
@@ -98,6 +99,7 @@ class WebDriverImp():
     # ！！！driver资源开销很大，如果你看到这行注释，请慎行。
     def deal(self, input):
         try:
+
             isDup = self.duplicate(input)
             if type(isDup) == type({}) or type(isDup) == type("string"):
                 return isDup
@@ -171,6 +173,10 @@ class WebDriverImp():
     # 获取浏览器标签截图（返回本地地址）
     def get_image_screen(self, imgTag):  # 对验证码所在位置进行定位，然后截取验证码图片
         global left_Moren, top_Moren
+        try:
+            self.driver.maximize_window()
+        except:
+            pass
         while True:
             loc = imgTag.location
             size = imgTag.size
@@ -207,6 +213,12 @@ class WebDriverImp():
 
     # 返回浏览器整个截图截图（返回OSS链接地址）
     def get_full_screen_oss(self):
+        try:
+            self.driver.maximize_window()
+        except:
+            pass
+        js = "var action=document.documentElement.scrollTop=10000"
+        self.driver.execute_script(js)
         fileName = str(uuid.uuid1()) + 'full_snap.png'
         self.driver.save_screenshot(fileName)
         ossUrl = fileUpdate(fileName)
