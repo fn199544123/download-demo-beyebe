@@ -169,19 +169,19 @@ class fapiaoImpl(WebDriverImp):
                         return dictNow
                     if "请输入发票代码" in driver.page_source:
                         print("请输入发票代码")
-                        dictNow = {'errMsg': "请输入发票代码", 'state': 604}
+                        dictNow = {'errMsg': "ERROR请输入发票代码", 'state': 604}
                         return dictNow
                     if "请输入开具金额" in driver.page_source:
                         print("请输入开具金额")
-                        dictNow = {'errMsg': "请输入开具金额", 'state': 604}
+                        dictNow = {'errMsg': "ERROR请输入开具金额", 'state': 604}
                         return dictNow
                     if "请输入开票日期" in driver.page_source:
                         print("请输入开票日期")
-                        dictNow = {'errMsg': "请输入开票日期", 'state': 604}
+                        dictNow = {'errMsg': "ERROR请输入开票日期", 'state': 604}
                         return dictNow
                     if "请输入校验码" in driver.page_source:
                         print("请输入校验码")
-                        dictNow = {'errMsg': "请输入校验码", 'state': 604}
+                        dictNow = {'errMsg': "ERROR请输入校验码", 'state': 604}
                         return dictNow
 
                     if 'yzm_img' in driver.page_source:
