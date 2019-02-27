@@ -113,6 +113,21 @@ class zhongDengDengJiImpl(LoginDriverImp):
         """
         资金融入方
         """
+
+        keyMustExist = [
+            "timelimit",
+            "title",
+            "addDebtorList",
+            "maincontractno",
+            "maincontractcurrency",
+            "maincontractsum",
+            "description",
+        ]
+
+        for key in keyMustExist:
+            if key not in input:
+                return {'state': 619,
+                        'errMsg': "缺少必备参数{},其中timelimit、title、addDebtorList、maincontractno、maincontractcurrency、maincontractsum、description为必须存在的参数"}
         while True:
             driver = self.driver
             print("初始登记")
@@ -435,7 +450,7 @@ if __name__ == '__main__':
             }
         ]
     }
-    print(json.dumps(input,ensure_ascii=False))
+    print(json.dumps(input, ensure_ascii=False))
     pool = WebDriverPool(dBean=zhongDengDengJiImpl, num=1, headless=False)
     impl = WebDriverPool.getOneDriver(pool)
     dictNow = impl.deal(input)

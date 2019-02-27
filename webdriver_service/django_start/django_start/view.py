@@ -9,11 +9,17 @@ from webdriver_service.driver_pool.driverPool import WebDriverPool
 
 def changeModel(request):
     try:
-        arguments = dict(request.GET)
+
+        if request.method == 'GET':
+            arguments = dict(request.GET)
+            for arg in arguments:
+                if type(arguments[arg]) == type([]):
+                    arguments[arg] = arguments[arg][0]
+        elif request.method == 'POST':
+            arguments = json.loads(request.body.decode())
+        else:
+            return "不支持除了GET和POST之外的请求方式"
         # 将每个参数的队列转换成单个结果
-        for arg in arguments:
-            if type(arguments[arg]) == type([]):
-                arguments[arg] = arguments[arg][0]
 
         if WebDriverPool().queueSize() > 0:
             msg = WebDriverPool().getOneDriverNoWait().deal(arguments)
@@ -36,5 +42,3 @@ def changeModel(request):
 
         traceback.print_exc()
         return HttpResponse(jsonStr)
-
-

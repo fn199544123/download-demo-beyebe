@@ -22,4 +22,5 @@ urlpatterns = [
     url(r"test.go", hello),
     url(r"fapiao.go", changeModel),
     url(r"zhongdeng.go", changeModel),
+    url(r"zhongdengdengji.go", changeModel),
 ]
