@@ -155,10 +155,35 @@ class fapiaoImpl(WebDriverImp):
                         print("开票日期有误")
                         dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
                         return dictNow
-                    if "开票金额有误!" in driver.page_source:
-                        print("开票金额有误")
+                    if "开具金额有误!" in driver.page_source:
+                        print("开具金额有误")
                         dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
                         return dictNow
+                    if "校验码有误!" in driver.page_source:
+                        print("校验码有误!")
+                        dictNow = {'errMsg': "ERROR校验码有误!无法返回信息，请输入正确的数据或格式", 'state': 604}
+                        return dictNow
+                    if "请输入发票号码" in driver.page_source:
+                        print("请输入发票号码")
+                        dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                        return dictNow
+                    if "请输入发票代码" in driver.page_source:
+                        print("请输入发票代码")
+                        dictNow = {'errMsg': "请输入发票代码", 'state': 604}
+                        return dictNow
+                    if "请输入开具金额" in driver.page_source:
+                        print("请输入开具金额")
+                        dictNow = {'errMsg': "请输入开具金额", 'state': 604}
+                        return dictNow
+                    if "请输入开票日期" in driver.page_source:
+                        print("请输入开票日期")
+                        dictNow = {'errMsg': "请输入开票日期", 'state': 604}
+                        return dictNow
+                    if "请输入校验码" in driver.page_source:
+                        print("请输入校验码")
+                        dictNow = {'errMsg': "请输入校验码", 'state': 604}
+                        return dictNow
+
                     if 'yzm_img' in driver.page_source:
                         self._state = "已经出现验证码标签"
                         print("出现验证码标签")
