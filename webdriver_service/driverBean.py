@@ -120,9 +120,10 @@ class WebDriverImp():
                     # pipe.set(inputMD5, json.dumps(input, cls=CJsonEncoder, ensure_ascii=False))
                     # pipe.expire(inputMD5, 60 * 60 * 24)
                     # pipe.execute()
+                    print("数据存储成功")
                 else:
                     print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
-                print("数据存储成功")
+
                 input['version'] = 'V1.0'
                 return input
             elif isDup == True:
@@ -156,7 +157,7 @@ class WebDriverImp():
         bufferItem = r.get(inputMD5)
         if bufferItem is not None:
             print("已存在缓存,进一步确定缓存形式")
-            if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
+            if 'DOING_MISSION!!wait_for_few_time!' in buffferItem.decode():
                 raise Exception("数据正在处理!,请稍后再试(相同任务3秒内只能请求一次)" + bufferItem)
             else:
                 print("走缓存返回结果")
