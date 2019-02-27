@@ -49,6 +49,9 @@ class WebDriverImp():
         self.myPool = MyPool
 
         options = webdriver.ChromeOptions()
+        options.add_argument("--kiosk")
+        options.add_argument("--start-maximized")
+        options.add_argument("--start-fullscreen")
         store_path = './webDriver_download'
         if not os.path.exists(store_path):
             os.makedirs(store_path)
@@ -57,6 +60,7 @@ class WebDriverImp():
                  'profile.default_content_settings.popups': 0,
                  "download.prompt_for_download": False}
         options.add_experimental_option("prefs", prefs)
+
         # options.add_argument('--headless')
         # options.add_argument('--no-sandbox')
         if headless:
@@ -173,10 +177,7 @@ class WebDriverImp():
     # 获取浏览器标签截图（返回本地地址）
     def get_image_screen(self, imgTag):  # 对验证码所在位置进行定位，然后截取验证码图片
         global left_Moren, top_Moren
-        try:
-            self.driver.maximize_window()
-        except:
-            pass
+
         while True:
             loc = imgTag.location
             size = imgTag.size
@@ -213,10 +214,7 @@ class WebDriverImp():
 
     # 返回浏览器整个截图截图（返回OSS链接地址）
     def get_full_screen_oss(self):
-        try:
-            self.driver.maximize_window()
-        except:
-            pass
+
         js = "var action=document.documentElement.scrollTop=10000"
         self.driver.execute_script(js)
         fileName = str(uuid.uuid1()) + 'full_snap.png'

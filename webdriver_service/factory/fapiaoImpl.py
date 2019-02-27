@@ -141,27 +141,30 @@ class fapiaoImpl(WebDriverImp):
                 # self.setAttribute(imgTag2, "height", 35)
 
                 # 看输入是否有错误
-                if "发票代码有误!" in driver.page_source:
-                    print("发票代码有误")
-                    dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
-                    return dictNow
-                if "发票号码有误!" in driver.page_source:
-                    print("发票号码有误")
-                    dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
-                    return dictNow
-                if "开票日期有误!" in driver.page_source:
-                    print("开票日期有误")
-                    dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
-                    return dictNow
-                if "开票金额有误!" in driver.page_source:
-                    print("开票金额有误")
-                    dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
-                    return dictNow
-                while True:
+
+                for i in range(100):
+                    if "发票代码有误!" in driver.page_source:
+                        print("发票代码有误")
+                        dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                        return dictNow
+                    if "发票号码有误!" in driver.page_source:
+                        print("发票号码有误")
+                        dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                        return dictNow
+                    if "开票日期有误!" in driver.page_source:
+                        print("开票日期有误")
+                        dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                        return dictNow
+                    if "开票金额有误!" in driver.page_source:
+                        print("开票金额有误")
+                        dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                        return dictNow
                     if 'yzm_img' in driver.page_source:
                         self._state = "已经出现验证码标签"
                         print("出现验证码标签")
                         break
+                    time.sleep(0.1)
+
                 """
                 验证码
                 """

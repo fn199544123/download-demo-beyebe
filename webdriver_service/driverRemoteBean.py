@@ -45,7 +45,7 @@ class WebDriverRemoteImp(WebDriverImp):
                     self.driver = webdriver.Remote(
                         command_executor="http://{}:{}/wd/hub".format(ip, str(self.getDriverPort())),
                         desired_capabilities=DesiredCapabilities.CHROME)
-                    self.driver.maximize_window()
+
                     self.driver.implicitly_wait(7)
                     self.driver.set_page_load_timeout(7)  # 数据库加载
                     self.driver.set_script_timeout(7)

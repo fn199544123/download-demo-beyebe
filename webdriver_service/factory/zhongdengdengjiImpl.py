@@ -106,52 +106,23 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 driver.refresh()
 
     def _deal(self, input):
-        djqx = 2
-        tbrgdh = "测试填表人归档号"
+
         # 下面的可能有多个【出让人信息】
-        crrxxList = [{
-            "crrlx": 2,
-            "crrmc": '我是一家测试的企业',
-            "zzjgdm": "abcdefg",
-            "gszch": "abcdefghij",
-            "qqfrjgsbbm": "",
-            "fddbr": "帅比",
-            "shhy": 3,
-            "qygm": 1,
-            "zsList": ["中国", "河北省", "石家庄市"],
-            "zsText": "美丽的地球村",
-        },
-            {
-                "crrlx": 2,
-                "crrmc": '我是第2家测试的企业',
-                "zzjgdm": "abcdefg",
-                "gszch": "abcdefghij",
-                "qqfrjgsbbm": "",
-                "fddbr": "丑比",
-                "shhy": 3,
-                "qygm": 1,
-                "zsList": ["其他国家和地区", "", ""],
-                "zsText": "美丽的地球村",
-            }
 
-        ]
-
-        # 受让人信息
-
-        driver = self.driver
         # 按资金融入方名称查询
         """
         资金融入方
         """
-        print("初始登记")
-        try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/bigTypechoose.do?timeset={}".format(str(
-                time.time())))
-        except TimeoutException:
-            print("driver超时异常,忽略并尝试提取内容")
-        # 查询校验码识别
-        self._state = "[中登网登记]正在进行登记,正在填写基本信息阶段,进度1/4"
         while True:
+            driver = self.driver
+            print("初始登记")
+            try:
+                driver.get("https://www.zhongdengwang.org.cn/rs/bigTypechoose.do?timeset={}".format(str(
+                    time.time())))
+            except TimeoutException:
+                print("driver超时异常,忽略并尝试提取内容")
+            # 查询校验码识别
+            self._state = "[中登网登记]正在进行登记,正在填写基本信息阶段,进度1/4"
             try:
                 time.sleep(1)
                 driver.find_element_by_css_selector("#A00200").click()
@@ -160,58 +131,70 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     "body > div.main-table.hui > table:nth-child(4) > tbody > tr:nth-child(1) > td > input[type=\"radio\"]:nth-child(1)").click()
                 driver.find_element_by_css_selector("#next").click()
                 time.sleep(1)
-                Select(driver.find_element_by_css_selector('#timelimit')).select_by_index(djqx)
-                driver.find_element_by_css_selector('#title').send_keys(tbrgdh)
+                # 输入基本信息
+                self.__findSelectByText(driver.find_element_by_css_selector('#timelimit'), input['timelimit'])
+                driver.find_element_by_css_selector('#title').send_keys(input['title'])
                 time.sleep(1)
                 driver.find_element_by_css_selector(
                     "body > div.main-table.hui > form > div > input:nth-child(1)").click()
                 time.sleep(1)
                 # 增加出让人 #addDebtor
-                for item in crrxxList:
+                for item in input['addDebtorList']:
+                    # 点击增加出让人
                     driver.find_element_by_css_selector("#addDebtor").click()
                     time.sleep(1)
-                    # 出让人类型企业 #debtorType
-                    Select(driver.find_element_by_css_selector('#debtorType')).select_by_index(item["crrlx"])
-                    # 等待渲染内容
-                    time.sleep(0.5)
-                    # 出让人名称 #debtorName
-                    driver.find_element_by_css_selector('#debtorName').send_keys(item["crrmc"])
-                    # 组织机构代码 #orgCode
-                    driver.find_element_by_css_selector('#orgCode').send_keys(item["zzjgdm"])
-                    # 工商注册号 #businessCode
-                    driver.find_element_by_css_selector('#businessCode').send_keys(item["gszch"])
-                    # 全球法人机构识别代码 #lei
-                    driver.find_element_by_css_selector('#lei').send_keys(item["qqfrjgsbbm"])
-                    # 法定代表人 #responsiblePerson
-                    driver.find_element_by_css_selector('#responsiblePerson').send_keys(item["fddbr"])
-                    # 所属行业 #industryCode
-                    Select(driver.find_element_by_css_selector('#industryCode')).select_by_index(item["shhy"])
-                    # 企业规模 #scale
-                    Select(driver.find_element_by_css_selector('#scale')).select_by_index(item["qygm"])
-                    # 住所选项 #country #province #city
-                    Select(driver.find_element_by_css_selector('#country')).select_by_index(item["zsList"][0])
-                    time.sleep(0.5)
-                    if item["zsList"][0] == "中国":
-                        # 如果是中国
-                        Select(driver.find_element_by_css_selector('#province')).select_by_index(item["zsList"][1])
-                        time.sleep(0.5)
-                        Select(driver.find_element_by_css_selector('#city')).select_by_index(item["zsList"][2])
-                        # 住所内容 #address
-                    driver.find_element_by_css_selector('#address').send_keys(item["zsText"])
+                    driver.refresh()
+
+                    for key in item:
+                        # 遍历所有的类型
+                        tagNow = driver.find_element_by_id(key)
+                        tagName = tagNow.tag_name
+                        if 'input' in tagName:
+                            tagNow.send_keys(item[key])
+                        elif 'select' in tagName:
+                            self.__findSelectByText(tagNow, item[key])
+                        # 出让人类型企业 #debtorType
+                        time.sleep(0.35)
+                    time.sleep(1)  # 等待渲染内容
                     driver.find_element_by_css_selector("#saveButton").click()
-                    time.sleep(1)
+                    time.sleep(1)  # 等待渲染内容
                 # 受让人信息
                 driver.find_element_by_css_selector("#secondName").click()
-                time.sleep(1)
+                time.sleep(1)  # 等待渲染内容
                 driver.find_element_by_css_selector("#addDebtorAuto").click()
-                time.sleep(1)
+                time.sleep(1)  # 等待渲染内容
                 # 转让财产信息
                 driver.find_element_by_css_selector("#typeName").click()
+                time.sleep(1)  # 等待渲染内容
+                driver.find_element_by_css_selector('#maincontractno').send_keys(input['maincontractno'])
+                self.__findSelectByText(driver.find_element_by_css_selector('#maincontractcurrency'),
+                                        input['maincontractcurrency'])
 
-
+                driver.find_element_by_css_selector('#maincontractsum').send_keys(input['maincontractsum'])
+                driver.find_element_by_css_selector('#description').send_keys(input['description'])
+                driver.find_element_by_css_selector(
+                    "body > div.main-table.hui > table > tbody > tr > td > table:nth-child(3) > tbody > tr > td > input").click()
+                time.sleep(0.5)
+                # 预览截图并返回
+                driver.find_element_by_id("previewbutton").click()
+                ossUrl = self.get_full_screen_oss()
+                print("预览图已截取", ossUrl)
+                return {'state': 200, 'ossUrl': ossUrl}
             except:
                 traceback.print_exc()
-                print("操作出现意外错误错误")
+                print("操作出现意外错误错误，重新登陆并重试")
+
+                self._login()
+
+    def __findSelectByText(self, selectTag, textStr):
+        if textStr == None or textStr == "":
+            return
+        print("正在填写选择栏,textStr={}".format(textStr))
+        for i, option in enumerate(selectTag.find_elements_by_css_selector("option")):
+            if option.text == textStr:
+                Select(selectTag).select_by_index(i)
+                return
+        raise Exception("您的输入有问题,这个输入没有在下拉栏里找到:" + textStr)
 
     def download_pdf(self, regno, companyName, ansList):
         url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
@@ -372,8 +355,89 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
 
 if __name__ == '__main__':
+    input = {
+        "timelimit": "1年",
+        "title": "测试归档号",
+        "maincontractno": "转让合同编码",
+        "maincontractcurrency": "人民币",
+        "maincontractsum": "10000",
+        "description": "我是可爱的小描述",
+        "addDebtorList": [
+            {
+                # 金融机构
+                "debtorType": "金融机构",
+                "debtorName": "出让人名称",
+                "financeCode": "abc123abc123abc123",
+                "businessCode": "abc",
+                "lei": "123",
+                "responsiblePerson": "江泽民",
+                "country": "中国",
+                "province": "黑龙江省",
+                "city": "哈尔滨市",
+                "address": "美丽的松花江",
+            }, {
+                # 企业
+                "debtorType": "企业",
+                "debtorName": "可爱的比一比",
+                "orgCode": "abcd",
+                "businessCode": "1234",
+                "lei": "777",
+                "responsiblePerson": "毛泽东",
+                "industryCode": "农、林、牧、渔业",
+                "scale": "大型企业",
+                "country": "中国",
+                "province": "广东省",
+                "city": "深圳市",
+                "address": "可爱的南山区",
+            }, {
+                # 机关事业单位
+                "debtorType": "机关事业单位",
+                "debtorName": "可爱的比一比",
+                "orgCode": "abcd",
+                "legalCertificateNo": "1234",
+                "lei": "777",
+                "responsiblePerson": "毛泽东",
+                "country": "中国",
+                "province": "广东省",
+                "city": "深圳市",
+                "address": "可爱的南山区",
+            }, {
+                # 个体工商户
+                "debtorType": "个体工商户",
+                "tradeName": "字号名称",
+                "idType": "身份证",
+                "idCode": "230104199504041215",
+                "country": "中国",
+                "province": "广东省",
+                "city": "深圳市",
+                "address": "可爱的南山区",
+            }, {
+                # 个人
+                "debtorType": "个人",
+                "idType": "身份证",
+                "idCode": "230104199504041215",
+                "country": "中国",
+                "province": "广东省",
+                "city": "深圳市",
+                "address": "可爱的南山区",
+            }, {
+                # 其他
+                "debtorType": "其他",
+                "debtorName": "出让人名称",
+                "orgCodeNoVerify": "abc123abc123abc123",
+                "registrationCertificateNo": "abc",
+                "lei": "123",
+                "responsiblePerson": "江泽民",
+                "country": "中国",
+                "province": "黑龙江省",
+                "city": "哈尔滨市",
+                "address": "美丽的松花江",
+            }
+        ]
+    }
+    print(json.dumps(input,ensure_ascii=False))
     pool = WebDriverPool(dBean=zhongDengDengJiImpl, num=1, headless=False)
     impl = WebDriverPool.getOneDriver(pool)
-    dictNow = impl.deal({'time': str(time.time())})
+    dictNow = impl.deal(input)
     print(json.dumps(dictNow, cls=CJsonEncoder, ensure_ascii=False))
     # impl.deal({'companyName': "深圳银泰保理有限公司"})
