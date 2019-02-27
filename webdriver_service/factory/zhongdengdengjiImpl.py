@@ -196,8 +196,10 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 print("预览图已截取", ossUrl)
                 return {'state': 200, 'ossUrl': ossUrl}
             except:
+                if 'ERROR' in traceback.format_exc():
+                    return {'state': 599, 'errMsg': traceback.format_exc()}
                 traceback.print_exc()
-                print("操作出现意外错误错误，重新登陆并重试")
+                print("操作出现意外错误，重新登陆并重试")
 
                 self._login()
 
@@ -209,7 +211,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
             if option.text == textStr:
                 Select(selectTag).select_by_index(i)
                 return
-        raise Exception("您的输入有问题,这个输入没有在下拉栏里找到:" + textStr)
+        raise Exception("ERROR您的输入有问题,这个输入没有在下拉栏里找到:" + textStr)
 
     def download_pdf(self, regno, companyName, ansList):
         url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
