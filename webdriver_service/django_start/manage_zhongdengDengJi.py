@@ -3,13 +3,13 @@ import sys
 import os
 import platform
 
-from webdriver_service.factory.zhongdengdengjiImpl import zhongDengDengJiImpl
 
 sys.path.append("../../")  # 解决潜在的路径依赖问题
 sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 
 from webdriver_service.factory.zhongdengImpl import zhongDengImpl
 from webdriver_service.driver_pool.driverPool import WebDriverPool
+from webdriver_service.factory.zhongdengdengjiImpl import zhongDengDengJiImpl
 
 """
 启动selenium
