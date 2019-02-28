@@ -8,3 +8,5 @@ url = "http://39.108.188.34:9089/spider/zhongdeng.go?companyName={}".format(comp
 text = requests.get(url).text
 objJson = json.loads(text)
 print(objJson)
+
+

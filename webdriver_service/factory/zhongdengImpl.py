@@ -288,7 +288,7 @@ class zhongDengImpl(LoginDriverImp):
                 if dictNow == {}:
                     print("10秒都没有下载成功,下载异常")
                     dictNow['regno'] = regno
-                    dictNow['name'] = name
+                    dictNow['pdfname'] = name
                     dictNow['companyName'] = companyName
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
