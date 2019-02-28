@@ -164,10 +164,16 @@ class zhongDengImpl(LoginDriverImp):
                 try:
                     driver.find_element_by_id('query').click()
                 except:
-                    pass
-                if '查看应收账款质押和转让登记' in driver.page_source:
-                    print("【查看应收账款质押和转让登记】进入成功")
-                    break
+                    print("点击超时,最多等待30秒查询")
+                    self._state = "{},已点击查询按钮，正在等待中登网返回信息。最多等待30秒 2/4".format(input['companyName'])
+                for i in range(300):
+                    if '查看应收账款质押和转让登记' in driver.page_source:
+                        print("【查看应收账款质押和转让登记】进入成功")
+                        break
+                    time.sleep(0.1)
+                else:
+                    print("30秒内中登网没返回该公司信息")
+                    return {'state': 700, 'errMsg': 'ERROR中登网30秒内查询不到该公司信息'}
             except selenium.common.exceptions.NoSuchElementException:
                 traceback.print_exc()
                 print("【中登网】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
@@ -175,73 +181,76 @@ class zhongDengImpl(LoginDriverImp):
                 print("截图ossURL,并休息3秒", ossUrl)
                 time.sleep(3)
                 self._login()
+                continue
             except:
                 traceback.print_exc()
                 print("验证码错误,重试验证码,刷新")
                 driver.refresh()
-        # 查看应收账款质押和转让登记
-        for item in driver.find_elements_by_css_selector('a'):
-            if item.text == '查看应收账款质押和转让登记':
-                print("【点击】查看应收账款质押和转让登记")
-                item.click()
-                break
-        # 查看是否有记录
-
-        for tt in range(100):
-            if '下载' in driver.page_source:
-                break
-            if '本次查询共查询到登记0笔' in driver.page_source:
-                returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'ansList': []}
-                return returnObj
-            time.sleep(0.1)
-        # 记录所有regno
-        lstRegno = []
-        # 首先查看有几页,如果有n页,那么就要采集n次
-        try:
-            numTotal = int(driver.find_element_by_id("totalNum").text)
-        except:
-            numTotal = 1
-        for page in range(numTotal):
-            # 添加内容
-            for item in driver.find_elements_by_css_selector("td[name=\"no\"]"):
-                lstRegno.append(item.text)
-            # 点击下一页
-            self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
-            time.sleep(0.5)
-        print("登记证明编号记录完成", lstRegno)
-        print("正在依次下载")
-        self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
-                                                                                     len(lstRegno))
-
-        ansList = []
-        for i, regno in enumerate(lstRegno):
-            # 大量下载极易造成卡死,要进行重试,最次最多重试5次
-            self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(input['companyName'],
-                                                                                                  len(lstRegno), i)
-            dbItem = self.db[tableName].find_one({'regno': regno})
-            if dbItem is not None:
-                print(dbItem['regno'], "已经下载过了,走缓存")
-                # 已经下载过了,使用下载结果
-                dictNow = dbItem
-                dictNow['_id'] = str(dictNow['_id'])
-                ansList.append(dictNow)
                 continue
+            # 查看应收账款质押和转让登记
+            for item in driver.find_elements_by_css_selector('a'):
+                if item.text == '查看应收账款质押和转让登记':
+                    print("【点击】查看应收账款质押和转让登记")
+                    item.click()
+                    break
+            # 查看是否有记录
 
-            for h in range(5):
-                print(i, regno)
-                self.download_pdf(regno, companyName, ansList)
-                break
-            else:
-                print("5次重试失败,跳过该页")
-                traceback.print_exc()
+            for tt in range(100):
+                if '下载' in driver.page_source:
+                    break
+                if '本次查询共查询到登记0笔' in driver.page_source:
+                    returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'ansList': []}
+                    return returnObj
+                time.sleep(0.1)
+            # 记录所有regno
+            lstRegno = []
+            # 首先查看有几页,如果有n页,那么就要采集n次
+            try:
+                numTotal = int(driver.find_element_by_id("totalNum").text)
+            except:
+                numTotal = 1
+            for page in range(numTotal):
+                # 添加内容
+                for item in driver.find_elements_by_css_selector("td[name=\"no\"]"):
+                    lstRegno.append(item.text)
+                # 点击下一页
+                self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
+                time.sleep(0.5)
+            print("登记证明编号记录完成", lstRegno)
+            print("正在依次下载")
+            self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
+                                                                                         len(lstRegno))
 
-        # 全部完成并且回复代码至首页
-        try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init")
-        except TimeoutException:
-            print("driver超时异常,忽略并尝试提取内容")
-        returnObj = {'state': 200, 'errMsg': 'success!', 'regnoList': lstRegno, 'ansList': ansList}
-        return returnObj
+            ansList = []
+            for i, regno in enumerate(lstRegno):
+                # 大量下载极易造成卡死,要进行重试,最次最多重试5次
+                self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(
+                    input['companyName'],
+                    len(lstRegno), i)
+                dbItem = self.db[tableName].find_one({'regno': regno})
+                if dbItem is not None:
+                    print(dbItem['regno'], "已经下载过了,走缓存")
+                    # 已经下载过了,使用下载结果
+                    dictNow = dbItem
+                    dictNow['_id'] = str(dictNow['_id'])
+                    ansList.append(dictNow)
+                    continue
+
+                for h in range(5):
+                    print(i, regno)
+                    self.download_pdf(regno, companyName, ansList)
+                    break
+                else:
+                    print("5次重试失败,跳过该页")
+                    traceback.print_exc()
+
+            # 全部完成并且回复代码至首页
+            try:
+                driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init")
+            except TimeoutException:
+                print("driver超时异常,忽略并尝试提取内容")
+            returnObj = {'state': 200, 'errMsg': 'success!', 'regnoList': lstRegno, 'ansList': ansList}
+            return returnObj
 
     def download_pdf(self, regno, companyName, ansList):
         url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
