@@ -173,7 +173,7 @@ class zhongDengImpl(LoginDriverImp):
                 self._login()
             except:
                 traceback.print_exc()
-                print("验证码错误,重试验证码")
+                print("验证码错误,重试验证码,刷新")
                 driver.refresh()
         # 查看应收账款质押和转让登记
         for item in driver.find_elements_by_css_selector('a'):
