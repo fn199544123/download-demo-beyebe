@@ -32,7 +32,7 @@ top_Moren = 0
    kjje = input['kjje'] 开具金额
     # fpdm = "1100182130"
     # fphm = "15024752"
-    # kprq = "20180614"
+    # kprq = "20180614" 
     # kjje = "18679.25"
 """
 
@@ -44,6 +44,8 @@ class fapiaoImpl(WebDriverImp):
     def _parseInvoice(self, html):
         if '查无此票' in html:
             return {'errMsg': '国家税务局返回查无此票'}
+        if '不一致' in html:
+            return {'errMsg': '国家税务局返回不一致'}
         data = {'goods': [], 'errMsg': 'success!'}
         soup = BeautifulSoup(html, 'lxml')
         idH1 = soup.select_one('h1')['id']
