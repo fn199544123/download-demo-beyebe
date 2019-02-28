@@ -126,8 +126,9 @@ class zhongDengImpl(LoginDriverImp):
             """
             print("按金融融资方查询")
             try:
-                driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
-                    time.time())))
+                driver.get(
+                    "https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
+                        time.time())))
             except TimeoutException:
                 print("driver超时异常,忽略并尝试提取内容")
             # 查询校验码识别
@@ -160,7 +161,10 @@ class zhongDengImpl(LoginDriverImp):
                                 traceback.print_exc()
                 # 输入内容
                 driver.find_element_by_id('validateCode').send_keys(imgCode)
-                driver.find_element_by_id('query').click()
+                try:
+                    driver.find_element_by_id('query').click()
+                except:
+                    pass
                 if '查看应收账款质押和转让登记' in driver.page_source:
                     print("【查看应收账款质押和转让登记】进入成功")
                     break
