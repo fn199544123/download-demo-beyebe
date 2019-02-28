@@ -119,19 +119,20 @@ class zhongDengImpl(LoginDriverImp):
     def _deal(self, input):
         companyName = input['companyName']
         driver = self.driver
-        # 按资金融入方名称查询
-        """
-        资金融入方
-        """
-        print("按金融融资方查询")
-        try:
-            driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
-                time.time())))
-        except TimeoutException:
-            print("driver超时异常,忽略并尝试提取内容")
-        # 查询校验码识别
-        self._state = "[中登网登记]正在查询的公司是:{},正在验证码查询阶段,进度1/4".format(input['companyName'])
         while True:
+            # 按资金融入方名称查询
+            """
+            资金融入方
+            """
+            print("按金融融资方查询")
+            try:
+                driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init&timeset={}".format(str(
+                    time.time())))
+            except TimeoutException:
+                print("driver超时异常,忽略并尝试提取内容")
+            # 查询校验码识别
+            self._state = "[中登网登记]正在查询的公司是:{},正在验证码查询阶段,进度1/4".format(input['companyName'])
+
             try:
                 driver.find_element_by_id('name').clear()
                 driver.find_element_by_id('name').send_keys(companyName)
