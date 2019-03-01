@@ -14,7 +14,7 @@ import sys
 
 import selenium
 from PIL import Image
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, UnexpectedAlertPresentException
 from selenium.webdriver import ActionChains
 
 from logging_utils.cJsonEncoder import CJsonEncoder
@@ -176,6 +176,14 @@ class zhongDengImpl(LoginDriverImp):
                 else:
                     print("30秒内中登网没返回该公司信息")
                     return {'state': 700, 'errMsg': 'ERROR中登网30秒内查询不到该公司信息'}
+            except UnexpectedAlertPresentException:
+                # 弹窗BUG
+                al = self.driver.switch_to_alert()
+                msg = al.text
+                returnObj = {'state': 580, 'errMsg': 'ERROR浏览器意外弹窗:' + msg}
+                al.accept()
+                return returnObj
+
             except selenium.common.exceptions.NoSuchElementException:
                 traceback.print_exc()
                 print("【中登网】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")

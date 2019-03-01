@@ -12,7 +12,7 @@ import uuid
 import requests
 import sys
 from PIL import Image
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, UnexpectedAlertPresentException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
 
@@ -130,35 +130,35 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 return {'state': 619,
                         'errMsg': "缺少必备参数{},其中timelimit、title、addDebtorList、maincontractno、maincontractcurrency、maincontractsum、description为必须存在的参数"}
         while True:
-            driver = self.driver
-            print("初始登记")
             try:
-                driver.get("https://www.zhongdengwang.org.cn/rs/bigTypechoose.do?timeset={}".format(str(
-                    time.time())))
-            except TimeoutException:
-                print("driver超时异常,忽略并尝试提取内容")
-            # 查询校验码识别
-            self._state = "[中登网登记]正在进行登记,正在填写基本信息阶段,进度1/4"
-            try:
-                time.sleep(1)
+                driver = self.driver
+                print("初始登记")
+                try:
+                    driver.get("https://www.zhongdengwang.org.cn/rs/bigTypechoose.do?timeset={}".format(str(
+                        time.time())))
+                except TimeoutException:
+                    print("driver超时异常,忽略并尝试提取内容")
+                # 查询校验码识别
+                self._state = "[中登网登记]正在进行登记,正在填写基本信息阶段,进度1/4"
+                time.sleep(0.5)
                 driver.find_element_by_css_selector("#A00200").click()
-                time.sleep(1)
+                time.sleep(0.5)
                 driver.find_element_by_css_selector(
                     "body > div.main-table.hui > table:nth-child(4) > tbody > tr:nth-child(1) > td > input[type=\"radio\"]:nth-child(1)").click()
                 driver.find_element_by_css_selector("#next").click()
-                time.sleep(1)
+                time.sleep(0.5)
                 # 输入基本信息
                 self.__findSelectByText(driver.find_element_by_css_selector('#timelimit'), input['timelimit'])
                 driver.find_element_by_css_selector('#title').send_keys(input['title'])
-                time.sleep(1)
+                time.sleep(0.5)
                 driver.find_element_by_css_selector(
                     "body > div.main-table.hui > form > div > input:nth-child(1)").click()
-                time.sleep(1)
+                time.sleep(0.5)
                 # 增加出让人 #addDebtor
                 for item in input['addDebtorList']:
                     # 点击增加出让人
                     driver.find_element_by_css_selector("#addDebtor").click()
-                    time.sleep(1)
+                    time.sleep(0.5)
                     driver.refresh()
 
                     for key in item:
@@ -171,17 +171,17 @@ class zhongDengDengJiImpl(LoginDriverImp):
                             self.__findSelectByText(tagNow, item[key])
                         # 出让人类型企业 #debtorType
                         time.sleep(0.35)
-                    time.sleep(1)  # 等待渲染内容
+                    time.sleep(0.5)  # 等待渲染内容
                     driver.find_element_by_css_selector("#saveButton").click()
-                    time.sleep(1)  # 等待渲染内容
+                    time.sleep(0.5)  # 等待渲染内容
                 # 受让人信息
                 driver.find_element_by_css_selector("#secondName").click()
-                time.sleep(1)  # 等待渲染内容
+                time.sleep(0.5)  # 等待渲染内容
                 driver.find_element_by_css_selector("#addDebtorAuto").click()
-                time.sleep(1)  # 等待渲染内容
+                time.sleep(0.5)  # 等待渲染内容
                 # 转让财产信息
                 driver.find_element_by_css_selector("#typeName").click()
-                time.sleep(1)  # 等待渲染内容
+                time.sleep(0.5)  # 等待渲染内容
                 driver.find_element_by_css_selector('#maincontractno').send_keys(input['maincontractno'])
                 self.__findSelectByText(driver.find_element_by_css_selector('#maincontractcurrency'),
                                         input['maincontractcurrency'])
@@ -195,10 +195,17 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 driver.find_element_by_id("previewbutton").click()
                 ossUrl = self.get_full_screen_oss()
                 print("预览图已截取", ossUrl)
-                return {'state': 200, 'ossUrl': ossUrl}
+
+            except UnexpectedAlertPresentException:
+                # 弹窗BUG
+                al = self.driver.switch_to_alert()
+                msg = al.text
+                returnObj = {'state': 580, 'errMsg': 'ERROR浏览器意外弹窗:' + msg}
+                al.accept()
+                return returnObj
             except:
                 if 'ERROR' in traceback.format_exc():
-                    return {'state': 599, 'errMsg': traceback.format_exc()}
+                    return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
                 traceback.print_exc()
                 print("操作出现意外错误，重新登陆并重试")
 
@@ -213,6 +220,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
             if option.text == textStr:
                 Select(selectTag).select_by_index(i)
                 return
+
         raise Exception("ERROR您的输入有问题,这个输入没有在下拉栏里找到:" + textStr)
 
     def download_pdf(self, regno, companyName, ansList):
@@ -275,7 +283,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 return
         except:
             traceback.print_exc()
-            time.sleep(1)
+            time.sleep(0.5)
 
     # def duplicate(self, input):
 
@@ -297,6 +305,10 @@ class zhongDengDengJiImpl(LoginDriverImp):
     """
     获取验证码结果
     """
+
+    # 登记不缓存
+    def duplicate(self, input):
+        return False
 
     def getCodeString(self, imgTag):
         # 多地址容错
