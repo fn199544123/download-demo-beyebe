@@ -52,13 +52,9 @@ class zhongDengImpl(LoginDriverImp):
     def getDriverPort(self):
         return 5441
 
-
-
-
-
     def _login(self):
         if self.data is None:
-            #如果没传账号,就是比一比的测试账号
+            # 如果没传账号,就是比一比的测试账号
             user = "beyebe"
             password = "asdf1234"
         else:

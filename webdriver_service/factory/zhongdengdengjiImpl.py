@@ -300,9 +300,9 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
     def getCodeString(self, imgTag):
         # 多地址容错
-        url_l = "http://localhost:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
+        # url_l = "http://localhost:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
         url = "http://39.108.188.34:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
-        urlList = [url, url_l]
+        urlList = [url]
         ansList = []
 
         while True:
