@@ -319,6 +319,7 @@ class fapiaoImpl(WebDriverImp):
         :param input:
         :return:
         """
+
         dictDup = {'fpdm': input['fpdm'], 'fphm': input['fphm'], 'kprq': input['kprq'], 'kjje': input['kjje']}
         item = self.db['auto_' + type(self).__name__].find_one(dictDup)
         if item is not None:
