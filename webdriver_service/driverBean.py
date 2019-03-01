@@ -23,8 +23,10 @@ from oss_aliyun.updateFileBeyebe import fileUpdate
 WebDriver基类
 所有的Driver对象继承该对象完成任务
 """
-
-redisPool14 = redis.ConnectionPool(host="121.9.245.183", password="BybAZ!@12", port=6379, db=14)
+try:
+    redisPool14 = redis.ConnectionPool(host="121.9.245.183", password="BybAZ!@12", port=6379, db=14)
+except:
+    print("WARNING REDIS缓存服务器失效,不使用缓存进行处理")
 
 
 class WebDriverImp():
@@ -150,26 +152,29 @@ class WebDriverImp():
         # 随后如果成功,还要覆盖缓存一个结果。
         # 这个结果默认在deal流程里是关闭的
         # 如要打开,在duplicate方法中操作实例对象的
-        self.REDIS_BUFFER = True
-        inputMD5 = self.__getInputMD5(input)
-        r = redis.Redis(connection_pool=redisPool14)
-        bufferItem = r.get(inputMD5)
-        if bufferItem is not None:
-            print("已存在缓存,进一步确定缓存形式")
-            if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
-                raise Exception("数据正在处理!,请稍后再试(相同任务3秒内只能请求一次)" + bufferItem)
+        try:
+            self.REDIS_BUFFER = True
+            inputMD5 = self.__getInputMD5(input)
+            r = redis.Redis(connection_pool=redisPool14)
+            bufferItem = r.get(inputMD5)
+            if bufferItem is not None:
+                print("已存在缓存,进一步确定缓存形式")
+                if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
+                    raise Exception("数据正在处理!,请稍后再试(相同任务3秒内只能请求一次)" + bufferItem)
+                else:
+                    print("走缓存返回结果")
+                    bufferItemStr = bufferItem.decode()
+                    return json.loads(bufferItemStr)
             else:
-                print("走缓存返回结果")
-                bufferItemStr = bufferItem.decode()
-                return json.loads(bufferItemStr)
-        else:
-            print("不存在缓存,加入一个临时缓存(60秒),并直接运行")
-            pipe = r.pipeline()
-            pipe.set(inputMD5,
-                     "DOING_MISSION!!wait_for_few_time!\n" + str(datetime.datetime.now()))
-            pipe.expire(inputMD5, 3)
-            pipe.execute()
-            return False
+                print("不存在缓存,加入一个临时缓存(60秒),并直接运行")
+                pipe = r.pipeline()
+                pipe.set(inputMD5,
+                         "DOING_MISSION!!wait_for_few_time!\n" + str(datetime.datetime.now()))
+                pipe.expire(inputMD5, 3)
+                pipe.execute()
+                return False
+        except:
+            print("WARNING REDIS缓存服务器失效,不使用缓存进行处理")
 
     # 存储方法
     def save(self, msg):

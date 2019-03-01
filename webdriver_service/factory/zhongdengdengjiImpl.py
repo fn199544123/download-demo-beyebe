@@ -58,7 +58,10 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 try:
                     driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
                 except TimeoutException:
-                    print("driver超时异常,忽略并尝试提取内容")
+                    try:
+                        driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
+                    except TimeoutException:
+                        print("driver超时异常,忽略并尝试提取内容")
                 print("正在输入账号密码")
                 driver.find_element_by_id('userCode').clear()
                 driver.find_element_by_id('userCode').send_keys(user)
@@ -158,8 +161,8 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 for item in input['addDebtorList']:
                     # 点击增加出让人
                     driver.find_element_by_css_selector("#addDebtor").click()
-                    time.sleep(0.5)
-                    driver.refresh()
+                    time.sleep(1)
+                    # driver.refresh()
 
                     for key in item:
                         # 遍历所有的类型
@@ -196,19 +199,28 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 ossUrl = self.get_full_screen_oss()
                 print("预览图已截取", ossUrl)
 
+                returnObj = {'state': 200, 'ossUrl': ossUrl, 'errMsg': '成功'}
+                input.update(returnObj)
+                return input
+
             except UnexpectedAlertPresentException:
                 # 弹窗BUG
                 al = self.driver.switch_to_alert()
                 msg = al.text
                 returnObj = {'state': 580, 'errMsg': 'ERROR浏览器意外弹窗:' + msg}
                 al.accept()
+                if '同名用户已在' in msg:
+                    print("用户被强登，重新登陆抢回控制权")
+                    self._login()
+                    continue
+
                 return returnObj
             except:
                 if 'ERROR' in traceback.format_exc():
                     return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
                 traceback.print_exc()
                 print("操作出现意外错误，重新登陆并重试")
-
+                self.driver.refresh()
                 self._login()
 
     def __findSelectByText(self, selectTag, textStr):

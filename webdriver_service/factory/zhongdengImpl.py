@@ -178,10 +178,15 @@ class zhongDengImpl(LoginDriverImp):
                     return {'state': 700, 'errMsg': 'ERROR中登网30秒内查询不到该公司信息'}
             except UnexpectedAlertPresentException:
                 # 弹窗BUG
+
                 al = self.driver.switch_to_alert()
                 msg = al.text
                 returnObj = {'state': 580, 'errMsg': 'ERROR浏览器意外弹窗:' + msg}
                 al.accept()
+                if '同名用户已在别处登陆' in msg:
+                    print("用户被强登，重新登陆抢回控制权")
+                    self._login()
+                    continue
                 return returnObj
 
             except selenium.common.exceptions.NoSuchElementException:
@@ -237,7 +242,11 @@ class zhongDengImpl(LoginDriverImp):
                 self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(
                     input['companyName'],
                     len(lstRegno), i)
-                dbItem = self.db[tableName].find_one({'regno': regno})
+                try:
+                    dbItem = self.db[tableName].find_one({'regno': regno})
+                except:
+                    print("WARNING MONGODB链接异常,缓存功能失效")
+                    dbItem = None
                 if dbItem is not None:
                     print(dbItem['regno'], "已经下载过了,走缓存")
                     # 已经下载过了,使用下载结果
