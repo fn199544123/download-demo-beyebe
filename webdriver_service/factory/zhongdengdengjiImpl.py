@@ -206,7 +206,8 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
     def __findSelectByText(self, selectTag, textStr):
         if textStr == None or textStr == "":
-            return
+            raise Exception("ERROR下拉框的输入不能为空:" + textStr)
+
         print("正在填写选择栏,textStr={}".format(textStr))
         for i, option in enumerate(selectTag.find_elements_by_css_selector("option")):
             if option.text == textStr:

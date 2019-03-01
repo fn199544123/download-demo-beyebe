@@ -100,6 +100,17 @@ class fapiaoImpl(WebDriverImp):
         return 5440
 
     def _deal(self, input):
+        keyMustExist = [
+            "fpdm",
+            "fphm",
+            "kprq",
+            "kpje"
+        ]
+        for key in keyMustExist:
+            if key not in input:
+                return {'state': 619,
+                        'errMsg': "缺少必备参数{},fpdm、fphm、kprq、kpje、（校验码如果有必须填jym）为必须存在的参数"}
+
         driver = self.driver
         while True:
             try:
