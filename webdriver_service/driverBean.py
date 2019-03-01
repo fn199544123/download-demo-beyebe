@@ -45,9 +45,9 @@ class WebDriverImp():
     MONGODB_PORT = 27017
     MONGODB_DBNAME = 'hedgehog_spider'
 
-    def __init__(self, MyPool, driver=None, headless=False):
+    def __init__(self, MyPool, driver=None, headless=False, data=None):
         self.myPool = MyPool
-
+        self.data = data
         options = webdriver.ChromeOptions()
         options.add_argument("--kiosk")
         options.add_argument("--start-maximized")

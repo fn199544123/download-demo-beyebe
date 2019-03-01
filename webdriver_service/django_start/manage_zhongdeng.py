@@ -2,6 +2,7 @@
 import sys
 import os
 import platform
+
 sys.path.append("../../")  # 解决潜在的路径依赖问题
 sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 
@@ -19,10 +20,12 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 if __name__ == '__main__':
     # 测试使用
     # WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+    onlineAccount = [{'account': 'ytbl007', 'keyword': 'ytbl007aDmin'}]
+    testAccount = [{'account': 'ytbl008', 'keyword': 'ytbl008aDmin'}, {'account': 'ytbl009', 'keyword': 'ytbl009aDmin'}]
     if 'inux' in platform.system():
-        WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
+        WebDriverPool(dBean=zhongDengImpl, num=onlineAccount, headless=True)
     else:
-        WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+        WebDriverPool(dBean=zhongDengImpl, num=testAccount, headless=False)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:

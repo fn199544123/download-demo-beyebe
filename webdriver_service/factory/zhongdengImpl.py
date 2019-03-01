@@ -52,12 +52,18 @@ class zhongDengImpl(LoginDriverImp):
     def getDriverPort(self):
         return 5441
 
-    def __init__(self, MyPool, driver=None, headless=False):
-        super().__init__(MyPool, driver, headless)
+
+
+
 
     def _login(self):
-        user = "beyebe"
-        password = "asdf1234"
+        if self.data is None:
+            #如果没传账号,就是比一比的测试账号
+            user = "beyebe"
+            password = "asdf1234"
+        else:
+            user = self.data['account']
+            password = self.data['keyword']
         driver = self.driver
         """
         登录模块

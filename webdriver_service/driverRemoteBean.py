@@ -16,7 +16,7 @@ from webdriver_service.driverBean import WebDriverImp
 
 
 class WebDriverRemoteImp(WebDriverImp):
-    def __init__(self, MyPool, driver=None, headless=False):
+    def __init__(self, MyPool, driver=None, headless=False, data=None):
         self.myPool = MyPool
         mylog.info("正在尝试创建一个Driver实例")
         while True:

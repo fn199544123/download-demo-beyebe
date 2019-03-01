@@ -38,10 +38,16 @@ class WebDriverPool():
         if not cls.__instance:
             print("正在进行单例浏览器实例化")
             cls.__instance = super().__new__(cls)
-            for i in range(num):
-                beanNow = dBean(cls.__instance, headless=headless)
-                cls.driverQueue.put(beanNow)
-                cls.__driverList.append(beanNow)
+            if type(num) == type([]):
+                for item in num:
+                    beanNow = dBean(cls.__instance, headless=headless,data=item)
+                    cls.driverQueue.put(beanNow)
+                    cls.__driverList.append(beanNow)
+            else:
+                for i in range(num):
+                    beanNow = dBean(cls.__instance, headless=headless)
+                    cls.driverQueue.put(beanNow)
+                    cls.__driverList.append(beanNow)
         else:
             print("已经实例化")
             pass
