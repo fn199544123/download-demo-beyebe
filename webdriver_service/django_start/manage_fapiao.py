@@ -2,6 +2,7 @@
 import sys
 import os
 import platform
+
 sys.path.append("../../")  # 解决潜在的路径依赖问题
 sys.path.append("/root/scrapy-demo-beyebe")  # 解决潜在的路径依赖问题
 

@@ -43,9 +43,9 @@ class fapiaoImpl(WebDriverImp):
     # class fapiaoImpl(WebDriverRemoteImp):
     def _parseInvoice(self, html):
         if '查无此票' in html:
-            return {'errMsg': '国家税务局返回查无此票'}
+            return {'errMsg': 'ERROR国家税务局返回查无此票'}
         if '不一致' in html:
-            return {'errMsg': '国家税务局返回不一致'}
+            return {'errMsg': 'ERROR国家税务局返回不一致'}
         data = {'goods': [], 'errMsg': 'success!'}
         soup = BeautifulSoup(html, 'lxml')
         idH1 = soup.select_one('h1')['id']
