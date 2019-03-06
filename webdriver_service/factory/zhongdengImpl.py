@@ -336,7 +336,7 @@ class zhongDengImpl(LoginDriverImp):
                         # 上传成功后删除oss对象
                         os.remove(filePath)
                         dictNow['regno'] = regno
-                        dictNow['pdfname'] = name
+                        dictNow['pdfName'] = name
                         dictNow['companyName'] = companyName
                         dictNow['ossPath'] = ossPath
                         dictNow['insertTime'] = datetime.datetime.now()
@@ -350,7 +350,7 @@ class zhongDengImpl(LoginDriverImp):
                 if dictNow == {}:
                     print("10秒都没有下载成功,下载异常")
                     dictNow['regno'] = regno
-                    dictNow['pdfname'] = name
+                    dictNow['pdfName'] = name
                     dictNow['companyName'] = companyName
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
