@@ -4,6 +4,7 @@ import datetime
 import json
 import os
 import random
+import re
 
 import time
 import traceback
@@ -34,7 +35,7 @@ top_Moren = 0
 # 有远程遥控Driver和本地Driver两种模拟形式
 # class fapiaoImpl(WebDriverImp):
 
-tableName = "file_zhongdeng"
+tableName = "file_zhongdengdengji"
 
 
 class zhongDengDengJiImpl(LoginDriverImp):
@@ -115,7 +116,6 @@ class zhongDengDengJiImpl(LoginDriverImp):
     def _deal(self, input):
 
         # 下面的可能有多个【出让人信息】
-
         # 按资金融入方名称查询
         """
         资金融入方
@@ -203,7 +203,9 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
                 # 点击这里上传转让附件
                 if 'ossPathList' in input:
-                    for ossPath in input['ossPathList']:
+                    for fileNew in input['ossPathList']:
+                        fileName = fileNew.get('filename')
+                        ossPath = fileNew['path']
                         if not os.path.exists('./file'):
                             os.makedirs('./file')
                         fileName = "./file/" + ossPath.split('/')[-1][-30:]
@@ -247,6 +249,50 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
                 returnObj = {'state': 200, 'ossUrl': ossUrl, 'errMsg': '成功'}
                 input.update(returnObj)
+
+                if input.get("isUpload", 0) == 1:
+                    try:
+                        time.sleep(2)
+                        print("[WARNING]注意！！这是一个登记操作")
+                        self.driver.find_element_by_id("initsubmitbutton").click()
+                        print("已点击登记按钮")
+                        for i in range(100):
+                            if '此次登记费用' in driver.page_source:
+                                break
+                            time.sleep(0.1)
+                        else:
+                            raise Exception("ERROR，未出现字段此次登记费用")
+                        # initSubmitButton 确定
+                        self.driver.find_element_by_id("initSubmitButton").click()
+                        for i in range(100):
+                            if '登记成功' in driver.page_source and 'images/success' in driver.page_source:
+                                break
+                            time.sleep(0.1)
+                        else:
+                            raise Exception("ERROR，未出现字段(登记成功)")
+                        print("已成功登记,进行截图")
+                        ossUrlDengJi = self.get_full_screen_oss()
+                        returnObj['ossUrlDengJi'] = ossUrlDengJi
+                        print("正在获取成功附件")
+                        # 获取type和id,组装URL
+                        # href="javascript:filedownload('00','05617033000668301597')
+                        matchObj = re.search(r'href=\"javascript:filedownload\(\'(.*)\',\'(.*?)\'\)', driver.page_source, re.M | re.I)
+                        if matchObj:
+                            textStr = matchObj.group(0)
+                            type = matchObj.group(1)
+                            fileId = matchObj.group(2)
+                            print("查询->type", type, "fileId", fileId, "正文", textStr)
+                        else:
+                            raise Exception("没有正则匹配到文件字符串")
+                        returnObj['fileNew'] = self.download_pdf(fileId)
+                        returnObj['state'] = 200
+                        returnObj['errMsg'] = "成功完成登记"
+                        return returnObj
+                    except:
+                        print("ERROR登记流程出错")
+                        returnError = {'state': 1099, 'ossUrl': ossUrl, 'errMsg': '未知登记错误异常,请排查登记错误'}
+                        returnObj.update(returnError)
+                        return returnObj
                 return input
 
             except UnexpectedAlertPresentException:
@@ -284,67 +330,63 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
         raise Exception("ERROR您的输入有问题,这个输入没有在下拉栏里找到:" + textStr)
 
-    def download_pdf(self, regno, companyName, ansList):
-        url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
+    def download_pdf(self, fileId):
+        urlBase = "https://www.zhongdengwang.org.cn/rs/download.do?method=getDownload&type={}&id={}"
+        # fileId = '05617033000668301597'
         dictNow = {}
         driver = self.driver
         try:
             try:
-                driver.get(url.format(regno))
+                driver.get(urlBase.format('00', fileId))
             except TimeoutException:
                 print("driver超时异常,忽略并尝试提取内容")
-            for tt in range(100):
-                if '下载' in driver.page_source:
+            for tt in range(300):
+                if '初始登记' in driver.page_source:
                     break
                 time.sleep(0.1)
 
-            for item in driver.find_elements_by_css_selector("a"):
+            for item in driver.find_elements_by_css_selector("span"):
 
                 # 这里只下载第一个,所以第一个就Break
                 name = item.text
                 print("获取文件名", name)
                 filePath = "./webDriver_download/" + name
-                print(name, "尚未缓存,走下载上传路线")
+                print(name, "开始下载")
                 # 下载
-                # item.click()
-                # href="javascript:download('02973013000359528048');"
-                """
-                使用docker下载文件怎么都不好使，妈蛋！！！
-                """
-                driver.execute_script("download('{}');".format(name.replace('.pdf', '')))
+                driver.get(urlBase.format('01', fileId))
                 for i in range(10):
                     if os.path.exists(filePath):
                         time.sleep(0.2)
                         ossPath = fileUpdate(filePath)
                         # 上传成功后删除oss对象
                         os.remove(filePath)
-                        dictNow['regno'] = regno
+                        dictNow['fileId'] = fileId
                         dictNow['name'] = name
-                        dictNow['companyName'] = companyName
                         dictNow['ossPath'] = ossPath
                         dictNow['insertTime'] = datetime.datetime.now()
-                        self.db[tableName].save(dictNow)
+                        try:
+                            self.db[tableName].save(dictNow)
+                        except:
+                            print("WARNING数据库链接异常,将会导致缓存失败")
+                            traceback.print_exc()
                         dictNow['_id'] = str(dictNow['_id'])
-                        ansList.append(dictNow)
-                        return
+                        return dictNow
                     else:
                         print("文件还在浏览器下载中,请稍后！")
-                        time.sleep(0.8)  # 100次0.1秒，共10秒
+                        time.sleep(0.6)  # 100次0.1秒，共10秒
                 if dictNow == {}:
                     print("10秒都没有下载成功,下载异常")
-                    dictNow['regno'] = regno
+                    dictNow['fileId'] = fileId
                     dictNow['name'] = name
-                    dictNow['companyName'] = companyName
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
                     dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"
-                    ansList.append(dictNow)
-                    # 只采集第一个,其他的不采集,于是break
-                    return
-                return
+                    # 只采集第一个,其他的不采集,于是return
+                    return dictNow
+                return dictNow
         except:
             traceback.print_exc()
-            time.sleep(0.5)
+            return None
 
     # def duplicate(self, input):
 
