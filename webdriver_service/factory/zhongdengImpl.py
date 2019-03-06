@@ -120,6 +120,12 @@ class zhongDengImpl(LoginDriverImp):
 
     def _deal(self, input):
         companyName = input['companyName']
+        afterDate = input.get('afterDate', '19000101')
+        try:
+            afterDate = datetime.datetime.strptime(afterDate, "%Y%m%d")
+        except:
+            return {'state': 622, 'errMsg': 'ERROR您的日期格式输入错误,请从新输入'}
+
         driver = self.driver
         while True:
             # 按资金融入方名称查询
@@ -137,6 +143,7 @@ class zhongDengImpl(LoginDriverImp):
             self._state = "[中登网登记]正在查询的公司是:{},正在验证码查询阶段,进度1/4".format(input['companyName'])
 
             try:
+
                 driver.find_element_by_id('name').clear()
                 driver.find_element_by_id('name').send_keys(companyName)
                 # 找到对应tr，从而定位验证码图片
@@ -172,6 +179,9 @@ class zhongDengImpl(LoginDriverImp):
                     if '查看应收账款质押和转让登记' in driver.page_source:
                         print("【查看应收账款质押和转让登记】进入成功")
                         break
+                    if '校验码错误' in driver.page_source:
+                        print("校验码错误,重新尝试")
+                        raise Exception("ERROR校验码错误")
                     time.sleep(0.1)
                 else:
                     print("30秒内中登网没返回该公司信息")
@@ -199,9 +209,11 @@ class zhongDengImpl(LoginDriverImp):
                 continue
             except:
                 traceback.print_exc()
-                print("验证码错误,重试验证码,刷新")
-                driver.refresh()
-                continue
+                if '校验码错误' in traceback.format_exc():
+                    print("校验码错误,重试验证码,刷新")
+                    driver.refresh()
+                    continue
+                return {'state': 599, "errMsg": "ERROR未知错误20054,请联系开发者修改", "err": traceback.format_exc()}
             # 查看应收账款质押和转让登记
             for item in driver.find_elements_by_css_selector('a'):
                 if item.text == '查看应收账款质押和转让登记':
@@ -226,8 +238,24 @@ class zhongDengImpl(LoginDriverImp):
                 numTotal = 1
             for page in range(numTotal):
                 # 添加内容
-                for item in driver.find_elements_by_css_selector("td[name=\"no\"]"):
-                    lstRegno.append(item.text)
+                for i, item in enumerate(driver.find_elements_by_css_selector("tr[class=\'baibiao\']")):
+                    if item.get_attribute("name") == 'noData' or 'pager' == item.get_attribute("name"):
+                        continue
+                    if item.get_attribute("style") is not None and 'display' in item.get_attribute("style"):
+                        continue
+                    itemNow = {}
+                    itemNow['index'] = item.find_elements_by_css_selector('td')[0].text
+                    itemNow['no'] = item.find_elements_by_css_selector('td')[1].text
+                    itemNow['date_start'] = item.find_elements_by_css_selector('td')[2].text.strip()
+
+                    dateNow = datetime.datetime.strptime(itemNow['date_start'], '%Y-%m-%d %H:%M:%S')
+                    if dateNow < afterDate:
+                        continue
+                    itemNow['date_end'] = item.find_elements_by_css_selector('td')[3].text
+                    itemNow['class'] = item.find_elements_by_css_selector('td')[4].text
+                    itemNow['pledgee'] = item.find_elements_by_css_selector('td')[5].text
+                    # "td[name=\"no\"]"
+                    lstRegno.append(itemNow)
                 # 点击下一页
                 self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
                 time.sleep(0.5)
@@ -237,7 +265,8 @@ class zhongDengImpl(LoginDriverImp):
                                                                                          len(lstRegno))
 
             ansList = []
-            for i, regno in enumerate(lstRegno):
+            for i, regnoDict in enumerate(lstRegno):
+                regno = regnoDict['no']
                 # 大量下载极易造成卡死,要进行重试,最次最多重试5次
                 self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(
                     input['companyName'],
@@ -252,6 +281,7 @@ class zhongDengImpl(LoginDriverImp):
                     # 已经下载过了,使用下载结果
                     dictNow = dbItem
                     dictNow['_id'] = str(dictNow['_id'])
+                    dictNow.update(regnoDict)
                     ansList.append(dictNow)
                     continue
 
@@ -421,8 +451,8 @@ class zhongDengImpl(LoginDriverImp):
 
 
 if __name__ == '__main__':
-    pool = WebDriverPool(dBean=zhongDengImpl, num=1, headless=True)
+    pool = WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
     impl = WebDriverPool.getOneDriver(pool)
-    dictNow = impl.deal({'companyName': "上海中建航建筑工业发展有限公司"})
+    dictNow = impl.deal({'companyName': "上海中建航建筑工业发展有限", "afterDate": "20170501"})
     print(json.dumps(dictNow, cls=CJsonEncoder, ensure_ascii=False))
     # impl.deal({'companyName': "深圳银泰保理有限公司"})

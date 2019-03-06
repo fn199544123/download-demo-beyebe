@@ -8,6 +8,7 @@ import random
 import time
 import traceback
 import uuid
+from urllib import request
 
 import requests
 import sys
@@ -185,14 +186,57 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 driver.find_element_by_css_selector("#addDebtorAuto").click()
                 time.sleep(0.5)  # 等待渲染内容
                 # 转让财产信息
-                driver.find_element_by_css_selector("#typeName").click()
-                time.sleep(0.5)  # 等待渲染内容
+                """
+                这个地方极容易被卡住，需要特别循环强调,如果卡住点小图标即可恢复
+                """
+                for i in range(10):
+                    driver.find_element_by_css_selector("#typeName").click()
+                    time.sleep(0.1)
+                    driver.find_element_by_css_selector("#typeName > img").click()
+                    time.sleep(0.1)
+                    if '请根据被转让的应收账款的特点进行描述' in driver.page_source:
+                        break
+                else:
+                    return {'state': 619,
+                            'errMsg': "点击*转让财产信息*按钮卡住了，重试10次失败，请重试"}
+                time.sleep(0.3)  # 等待渲染内容
+
+                # 点击这里上传转让附件
+                if 'ossPathList' in input:
+                    for ossPath in input['ossPathList']:
+                        if not os.path.exists('./file'):
+                            os.makedirs('./file')
+                        fileName = "./file/" + ossPath.split('/')[-1][-30:]
+                        request.urlretrieve(ossPath, fileName)
+                        # 拼接绝对路径
+                        localPath = os.path.abspath(fileName)
+                        try:
+                            driver.find_element_by_id("attachinfo").click()
+                            time.sleep(1)
+                            driver.find_element_by_id("file").send_keys(localPath)
+                            time.sleep(0.5)
+                            driver.find_element_by_css_selector(
+                                "#describeUpload > table > tbody > tr:nth-child(3) > td > input[type=\"button\"]:nth-child(1)").click()
+                            al = self.driver.switch_to_alert()
+                            msg = al.text
+                            if '附件上传成功' in msg:
+                                al.accept()
+                                continue
+                            else:
+                                al.accept()
+                                return {'state': 580,
+                                        'errMsg': "上传附件失败请重试,中登网提示信息:" + msg}
+                        finally:
+                            os.remove(localPath)
+                # 转让财产价值
                 driver.find_element_by_css_selector('#maincontractno').send_keys(input['maincontractno'])
+                time.sleep(0.5)  # 等待渲染内容
                 self.__findSelectByText(driver.find_element_by_css_selector('#maincontractcurrency'),
                                         input['maincontractcurrency'])
-
+                time.sleep(0.5)  # 等待渲染内容
                 driver.find_element_by_css_selector('#maincontractsum').send_keys(input['maincontractsum'])
                 driver.find_element_by_css_selector('#description').send_keys(input['description'])
+                # 保存
                 driver.find_element_by_css_selector(
                     "body > div.main-table.hui > table > tbody > tr > td > table:nth-child(3) > tbody > tr > td > input").click()
                 time.sleep(0.5)
