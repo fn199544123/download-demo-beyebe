@@ -11,6 +11,7 @@ import pymongo
 import time
 
 import redis
+import sys
 from PIL import Image
 from selenium import webdriver
 
@@ -181,6 +182,9 @@ class WebDriverImp():
     def save(self, msg):
         self.db['auto_' + type(self).__name__].insert_one(msg)
 
+    left_Moren = 10
+    top_Moren = 300
+
     # 获取浏览器标签截图（返回本地地址）
     def get_image_screen(self, imgTag):  # 对验证码所在位置进行定位，然后截取验证码图片
         global left_Moren, top_Moren
@@ -188,15 +192,21 @@ class WebDriverImp():
         while True:
             loc = imgTag.location
             size = imgTag.size
+            if 'darwin' in sys.platform:
+                print("如果是MAC系统,分辨率位置翻倍")
+                loc['x'] = loc['x'] * 2
+                loc['y'] = loc['y'] * 2
+                size['width'] = size['width'] * 2
+                size['height'] = size['height'] * 2
             # 图片和标签大小不一致的,不能通过size获取图片,截图会偏移
             for i in range(100):
                 if loc['x'] == 0:
-                    time.sleep(0.1)
+                    time.sleep(0.01)
                     continue
                 else:
-                    left_Moren = loc['x']
-                    top_Moren = loc['y']
-                    print("已对验证码图片位置做死定位,从而降低定位不到时候的命中率")
+                    # left_Moren = loc['x']
+                    # top_Moren = loc['y']
+                    # print("已对验证码图片位置做死定位,从而降低定位不到时候的命中率")
                     break
             else:
                 if left_Moren == 0:
