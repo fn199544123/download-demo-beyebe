@@ -117,7 +117,7 @@ class WebDriverImp():
                 inputMD5 = self.__getInputMD5(input)
                 input.update(self._deal(input))
                 if 'ERROR' not in str(input) and 'Traceback' not in str(input):
-                    print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储')
+                    print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储。（存储只是记录,不一定走缓存,不用担心）')
                     # MONGO缓存
                     self.save(input)
                     # REDIS缓存
