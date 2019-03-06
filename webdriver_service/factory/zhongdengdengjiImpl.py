@@ -219,8 +219,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 return returnObj
             except selenium.common.exceptions.ElementNotVisibleException:
                 print("操作错误，字段不存在")
-                if 'ERROR' in traceback.format_exc():
-                    return {'state': 521, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key), 'err': traceback.format_exc()}
+                return {'state': 521, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key), 'err': traceback.format_exc()}
             except:
                 if 'ERROR' in traceback.format_exc():
                     return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
