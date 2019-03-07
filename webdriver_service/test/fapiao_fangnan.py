@@ -3,7 +3,7 @@
 import requests
 import json
 
-# url = "http://39.108.188.34:9090/spider/zhongdengdengji.go"
+# url = "http://39.108.188.34:9090/spider/fapiaoList.go"
 url = "http://localhost:9088/spider/fapiaoList.go"
 
 data = """

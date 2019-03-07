@@ -16,7 +16,8 @@ import sys
 
 import selenium
 from PIL import Image
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, UnexpectedAlertPresentException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, UnexpectedAlertPresentException, \
+    ElementNotVisibleException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
 
@@ -111,7 +112,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
             except:
                 traceback.print_exc()
                 print("本次登录失败,正在尝试重试!")
-                driver.refresh()
+                self.restartDriver()
 
     def _deal(self, input):
 
@@ -313,13 +314,18 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     continue
 
                 return returnObj
+
+            except ElementNotVisibleException:
+                print("可能输入了非法字符或者不符合中登网要求的字段,请检查后再试")
+                return {'state': 619, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
+
             except selenium.common.exceptions.ElementNotVisibleException:
                 print("操作错误，字段不存在")
                 return {'state': 521, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key), 'err': traceback.format_exc()}
             except:
                 traceback.print_exc()
                 print("操作出现意外错误，重新登陆并重试")
-                self.driver.refresh()
+                self.restartDriver()
                 self._login()
                 return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
 

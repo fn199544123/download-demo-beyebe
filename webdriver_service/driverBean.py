@@ -203,12 +203,12 @@ class WebDriverImp():
         while True:
             loc = imgTag.location
             size = imgTag.size
-            if 'darwin' in sys.platform:
-                print("如果是MAC系统,分辨率位置翻倍")
-                loc['x'] = loc['x'] * 2
-                loc['y'] = loc['y'] * 2
-                size['width'] = size['width'] * 2
-                size['height'] = size['height'] * 2
+            # if 'darwin' in sys.platform:
+            #     print("如果是MAC系统,分辨率位置翻倍")
+            #     loc['x'] = loc['x'] * 2
+            #     loc['y'] = loc['y'] * 2
+            #     size['width'] = size['width'] * 2
+            #     size['height'] = size['height'] * 2
             # 图片和标签大小不一致的,不能通过size获取图片,截图会偏移
             for i in range(100):
                 if loc['x'] == 0:

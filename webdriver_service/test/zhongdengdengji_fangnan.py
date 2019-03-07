@@ -3,8 +3,8 @@
 import requests
 import json
 
-url = "http://39.108.188.34:9090/spider/zhongdengdengji.go"
-# url = "http://localhost:9090/spider/zhongdengdengji.go"
+# url = "http://39.108.188.34:9090/spider/zhongdengdengji.go"
+url = "http://localhost:9090/spider/zhongdengdengji.go"
 
 input = {
     "timelimit": "1年",
@@ -18,7 +18,7 @@ input = {
             # 金融机构
             "debtorType": "企业",
             "debtorName": "测试供应商有限公司",
-            "financeCode": "123456000001111111",
+            "financeCode": "！@&#*……#！*",
             "businessCode": "",
             "lei": "",
             "responsiblePerson": "测试法人1",
