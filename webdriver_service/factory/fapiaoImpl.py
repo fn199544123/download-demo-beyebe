@@ -105,8 +105,8 @@ class fapiaoImpl(WebDriverImp):
             input['fpdm'] = input['invoiceCode']
         if 'invoiceNo' in input:
             input['fphm'] = input['invoiceNo']
-        if '20196123' in input:
-            input['kprq'] = input['20196123']
+        if 'date' in input:
+            input['kprq'] = input['date']
         if 'amount' in input:
             input['kjje'] = input['amount']
         if 'checkCode' in input:
