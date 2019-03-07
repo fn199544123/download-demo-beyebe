@@ -21,6 +21,8 @@ class LoginDriverImp(WebDriverImp):
         pass
 
     def restartDriver(self):
+        self.driver.close()
         self.driver.quit()
+        self.driver = None
         self.initDriver(self.driver, self.headless)
         self._login()

@@ -62,11 +62,8 @@ class zhongDengDengJiImpl(LoginDriverImp):
             try:
                 try:
                     driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
-                except TimeoutException:
-                    try:
-                        driver.get('https://www.zhongdengwang.org.cn/rs/main.jsp')
-                    except TimeoutException:
-                        print("driver超时异常,忽略并尝试提取内容")
+                except Exception:
+                    print("driver请求异常,忽略并尝试提取内容")
                 print("正在输入账号密码")
                 driver.find_element_by_id('userCode').clear()
                 driver.find_element_by_id('userCode').send_keys(user)
@@ -316,8 +313,13 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 return returnObj
 
             except ElementNotVisibleException:
-                print("可能输入了非法字符或者不符合中登网要求的字段,请检查后再试")
-                return {'state': 619, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
+                print("可能输入了非法字符或者不存在的key,请检查后再试")
+                return {'state': 521, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
+
+            except NoSuchElementException:
+                print("可能输入了不符合中登网要求的字段,无法进行提交操作。")
+                return {'state': 619, 'errMsg': '可能输入了不符合中登网要求的字段,或者必填字段未填写,无法进行提交操作,请检查后再试',
+                        'err': traceback.format_exc()}
 
             except selenium.common.exceptions.ElementNotVisibleException:
                 print("操作错误，字段不存在")
@@ -327,7 +329,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 print("操作出现意外错误，重新登陆并重试")
                 self.restartDriver()
                 self._login()
-                return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
+                return {'state': 599, 'errMsg': 'ERROR未知错误75896', 'err': traceback.format_exc()}
 
     def __findSelectByText(self, selectTag, textStr):
         if textStr == None or textStr == "":

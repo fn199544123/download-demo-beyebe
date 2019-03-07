@@ -105,8 +105,10 @@ class WebDriverImp():
             self.enable_download_in_headless_chrome(store_path)
 
     def restartDriver(self):
+        self.driver.close()
         self.driver.quit()
-        self.initDriver(self.driver, self.headless)
+        self.driver = None
+        self.initDriver(self.driver,self.headless)
 
     def setPool(self, MyPool):
         self.myPool = MyPool

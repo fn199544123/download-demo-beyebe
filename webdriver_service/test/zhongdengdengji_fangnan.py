@@ -18,9 +18,9 @@ input = {
             # 金融机构
             "debtorType": "企业",
             "debtorName": "测试供应商有限公司",
-            "financeCode": "！@&#*……#！*",
-            "businessCode": "",
-            "lei": "",
+            "orgCode": "9144030068375453XL",
+            "businessCode": "9144030068375453XL",
+            "lei": "#*¥#*（&¥#（*&¥（）",
             "responsiblePerson": "测试法人1",
             "country": "中国",
             "province": "黑龙江省",
