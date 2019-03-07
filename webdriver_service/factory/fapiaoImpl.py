@@ -388,11 +388,11 @@ class fapiaoImpl(WebDriverImp):
                         print("删除验证码")
                 except NoSuchElementException:
                     traceback.print_exc()
-                    print("【发票验真平台】出现定位不到标签的错误，可能是登陆状态丢失，重新进行登陆,并保存截图")
+                    print("【发票验真平台】出现定位不到标签的错误，可能是登陆状态丢失，重新启动浏览器,并保存截图")
                     ossUrl = self.get_full_screen_oss()
-                    print("截图ossURL,并休息3秒", ossUrl)
-                    self.driver.refresh()
-                    time.sleep(3)
+                    print("截图ossURL,并休息2秒", ossUrl)
+                    self.driver.restartDriver()
+                    time.sleep(2)
 
 
                 except:

@@ -47,10 +47,21 @@ class WebDriverImp():
     MONGODB_PASSWORD = '123!@#qaz'
     MONGODB_PORT = 27017
     MONGODB_DBNAME = 'hedgehog_spider'
+    driver = None
+    headless = None
 
     def __init__(self, MyPool, driver=None, headless=False, data=None):
         self.myPool = MyPool
+        self.headless = headless
         self.data = data
+        self.initDriver(driver, headless)
+        # 数据库加载
+
+        self.client = pymongo.MongoClient(host=self.MONGODB_HOST, port=self.MONGODB_PORT)
+        self.db = self.client[self.MONGODB_DBNAME]
+        self.db.authenticate(self.MONGODB_USER, self.MONGODB_PASSWORD)
+
+    def initDriver(self, driver, headless):
         options = webdriver.ChromeOptions()
         options.add_argument("--kiosk")
         options.add_argument("--start-maximized")
@@ -92,11 +103,10 @@ class WebDriverImp():
             self.driver.set_script_timeout(7)
 
             self.enable_download_in_headless_chrome(store_path)
-        # 数据库加载
 
-        self.client = pymongo.MongoClient(host=self.MONGODB_HOST, port=self.MONGODB_PORT)
-        self.db = self.client[self.MONGODB_DBNAME]
-        self.db.authenticate(self.MONGODB_USER, self.MONGODB_PASSWORD)
+    def restartDriver(self):
+        self.driver.quit()
+        self.initDriver(self.driver, self.headless)
 
     def setPool(self, MyPool):
         self.myPool = MyPool
@@ -130,7 +140,7 @@ class WebDriverImp():
                 else:
                     print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
                 print("数据存储成功")
-                input['version'] = 'V1.2'
+                input['version'] = 'V1.3'
                 return input
             elif isDup == True:
                 input.update({'state': 100, 'errMsg': '任务重复并且调度期决定不做任何操作'})
