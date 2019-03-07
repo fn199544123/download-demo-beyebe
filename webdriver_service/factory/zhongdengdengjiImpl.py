@@ -168,15 +168,19 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     # driver.refresh()
 
                     for key in item:
-                        # 遍历所有的类型
-                        tagNow = driver.find_element_by_id(key)
-                        tagName = tagNow.tag_name
-                        if 'input' in tagName:
-                            tagNow.send_keys(item[key])
-                        elif 'select' in tagName:
-                            self.__findSelectByText(tagNow, item[key])
-                        # 出让人类型企业 #debtorType
-                        time.sleep(0.35)
+                        try:
+                            # 遍历所有的类型
+                            tagNow = driver.find_element_by_id(key)
+                            tagName = tagNow.tag_name
+                            if 'input' in tagName:
+                                tagNow.send_keys(item[key])
+                            elif 'select' in tagName:
+                                self.__findSelectByText(tagNow, item[key])
+                            # 出让人类型企业 #debtorType
+                            time.sleep(0.35)
+                        except:
+                            return {'state': 619,
+                                    'errMsg': "点击*转让财产信息*按钮卡住了，重试10次失败，请重试"}
                     time.sleep(0.5)  # 等待渲染内容
                     driver.find_element_by_css_selector("#saveButton").click()
                     time.sleep(0.5)  # 等待渲染内容
@@ -276,7 +280,8 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         print("正在获取成功附件")
                         # 获取type和id,组装URL
                         # href="javascript:filedownload('00','05617033000668301597')
-                        matchObj = re.search(r'href=\"javascript:filedownload\(\'(.*)\',\'(.*?)\'\)', driver.page_source, re.M | re.I)
+                        matchObj = re.search(r'href=\"javascript:filedownload\(\'(.*)\',\'(.*?)\'\)',
+                                             driver.page_source, re.M | re.I)
                         if matchObj:
                             textStr = matchObj.group(0)
                             type = matchObj.group(1)
@@ -311,12 +316,11 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 print("操作错误，字段不存在")
                 return {'state': 521, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key), 'err': traceback.format_exc()}
             except:
-                if 'ERROR' in traceback.format_exc():
-                    return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
                 traceback.print_exc()
                 print("操作出现意外错误，重新登陆并重试")
                 self.driver.refresh()
                 self._login()
+                return {'state': 599, 'errMsg': 'ERROR未知错误', 'err': traceback.format_exc()}
 
     def __findSelectByText(self, selectTag, textStr):
         if textStr == None or textStr == "":
