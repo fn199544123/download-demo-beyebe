@@ -35,9 +35,10 @@ if __name__ == '__main__':
     # 演示时使用下面的代码
     # WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
     if 'inux' in platform.system():
-        WebDriverPool(dBean=fapiaoImpl, num=1, headless=True)
+        WebDriverPool(dBean=fapiaoImpl, num=2, headless=True)
     else:
-        WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
+        WebDriverPool(dBean=fapiaoImpl, num=2, headless=False)
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:
         from django.core.management import execute_from_command_line

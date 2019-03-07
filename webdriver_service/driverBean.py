@@ -118,8 +118,9 @@ class WebDriverImp():
                 input.update(self._deal(input))
                 if 'ERROR' not in str(input) and 'Traceback' not in str(input):
                     print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储。（存储只是记录,不一定走缓存,不用担心）')
+                    print("WARNING mongo老卡，就不缓存了暂时")
                     # MONGO缓存
-                    self.save(input)
+                    # self.save(input)
                     # REDIS缓存
                     # r = redis.Redis(connection_pool=redisPool14)
                     # pipe = r.pipeline()

@@ -179,8 +179,9 @@ class zhongDengDengJiImpl(LoginDriverImp):
                             # 出让人类型企业 #debtorType
                             time.sleep(0.35)
                         except:
-                            return {'state': 619,
-                                    'errMsg': "点击*转让财产信息*按钮卡住了，重试10次失败，请重试"}
+                            return {'state': 623,
+                                    'errMsg': "登记时标签定位输入出现问题,id=" + key,
+                                    "err": traceback.format_exc()}
                     time.sleep(0.5)  # 等待渲染内容
                     driver.find_element_by_css_selector("#saveButton").click()
                     time.sleep(0.5)  # 等待渲染内容

@@ -38,6 +38,7 @@ top_Moren = 0
 
 
 # 有远程遥控Driver和本地Driver两种模拟形式
+# 【2】支持继承批量接口
 class fapiaoImpl(WebDriverImp):
 
     # class fapiaoImpl(WebDriverRemoteImp):
@@ -100,6 +101,16 @@ class fapiaoImpl(WebDriverImp):
         return 5440
 
     def _deal(self, input):
+        if 'invoiceCode' in input:
+            input['fpdm'] = input['invoiceCode']
+        if 'invoiceNo' in input:
+            input['fphm'] = input['invoiceNo']
+        if '20196123' in input:
+            input['kprq'] = input['20196123']
+        if 'amount' in input:
+            input['kjje'] = input['amount']
+        if 'checkCode' in input:
+            input['jym'] = input['checkCode']
         keyMustExist = [
             "fpdm",
             "fphm",

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from webdriver_service.django_start.django_start.view import changeModel
+from webdriver_service.django_start.django_start.view import changeModel, changeModelBatch
 from webdriver_service.django_start.manage_helloworld import hello
 
 urlpatterns = [
@@ -23,4 +23,5 @@ urlpatterns = [
     url(r"fapiao.go", changeModel),
     url(r"zhongdeng.go", changeModel),
     url(r"zhongdengdengji.go", changeModel),
+    url(r"fapiaoList.go", changeModelBatch),
 ]
