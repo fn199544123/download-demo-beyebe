@@ -33,9 +33,12 @@ try:
         "http://byb-pic.oss-cn-shenzhen-internal.aliyuncs.com/beyebe/test_0a98c7d2735c3595ec6593337775e83a.txt",
         timeout=1).text)
     endpoint = endpoint.replace(".aliyuncs.com", "-internal.aliyuncs.com")
+    isAliyunInside = True
     print("[文件系统]可以访问阿里云内网,使用内网endpoint服务器")
 except:
+    isAliyunInside = False
     print("[文件系统]无法访问阿里云内网,使用外网服务器")
+
 URL_BASE = 'http://{bucketName}.oss-cn-shenzhen.aliyuncs.com/'.replace('{bucketName}', bucket_name)
 
 # 确认上面的参数都填写正确了
