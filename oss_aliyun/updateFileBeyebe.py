@@ -29,13 +29,14 @@ endpoint = os.getenv('OSS_TEST_ENDPOINT', item['endpoint'])
 
 # 测试是否可以使用阿里云内网上传
 try:
-    print(requests.get("http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/test_0a98c7d2735c3595ec6593337775e83a.txt",
-                       timeout=2).text)
-    print("可以访问阿里云内网,使用内网服务器")
-    URL_BASE = 'http://{bucketName}.oss-cn-shenzhen-internal.aliyuncs.com/'.replace('{bucketName}', bucket_name)
+    print(requests.get(
+        "http://byb-pic.oss-cn-shenzhen-internal.aliyuncs.com/beyebe/test_0a98c7d2735c3595ec6593337775e83a.txt",
+        timeout=1).text)
+    endpoint = endpoint.replace(".aliyuncs.com", "-internal.aliyuncs.com")
+    print("[文件系统]可以访问阿里云内网,使用内网endpoint服务器")
 except:
-    print("无法访问阿里云内网,使用外网服务器")
-    URL_BASE = 'http://{bucketName}.oss-cn-shenzhen.aliyuncs.com/'.replace('{bucketName}', bucket_name)
+    print("[文件系统]无法访问阿里云内网,使用外网服务器")
+URL_BASE = 'http://{bucketName}.oss-cn-shenzhen.aliyuncs.com/'.replace('{bucketName}', bucket_name)
 
 # 确认上面的参数都填写正确了
 for param in (access_key_id, access_key_secret, bucket_name, endpoint):
