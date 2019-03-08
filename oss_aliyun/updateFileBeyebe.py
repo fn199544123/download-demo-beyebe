@@ -11,8 +11,6 @@ import requests
 # 从内网Mongo获取账号密码
 import sys
 
-from logging_utils.log import mylog
-
 MONGODB_HOST = '58.221.49.26'
 MONGODB_USER = 'developer'
 MONGODB_PASSWORD = '123!@#qaz'
