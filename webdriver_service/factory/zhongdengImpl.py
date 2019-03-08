@@ -226,7 +226,7 @@ class zhongDengImpl(LoginDriverImp):
                 if '下载' in driver.page_source:
                     break
                 if '本次查询共查询到登记0笔' in driver.page_source:
-                    returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'ansList': []}
+                    returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'pdfs': []}
                     return returnObj
                 time.sleep(0.1)
             # 记录所有regno
@@ -264,7 +264,7 @@ class zhongDengImpl(LoginDriverImp):
             self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
                                                                                          len(lstRegno))
 
-            ansList = []
+            pdfs = []
             for i, regnoDict in enumerate(lstRegno):
                 regno = regnoDict['no']
                 # 大量下载极易造成卡死,要进行重试,最次最多重试5次
@@ -282,12 +282,12 @@ class zhongDengImpl(LoginDriverImp):
                     dictNow = dbItem
                     dictNow['_id'] = str(dictNow['_id'])
                     dictNow.update(regnoDict)
-                    ansList.append(dictNow)
+                    pdfs.append(dictNow)
                     continue
 
                 for h in range(5):
                     print(i, regno)
-                    self.download_pdf(regno, companyName, ansList)
+                    self.download_pdf(regno, companyName, pdfs)
                     break
                 else:
                     print("5次重试失败,跳过该页")
@@ -298,10 +298,10 @@ class zhongDengImpl(LoginDriverImp):
                 driver.get("https://www.zhongdengwang.org.cn/rs/conditionquery/byname.do?method=init")
             except TimeoutException:
                 print("driver超时异常,忽略并尝试提取内容")
-            returnObj = {'state': 200, 'errMsg': 'success!', 'regnoList': lstRegno, 'ansList': ansList}
+            returnObj = {'state': 200, 'errMsg': 'success!', 'regnoList': lstRegno, 'pdfs': pdfs}
             return returnObj
 
-    def download_pdf(self, regno, companyName, ansList):
+    def download_pdf(self, regno, companyName, pdfs):
         url = "https://www.zhongdengwang.org.cn/rs/conditionquery/byid.do?method=viewfile&regno={}&type=1"
         dictNow = {}
         driver = self.driver
@@ -342,7 +342,7 @@ class zhongDengImpl(LoginDriverImp):
                         dictNow['insertTime'] = datetime.datetime.now()
                         self.db[tableName].save(dictNow)
                         dictNow['_id'] = str(dictNow['_id'])
-                        ansList.append(dictNow)
+                        pdfs.append(dictNow)
                         return
                     else:
                         print("文件还在浏览器下载中,请稍后！")
@@ -355,7 +355,7 @@ class zhongDengImpl(LoginDriverImp):
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
                     dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"
-                    ansList.append(dictNow)
+                    pdfs.append(dictNow)
                     # 只采集第一个,其他的不采集,于是break
                     return
                 return
@@ -389,7 +389,7 @@ class zhongDengImpl(LoginDriverImp):
 
         url = "http://39.108.188.34:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
         urlList = [url]
-        ansList = []
+        pdfs = []
         while True:
             # 尝试到成功为止
             for url in urlList:
@@ -408,14 +408,14 @@ class zhongDengImpl(LoginDriverImp):
                             dict_res = json.loads(code)
                             if dict_res.get('state') == 200:
                                 code = dict_res['data']
-                                ansList.append(code)
+                                pdfs.append(code)
                             else:
                                 print("算法返回", dict_res)
                                 print("算法要求更换验证码")
                                 break
                         except:
                             print("验证码接口未返回JSON格式,直接使用返回值")
-                            ansList.append(code)
+                            pdfs.append(code)
                             continue
 
 
@@ -425,9 +425,9 @@ class zhongDengImpl(LoginDriverImp):
                 except:
                     print("WARNING验证码接口请求异常", url)
                     # traceback.print_exc()
-            if len(ansList) > 0:
+            if len(pdfs) > 0:
                 print("至少有一个有正确结果,随机取一个返回")
-                ans = random.sample(ansList, 1)[0]
+                ans = random.sample(pdfs, 1)[0]
                 print("返回", ans)
                 return ans
             # 更换图片再来一次

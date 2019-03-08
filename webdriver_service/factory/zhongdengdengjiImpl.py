@@ -431,7 +431,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
         # url_l = "http://localhost:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
         url = "http://39.108.188.34:9022/middleware/zd_identifyingEnglish/upload.go?filename=zhongdeng"
         urlList = [url]
-        ansList = []
+        pdfs = []
 
         while True:
             # 尝试到成功为止
@@ -451,14 +451,14 @@ class zhongDengDengJiImpl(LoginDriverImp):
                             dict_res = json.loads(code)
                             if dict_res.get('state') == 200:
                                 code = dict_res['data']
-                                ansList.append(code)
+                                pdfs.append(code)
                             else:
                                 print("算法返回", dict_res)
                                 print("算法要求更换验证码")
                                 break
                         except:
                             print("验证码接口未返回JSON格式,直接使用返回值")
-                            ansList.append(code)
+                            pdfs.append(code)
                             continue
 
 
@@ -476,9 +476,9 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 except:
                     print("验证码接口请求异常", url)
                     traceback.print_exc()
-            if len(ansList) > 0:
+            if len(pdfs) > 0:
                 print("至少有一个有正确结果,随机取一个返回")
-                ans = random.sample(ansList, 1)[0]
+                ans = random.sample(pdfs, 1)[0]
                 print("返回", ans)
                 return ans
             # 更换图片再来一次

@@ -108,7 +108,7 @@ class WebDriverImp():
         self.driver.close()
         self.driver.quit()
         self.driver = None
-        self.initDriver(self.driver,self.headless)
+        self.initDriver(self.driver, self.headless)
 
     def setPool(self, MyPool):
         self.myPool = MyPool
@@ -142,7 +142,7 @@ class WebDriverImp():
                 else:
                     print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
                 print("数据存储成功")
-                input['version'] = 'V1.3'
+                input['version'] = 'V1.4'
                 return input
             elif isDup == True:
                 input.update({'state': 100, 'errMsg': '任务重复并且调度期决定不做任何操作'})
