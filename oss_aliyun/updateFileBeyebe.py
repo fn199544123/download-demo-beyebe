@@ -29,7 +29,16 @@ access_key_secret = os.getenv('OSS_TEST_ACCESS_KEY_SECRET', item['access_key_sec
 bucket_name = os.getenv('OSS_TEST_BUCKET', item['bucket_name'])
 endpoint = os.getenv('OSS_TEST_ENDPOINT', item['endpoint'])
 
-URL_BASE = 'http://{bucketName}.oss-cn-shenzhen.aliyuncs.com/'.replace('{bucketName}', bucket_name)
+# 测试是否可以使用阿里云内网上传
+try:
+    print(requests.get("http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/test_0a98c7d2735c3595ec6593337775e83a.txt",
+                       timeout=2).text)
+    print("可以访问阿里云内网,使用内网服务器")
+    URL_BASE = 'http://{bucketName}.oss-cn-shenzhen-internal.aliyuncs.com/'.replace('{bucketName}', bucket_name)
+except:
+    print("无法访问阿里云内网,使用外网服务器")
+    URL_BASE = 'http://{bucketName}.oss-cn-shenzhen.aliyuncs.com/'.replace('{bucketName}', bucket_name)
+
 # 确认上面的参数都填写正确了
 for param in (access_key_id, access_key_secret, bucket_name, endpoint):
     assert '<' not in param, '请设置参数：' + param
@@ -94,9 +103,15 @@ def mkdirUpdate(file_mkdir_dir, isFileName=False, path=None):
             msgList.append(fileUpdate(file_mkdir_dir + '/' + fileName, isFileName=isFileName, path=path))
     return msgList
 
+
 if __name__ == '__main__':
     # 单文件上传
-    print(fileUpdate('/Users/magic/PycharmProjects/scrapy-demo-beyebe/oss_aliyun/test/test2.jpg', path='beyebe/docker', isFileName=True))
+    import time
+
+    a1 = time.time()
+    print(fileUpdate('test.txt', path='beyebe/', isFileName=True))
+    print(time.time() - a1)
+    # print(fileUpdate('/Users/magic/PycharmProjects/scrapy-demo-beyebe/oss_aliyun/test/test2.jpg', path='beyebe/docker', isFileName=True))
     # print(fileUpdate('./test.txt'))
     # 文件夹上传,如果isFileName=True,那么地址会保留文件名,并且不会被文件系统去重逻辑去重
     # print(mkdirUpdate('./banner', isFileName=True))
