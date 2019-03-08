@@ -103,8 +103,8 @@ class fapiaoImpl(WebDriverImp):
     def _deal(self, input):
         if 'invoiceCode' in input:
             input['fpdm'] = input['invoiceCode']
-        if 'invoiceCode' in input:
-            input['fphm'] = input['invoiceCode']
+        if 'invoiceNo' in input:
+            input['fphm'] = input['invoiceNo']
         if 'date' in input:
             input['kprq'] = input['date']
         if 'amount' in input:
