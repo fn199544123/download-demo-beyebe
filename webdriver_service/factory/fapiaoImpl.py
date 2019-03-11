@@ -135,10 +135,8 @@ class fapiaoImpl(WebDriverImp):
                 fpdm = input['fpdm']
                 fphm = input['fphm']
                 kprq = input['kprq']
-                if input.get('jym') is not None and len(input.get('jym')) >= 6:
-                    kjje = input['jym'][-6:]
-                else:
-                    kjje = input['kjje']
+                kjje = input['kjje']
+                jym = input['jym']
                 for i in range(100):
                     if 'fpdm' in driver.page_source:
                         break
@@ -154,8 +152,12 @@ class fapiaoImpl(WebDriverImp):
                 driver.find_element_by_id('kprq').clear()
                 driver.find_element_by_id('kprq').send_keys(kprq)
                 # 开具金额
-                driver.find_element_by_id('kjje').clear()
-                driver.find_element_by_id('kjje').send_keys(kjje)
+                if "开具金额(不含税)" in driver.page_source:
+                    driver.find_element_by_id('kjje').clear()
+                    driver.find_element_by_id('kjje').send_keys(kjje)
+                else:
+                    driver.find_element_by_id('kjje').clear()
+                    driver.find_element_by_id('kjje').send_keys(jym)
                 # 首先调整验证码大小
                 # imgTag = driver.find_element_by_id('yzm_img')
                 # self.setAttribute(imgTag, "width", 90)
@@ -512,10 +514,17 @@ if __name__ == '__main__':
     # fphm = "27671246"
     # kprq = "20180920"
     # kjje = "351.69"
-    # # 3
+    # 3
     fpdm = "1100182130"
     fphm = "15024752"
     kprq = "20180614"
     kjje = "18679.25"
-    data = {'fpdm': fpdm, 'fphm': fphm, 'kprq': kprq, 'kjje': kjje}
+    jym = "123"
+    # # 4
+    # fpdm = "011001800211"
+    # fphm = "28519832"
+    # kprq = "20190109"
+    # kjje = "1020"
+    # jym = "07842591941327323876"
+    data = {'fpdm': fpdm, 'fphm': fphm, 'kprq': kprq, 'kjje': kjje, 'jym': jym}
     print(WebDriverPool(dBean=fapiaoImpl, num=1, headless=False).getOneDriver().deal(data))

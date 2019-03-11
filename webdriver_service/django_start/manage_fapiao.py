@@ -37,7 +37,7 @@ if __name__ == '__main__':
     if 'inux' in platform.system():
         WebDriverPool(dBean=fapiaoImpl, num=6, headless=True)
     else:
-        WebDriverPool(dBean=fapiaoImpl, num=6, headless=False)
+        WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:
