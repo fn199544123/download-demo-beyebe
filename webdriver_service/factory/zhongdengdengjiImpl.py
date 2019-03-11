@@ -317,19 +317,32 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 return {'state': 521, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
 
             except NoSuchElementException:
+                errImgOssPath = self.get_full_screen_oss()
                 print("可能输入了不符合中登网要求的字段,无法进行提交操作。")
-                return {'state': 619, 'errMsg': '可能输入了不符合中登网要求的字段,或者必填字段未填写,无法进行提交操作,请检查后再试',
-                        'err': traceback.format_exc()}
+                return {'state': 619,
+                        'errMsg': '可能输入了不符合中登网要求的字段,或者必填字段未填写,无法进行提交操作,请检查后再试',
+                        'err': traceback.format_exc(),
+                        'errImgOssPath': errImgOssPath}
 
             except selenium.common.exceptions.ElementNotVisibleException:
+                errImgOssPath = self.get_full_screen_oss()
                 print("操作错误，字段不存在")
-                return {'state': 521, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key), 'err': traceback.format_exc()}
+                return {'state': 521,
+                        'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key),
+                        'err': traceback.format_exc(),
+                        'errImgOssPath': errImgOssPath}
             except:
                 traceback.print_exc()
+                errImgOssPath = self.get_full_screen_oss()
+
                 print("操作出现意外错误，重新登陆并重试")
                 self.restartDriver()
                 self._login()
-                return {'state': 599, 'errMsg': 'ERROR未知错误75896', 'err': traceback.format_exc()}
+                return {'state': 599,
+                        'errMsg': 'ERROR未知错误75896',
+                        'err': traceback.format_exc(),
+                        'errImgOssPath': errImgOssPath
+                        }
 
     def __findSelectByText(self, selectTag, textStr):
         if textStr == None or textStr == "":
@@ -378,7 +391,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         dictNow['ossPath'] = ossPath
                         dictNow['insertTime'] = datetime.datetime.now()
                         try:
-                            self.db[tableName].save(dictNow)
+                            self.db[tableName].insert(dictNow)
                         except:
                             print("WARNING数据库链接异常,将会导致缓存失败")
                             traceback.print_exc()

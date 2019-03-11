@@ -129,16 +129,23 @@ class WebDriverImp():
                 inputMD5 = self.__getInputMD5(input)
                 input.update(self._deal(input))
                 if 'ERROR' not in str(input) and 'Traceback' not in str(input):
-                    print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储。（存储只是记录,不一定走缓存,不用担心）')
-                    print("WARNING mongo老卡，就不缓存了暂时")
-                    # MONGO缓存
-                    # self.save(input)
-                    # REDIS缓存
-                    # r = redis.Redis(connection_pool=redisPool14)
-                    # pipe = r.pipeline()
-                    # pipe.set(inputMD5, json.dumps(input, cls=CJsonEncoder, ensure_ascii=False))
-                    # pipe.expire(inputMD5, 60 * 60 * 24)
-                    # pipe.execute()
+                    a = time.time()
+                    try:
+                        print('存储数据中不存在ERROR字符串,代表完全成功,进行缓存存储。（存储只是记录,不一定走缓存,不用担心）')
+                        # MONGO缓存
+                        print("【WARNING】mongo老卡，就不做MONGO缓存了暂时")
+                        # self.insert(input)
+                        # REDIS缓存
+                        # r = redis.Redis(connection_pool=redisPool14)
+                        # pipe = r.pipeline()
+                        # pipe.set(inputMD5, json.dumps(input, cls=CJsonEncoder, ensure_ascii=False))
+                        # pipe.expire(inputMD5, 60 * 60 * 24)
+                        # pipe.execute()
+                    except:
+                        traceback.print_exc()
+                        print("缓存失败")
+                    finally:
+                        print("缓存耗时", time.time() - a)
                 else:
                     print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
                 print("数据存储成功")
@@ -177,22 +184,22 @@ class WebDriverImp():
         if bufferItem is not None:
             print("已存在缓存,进一步确定缓存形式")
             if 'DOING_MISSION!!wait_for_few_time!' in bufferItem.decode():
-                raise Exception("数据正在处理!,请稍后再试(相同任务3秒内只能请求一次)" + bufferItem)
+                raise Exception("数据正在处理!,请稍后再试(相同任务1秒内只能请求一次)" + bufferItem)
             else:
                 print("走缓存返回结果")
                 bufferItemStr = bufferItem.decode()
                 return json.loads(bufferItemStr)
         else:
-            print("不存在缓存,加入一个临时缓存(60秒),并直接运行")
+            print("不存在缓存,加入一个临时缓存(1秒),并直接运行")
             pipe = r.pipeline()
             pipe.set(inputMD5,
                      "DOING_MISSION!!wait_for_few_time!\n" + str(datetime.datetime.now()))
-            pipe.expire(inputMD5, 3)
+            pipe.expire(inputMD5, 1)
             pipe.execute()
             return False
 
     # 存储方法
-    def save(self, msg):
+    def insert(self, msg):
         self.db['auto_' + type(self).__name__].insert_one(msg)
 
     left_Moren = 10
@@ -238,7 +245,7 @@ class WebDriverImp():
             if not os.path.exists('./code'):
                 os.makedirs('./code')
             filePath = './code/' + str(time.time()).replace('.', '_') + '.png'
-            image_obj.save(filePath)
+            image_obj.insert(filePath)
             # 验证码识别
             return filePath  # 得到的就是验证码文件地址
 

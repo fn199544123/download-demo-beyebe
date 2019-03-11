@@ -42,8 +42,8 @@ class CrackSlider():
         template_link = template.get_attribute('src')
         target_img = Image.open(BytesIO(requests.get(target_link).content))
         template_img = Image.open(BytesIO(requests.get(template_link).content))
-        target_img.save('target.jpg')
-        template_img.save('template.png')
+        target_img.insert('target.jpg')
+        template_img.insert('template.png')
         size_orign = target.size
         local_img = Image.open('target.jpg')
         size_loc = local_img.size

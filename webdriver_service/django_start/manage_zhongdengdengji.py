@@ -20,8 +20,13 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 if __name__ == '__main__':
     # 测试使用
     # WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
-    onlineAccount = [{'account': 'ytbl0010', 'keyword': 'ytbl0010aDmin'}]
-    testAccount = [{'account': 'ytbl0011', 'keyword': 'ytbl0011aDmin'}]
+    onlineAccount = [
+        {'account': 'ytbl0010', 'keyword': 'ytbl0010aDmin'},
+        {'account': 'ytbl0011', 'keyword': 'ytbl0011aDmin'}
+    ]
+    testAccount = [
+        {'account': 'ytbl0011', 'keyword': 'ytbl0011aDmin'}
+    ]
     if 'inux' in platform.system():
         WebDriverPool(dBean=zhongDengDengJiImpl, num=onlineAccount, headless=True)
     else:

@@ -340,10 +340,10 @@ class zhongDengImpl(LoginDriverImp):
                         dictNow['companyName'] = companyName
                         dictNow['ossPath'] = ossPath
                         dictNow['insertTime'] = datetime.datetime.now()
-                        self.db[tableName].save(dictNow)
+                        self.db[tableName].insert(dictNow)
                         dictNow['_id'] = str(dictNow['_id'])
                         pdfs.append(dictNow)
-                        return
+                        return dictNow
                     else:
                         print("文件还在浏览器下载中,请稍后！")
                         time.sleep(0.8)  # 100次0.1秒，共10秒

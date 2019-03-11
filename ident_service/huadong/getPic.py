@@ -32,7 +32,7 @@ def get_pic(i):
     template = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'yidun_jigsaw')))
     target_link = target.get_attribute('src')
     target_img = Image.open(BytesIO(requests.get(target_link).content))
-    target_img.save('target_{}.jpg'.format(i))
+    target_img.insert('target_{}.jpg'.format(i))
     driver.refresh()
 
 

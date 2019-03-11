@@ -487,7 +487,7 @@ class fapiaoImpl(WebDriverImp):
                 .find_element_by_css_selector('font') \
                 .get_attribute('color')
             filePath = 'code/imgCode2' + str(time.time()).replace('.', '_') + '_{}.png'.format(colorStr)
-            image_obj.save(filePath)
+            image_obj.insert(filePath)
             # 验证码识别
             return filePath  # 得到的就是验证码
 
