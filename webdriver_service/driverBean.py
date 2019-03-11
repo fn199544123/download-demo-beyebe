@@ -245,7 +245,7 @@ class WebDriverImp():
             if not os.path.exists('./code'):
                 os.makedirs('./code')
             filePath = './code/' + str(time.time()).replace('.', '_') + '.png'
-            image_obj.insert(filePath)
+            image_obj.save(filePath)
             # 验证码识别
             return filePath  # 得到的就是验证码文件地址
 
