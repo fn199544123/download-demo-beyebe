@@ -244,13 +244,12 @@ class zhongDengImpl(LoginDriverImp):
                     if item.get_attribute("style") is not None and 'display' in item.get_attribute("style"):
                         continue
                     itemNow = {}
-                    itemNow['index'] = item.find_elements_by_css_selector('td')[0].text
-                    itemNow['no'] = item.find_elements_by_css_selector('td')[1].text
                     itemNow['date_start'] = item.find_elements_by_css_selector('td')[2].text.strip()
-
                     dateNow = datetime.datetime.strptime(itemNow['date_start'], '%Y-%m-%d %H:%M:%S')
                     if dateNow < afterDate:
                         continue
+                    itemNow['index'] = item.find_elements_by_css_selector('td')[0].text
+                    itemNow['no'] = item.find_elements_by_css_selector('td')[1].text
                     itemNow['date_end'] = item.find_elements_by_css_selector('td')[3].text
                     itemNow['class'] = item.find_elements_by_css_selector('td')[4].text
                     itemNow['pledgee'] = item.find_elements_by_css_selector('td')[5].text
@@ -258,7 +257,7 @@ class zhongDengImpl(LoginDriverImp):
                     lstRegno.append(itemNow)
                 # 点击下一页
                 self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
-                time.sleep(0.5)
+                time.sleep(0.1)
             print("登记证明编号记录完成", lstRegno)
             print("正在依次下载")
             self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],
@@ -442,7 +441,7 @@ class zhongDengImpl(LoginDriverImp):
 
     def click100_by_tag(self, tag):
         # 保证可以点击到的方法
-        time.sleep(1)
+        time.sleep(0.1)
         action_chains = ActionChains(self.driver)
         action_chains.move_to_element_with_offset(tag, 10, 10)
         action_chains.click()

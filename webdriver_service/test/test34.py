@@ -3,9 +3,9 @@ import requests
 
 # 接口3，接口4测试DEMO
 data = {
-    "companyName": "沈阳北方建设股份有限公司",
-    "billNums": ["01287153", "01238774"],
-    "afterDate": "19000101"
+    "companyName": "东莞市民兴电缆有限公司",
+    "billNums": ["25275763"],
+    "afterDate": "20190121"
 }
 
 headers = {"Content-Type": "application/json"}
