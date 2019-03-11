@@ -30,7 +30,7 @@ if __name__ == '__main__':
     if 'inux' in platform.system():
         WebDriverPool(dBean=zhongDengDengJiImpl, num=onlineAccount, headless=True)
     else:
-        WebDriverPool(dBean=zhongDengDengJiImpl, num=testAccount, headless=False)
+        WebDriverPool(dBean=zhongDengDengJiImpl, num=testAccount, headless=True)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:

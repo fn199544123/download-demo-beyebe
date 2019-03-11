@@ -211,7 +211,10 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         ossPath = fileNew['path']
                         if not os.path.exists('./file'):
                             os.makedirs('./file')
-                        fileName = "./file/" + ossPath.split('/')[-1][-30:]
+                        if fileName is not None and fileName != "":
+                            fileName = "./file/" + fileName
+                        else:
+                            fileName = "./file/" + ossPath.split('/')[-1][-30:]
                         request.urlretrieve(ossPath, fileName)
                         # 拼接绝对路径
                         localPath = os.path.abspath(fileName)

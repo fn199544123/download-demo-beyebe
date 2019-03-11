@@ -255,9 +255,8 @@ class zhongDengImpl(LoginDriverImp):
                     itemNow['pledgee'] = item.find_elements_by_css_selector('td')[5].text
                     # "td[name=\"no\"]"
                     lstRegno.append(itemNow)
-                # 点击下一页
+                # 点击下一页 用click100不需要点击
                 self.click100_by_tag(driver.find_element_by_css_selector("a[name=\"next\"]"))
-                time.sleep(0.1)
             print("登记证明编号记录完成", lstRegno)
             print("正在依次下载")
             self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度2/4,应下载文件共{}个".format(input['companyName'],

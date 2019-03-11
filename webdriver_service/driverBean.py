@@ -66,6 +66,7 @@ class WebDriverImp():
         options.add_argument("--kiosk")
         options.add_argument("--start-maximized")
         options.add_argument("--start-fullscreen")
+        options.add_argument("window-size=1920,1080");
         store_path = './webDriver_download'
         if not os.path.exists(store_path):
             os.makedirs(store_path)
@@ -98,10 +99,11 @@ class WebDriverImp():
                 raise Exception("不知道是什么系统,无法实例化Driver对象")
             self.driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
             # self.driver.maximize_window()
+
             self.driver.implicitly_wait(7)
             self.driver.set_page_load_timeout(7)
             self.driver.set_script_timeout(7)
-
+            self.driver.set_window_size(1920, 1080)
             self.enable_download_in_headless_chrome(store_path)
 
     def restartDriver(self):
