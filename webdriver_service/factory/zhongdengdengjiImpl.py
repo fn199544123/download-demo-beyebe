@@ -298,7 +298,11 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         returnObj.update(returnError)
                         return returnObj
                 return input
-
+            except Exception as err:
+                if '用户连接超时' in driver.page_source:
+                    self._login()
+                    continue
+                raise err
             except UnexpectedAlertPresentException:
                 # 弹窗BUG
                 al = self.driver.switch_to_alert()
