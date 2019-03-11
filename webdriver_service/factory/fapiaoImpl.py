@@ -151,6 +151,7 @@ class fapiaoImpl(WebDriverImp):
                 # 开票日期
                 driver.find_element_by_id('kprq').clear()
                 driver.find_element_by_id('kprq').send_keys(kprq)
+                time.sleep(0.3)
                 # 开具金额
                 if "开具金额(不含税)" in driver.page_source:
                     driver.find_element_by_id('kjje').clear()
