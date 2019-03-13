@@ -20,7 +20,7 @@ MONGODB_DBNAME = 'hedgehog_spider'
 client = pymongo.MongoClient(host=MONGODB_HOST, port=MONGODB_PORT)
 db = client[MONGODB_DBNAME]
 db.authenticate(MONGODB_USER, MONGODB_PASSWORD)
-item = db['aliyun_oss'].find_one({'name': 'beyebe'})
+item = db['aliyun_oss'].find_one({'name': 'yintai'})
 
 access_key_id = os.getenv('OSS_TEST_ACCESS_KEY_ID', item['access_key_id'])
 access_key_secret = os.getenv('OSS_TEST_ACCESS_KEY_SECRET', item['access_key_secret'])
