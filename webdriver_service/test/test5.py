@@ -87,9 +87,11 @@ input = {
     ]
 }
 
+
+print(json.dumps(input))
 headers = {"Content-Type": "application/json"}
 text1 = requests.post(url, data=json.dumps(input).encode(), headers=headers).text
 print("预览测试")
-print(json.loads(text1))
+print(text1)
 
 # testAccount = [{'account': 'ytbl0011', 'keyword': 'ytbl0011aDmin'}]

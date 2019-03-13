@@ -77,10 +77,16 @@ def changeModelBatch(request):
         if WebDriverPool().queueSize() > 0:
             threads = []
             for itemData in arguments['data']:
-                for item in itemData['result']:
-                    # msg = WebDriverPool().getOneDriver().deal(item)
+                if 'result' in itemData:
+                    for item in itemData['result']:
+                        # msg = WebDriverPool().getOneDriver().deal(item)
+                        driver = WebDriverPool().getOneDriver()
+                        t = MyThread(driver, item)
+                        threads.append(t)
+                        t.start()
+                else:
                     driver = WebDriverPool().getOneDriver()
-                    t = MyThread(driver, item)
+                    t = MyThread(driver, itemData)
                     threads.append(t)
                     t.start()
             # 阻塞全部完成

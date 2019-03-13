@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # 演示时使用下面的代码
     # WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
     if 'inux' in platform.system():
-        WebDriverPool(dBean=fapiaoImpl, num=6, headless=True)
+        WebDriverPool(dBean=fapiaoImpl, num=12, headless=True)
     else:
         WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
 

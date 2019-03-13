@@ -150,7 +150,7 @@ class fapiaoImpl(WebDriverImp):
                 # 开票日期
                 driver.find_element_by_id('kprq').clear()
                 driver.find_element_by_id('kprq').send_keys(kprq)
-                time.sleep(0.3)
+                time.sleep(0.1)
                 # 开具金额
                 if "开具金额(不含税)" in driver.page_source:
                     driver.find_element_by_id('kjje').clear()
@@ -169,6 +169,7 @@ class fapiaoImpl(WebDriverImp):
                 # 看输入是否有错误
 
                 for i in range(100):
+
                     if "发票代码有误!" in driver.page_source:
                         print("发票代码有误")
                         dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
@@ -219,7 +220,7 @@ class fapiaoImpl(WebDriverImp):
                 """
                 验证码
                 """
-                time.sleep(0.5)
+                time.sleep(0.1)
                 try:
                     for i in range(50):
                         if '请输入验证码图片' in driver.page_source:
@@ -228,9 +229,12 @@ class fapiaoImpl(WebDriverImp):
                             break
                         time.sleep(0.1)
                     else:
-                        print("5秒钟验证码还没有出现,重启")
+                        print("5秒钟验证码还没有出现,刷新页面")
                         print("错误截图", self.get_full_screen_oss())
                         self.driver.refresh()
+                        continue
+                    if '请输入验证码文字' in driver.page_source:
+                        print("不打不带颜色的码,跳过")
                         continue
                     try:
                         # 不存在会抛异常
@@ -394,7 +398,7 @@ class fapiaoImpl(WebDriverImp):
                     ossUrl = self.get_full_screen_oss()
                     print("截图ossURL,并休息2秒", ossUrl)
                     self.driver.restartDriver()
-                    time.sleep(2)
+                    time.sleep(5)
 
 
                 except:
