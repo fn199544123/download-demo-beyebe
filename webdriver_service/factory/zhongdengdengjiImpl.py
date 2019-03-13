@@ -177,7 +177,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                             # 出让人类型企业 #debtorType
                             time.sleep(0.35)
                         except:
-                            return {'state': 623,
+                            return {'state': 523,
                                     'errMsg': "登记时标签定位输入出现问题,id=" + key,
                                     "err": traceback.format_exc()}
                     time.sleep(0.5)  # 等待渲染内容
@@ -200,7 +200,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     if '请根据被转让的应收账款的特点进行描述' in driver.page_source:
                         break
                 else:
-                    return {'state': 619,
+                    return {'state': 719,
                             'errMsg': "点击*转让财产信息*按钮卡住了，重试10次失败，请重试"}
                 time.sleep(0.3)  # 等待渲染内容
 
@@ -232,7 +232,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                                 continue
                             else:
                                 al.accept()
-                                return {'state': 580,
+                                return {'state': 780,
                                         'errMsg': "上传附件失败请重试,中登网提示信息:" + msg}
                         finally:
                             os.remove(localPath)
@@ -297,7 +297,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                         return returnObj
                     except:
                         print("ERROR登记流程出错")
-                        returnError = {'state': 1099, 'ossUrl': ossUrl, 'errMsg': '未知登记错误异常,请排查登记错误'}
+                        returnError = {'state': 598, 'ossUrl': ossUrl, 'errMsg': '未知登记错误异常,请排查登记错误'}
                         returnObj.update(returnError)
                         return returnObj
                 return input
@@ -321,21 +321,19 @@ class zhongDengDengJiImpl(LoginDriverImp):
 
             except ElementNotVisibleException:
                 print("可能输入了非法字符或者不存在的key,请检查后再试")
-                return {'state': 521, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
+                return {'state': 621, 'errMsg': '可能输入了非法字符或者不符合中登网要求的字段,请检查后再试', 'err': traceback.format_exc()}
 
             except NoSuchElementException:
                 errImgOssPath = self.get_full_screen_oss()
                 print("可能输入了不符合中登网要求的字段,无法进行提交操作。")
-                return {'state': 619,
-                        'errMsg': '可能输入了不符合中登网要求的字段,或者必填字段未填写,无法进行提交操作,请检查后再试',
+                return {'state': 619, 'errMsg': '可能输入了不符合中登网要求的字段,或者必填字段未填写,无法进行提交操作,请检查后再试',
                         'err': traceback.format_exc(),
                         'errImgOssPath': errImgOssPath}
 
             except selenium.common.exceptions.ElementNotVisibleException:
                 errImgOssPath = self.get_full_screen_oss()
                 print("操作错误，字段不存在")
-                return {'state': 521,
-                        'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key),
+                return {'state': 622, 'errMsg': '不存在该标签:{},请查询字段表重新输入'.format(key),
                         'err': traceback.format_exc(),
                         'errImgOssPath': errImgOssPath}
             except:
@@ -345,8 +343,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                 print("操作出现意外错误，重新登陆并重试")
                 self.restartDriver()
                 self._login()
-                return {'state': 599,
-                        'errMsg': 'ERROR未知错误75896',
+                return {'state': 599, 'errMsg': 'ERROR未知错误75896',
                         'err': traceback.format_exc(),
                         'errImgOssPath': errImgOssPath
                         }
@@ -413,8 +410,9 @@ class zhongDengDengJiImpl(LoginDriverImp):
                     dictNow['name'] = name
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
-                    dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"
+                    dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"  # 703
                     # 只采集第一个,其他的不采集,于是return
+                    dictNow['state'] = 703
                     return dictNow
                 return dictNow
         except:

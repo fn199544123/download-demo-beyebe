@@ -44,8 +44,7 @@ def changeModel(request):
         else:
             # 现在没有可用driver,所以暂时不下发任务
 
-            msg = {"state": 577,
-                   "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。",
+            msg = {"state": 701, "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。",
                    "stateMsg": WebDriverPool().getDriverState()}
         jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
         return HttpResponse(jsonStr)
@@ -98,8 +97,7 @@ def changeModelBatch(request):
         else:
             # 现在没有可用driver,所以暂时不下发任务
 
-            msg = {"state": 577,
-                   "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。",
+            msg = {"state": 701, "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。",
                    "stateMsg": WebDriverPool().getDriverState()}
         jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
         return HttpResponse(jsonStr)

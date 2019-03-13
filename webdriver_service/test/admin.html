@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var num = 200;
+    var num2 = 300;
+    var num3 = "200";
+    var num4 = "300";
+    var num5 = 203;
+
+    function isSuccess(num) {
+        // 支持字符串和数字双格式
+        typeName = typeof(num);
+        if (typeName === "number") {
+            return num >= 200 && num <= 299;
+        } else if (typeName === "string") {
+            return num[0] === '2';
+        } else {
+            return false
+        }
+    }
+
+    alert(isSuccess(num));
+    alert(isSuccess(num2));
+    alert(isSuccess(num3));
+    alert(isSuccess(num4));
+    alert(isSuccess(num5));
+
+</script>
+</body>
+</html>

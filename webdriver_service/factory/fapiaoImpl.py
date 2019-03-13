@@ -44,9 +44,9 @@ class fapiaoImpl(WebDriverImp):
     # class fapiaoImpl(WebDriverRemoteImp):
     def _parseInvoice(self, html):
         if '查无此票' in html:
-            return {'errMsg': 'ERROR国家税务局返回查无此票'}
+            return {'state': 211, 'errMsg': 'ERROR国家税务局返回查无此票'}
         if '不一致' in html:
-            return {'errMsg': 'ERROR国家税务局返回不一致'}
+            return {'state': 212, 'errMsg': 'ERROR国家税务局返回不一致'}
         data = {'goods': [], 'errMsg': 'success!'}
         soup = BeautifulSoup(html, 'lxml')
         idH1 = soup.select_one('h1')['id']
@@ -119,8 +119,7 @@ class fapiaoImpl(WebDriverImp):
         ]
         for key in keyMustExist:
             if key not in input:
-                return {'state': 619,
-                        'errMsg': "ERROR缺少必备参数{},fpdm、fphm、kprq、kjje、（校验码如果有必须填jym）为必须存在的参数"}
+                return {'state': 619, 'errMsg': "ERROR缺少必备参数{},fpdm、fphm、kprq、kjje、（校验码如果有必须填jym）为必须存在的参数"}
 
         driver = self.driver
         while True:
@@ -265,7 +264,7 @@ class fapiaoImpl(WebDriverImp):
                     time.sleep(0.1)
                 if '超过该张发票当日查验次数' in driver.page_source:
                     print("超过次数")
-                    dictNow = {'errMsg': "ERROR超过次数！无法返回信息", 'state': 601}
+                    dictNow = {'errMsg': "ERROR超过次数！无法返回信息", 'state': 251}
                     return dictNow
                     # 看输入是否有错误
                 elif "发票代码有误!" in driver.page_source:
@@ -286,7 +285,7 @@ class fapiaoImpl(WebDriverImp):
                     return dictNow
                 elif '校验码有误!' in driver.page_source:
                     print("校验码有误")
-                    dictNow = {'errMsg': "校验码有误！无法返回信息,请输入校验码或查看是否正确", 'state': 602}
+                    dictNow = {'errMsg': "校验码有误！无法返回信息,请输入校验码或查看是否正确", 'state': 605}
                     return dictNow
                 elif '一分钟' in driver.page_source:
                     print("访问过于频繁，休息60秒后再试")
@@ -315,7 +314,7 @@ class fapiaoImpl(WebDriverImp):
                     dictNow.update({'data': invoiceData,
                                     'imgFile': ossPath,
                                     'errMsg': "success!",
-                                    'state': 200})
+                                    'state': 579})
                     return dictNow
             except:
                 print("未知异常,进行上报")

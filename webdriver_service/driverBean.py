@@ -151,7 +151,7 @@ class WebDriverImp():
                 else:
                     print("存储数据中存在ERROR字符串，代表着有部分失败，所以不进行缓存存储")
                 print("数据存储成功")
-                input['version'] = 'V1.4'
+                input['version'] = 'V1.5'
                 return input
             elif isDup == True:
                 input.update({'state': 100, 'errMsg': '任务重复并且调度期决定不做任何操作'})

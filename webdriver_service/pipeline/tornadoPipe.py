@@ -25,9 +25,9 @@ class ChangeModel(tornado.web.RequestHandler):
                 msg = WebDriverPool().getOneDriverNoWait().deal(arguments)
             else:
                 # 现在没有可用driver,所以暂时不下发任务
-                msg = {"state": 577,
+                msg = {"state": 701,
                        "errMsg": "当前无可用Webdriver实例,根据其他参数查看当前任务的工作状态。"}
-            jsonStr=json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
+            jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
             self.write(jsonStr)
             return
         except:
