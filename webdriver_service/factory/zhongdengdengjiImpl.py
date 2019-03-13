@@ -233,7 +233,7 @@ class zhongDengDengJiImpl(LoginDriverImp):
                             else:
                                 al.accept()
                                 return {'state': 780,
-                                        'errMsg': "上传附件失败请重试,中登网提示信息:" + msg}
+                                        'errMsg': "上传附件失败,中登网提示信息:" + msg}
                         finally:
                             os.remove(localPath)
                 # 转让财产价值

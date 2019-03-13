@@ -44,9 +44,9 @@ class fapiaoImpl(WebDriverImp):
     # class fapiaoImpl(WebDriverRemoteImp):
     def _parseInvoice(self, html):
         if '查无此票' in html:
-            return {'state': 211, 'errMsg': 'ERROR国家税务局返回查无此票'}
+            return {'state': 411, 'errMsg': 'ERROR国家税务局返回查无此票'}
         if '不一致' in html:
-            return {'state': 212, 'errMsg': 'ERROR国家税务局返回不一致'}
+            return {'state': 412, 'errMsg': 'ERROR国家税务局返回不一致'}
         data = {'goods': [], 'errMsg': 'success!'}
         soup = BeautifulSoup(html, 'lxml')
         idH1 = soup.select_one('h1')['id']
@@ -264,7 +264,7 @@ class fapiaoImpl(WebDriverImp):
                     time.sleep(0.1)
                 if '超过该张发票当日查验次数' in driver.page_source:
                     print("超过次数")
-                    dictNow = {'errMsg': "ERROR超过次数！无法返回信息", 'state': 251}
+                    dictNow = {'errMsg': "ERROR验真平台今日超过次数！无法返回信息", 'state': 413}
                     return dictNow
                     # 看输入是否有错误
                 elif "发票代码有误!" in driver.page_source:
