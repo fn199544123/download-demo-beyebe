@@ -467,7 +467,7 @@ class fapiaoImpl(WebDriverImp):
             loc = img.location
             size = img.size
             # 图片和标签大小不一致的,不能通过size获取图片,截图会偏移
-            for i in range(100):
+            for i in range(10):
                 if loc['x'] == 0:
                     time.sleep(0.1)
                     continue
