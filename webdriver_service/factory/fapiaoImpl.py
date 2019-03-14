@@ -315,10 +315,14 @@ class fapiaoImpl(WebDriverImp):
                         invoiceData['errMsg'] = "ERROR解析结构异常,发现新模板或者改版,请将这个返回交付开发者进行模板添加"
                         invoiceData['html'] = driver.page_source
                         invoiceData['errMsgText'] = traceback.format_exc()
+                        dictNow.update({'data': invoiceData,
+                                        'imgFile': ossPath,
+                                        'errMsg': "ERROR解析结构异常,发现新模板或者改版,请将这个返回交付开发者进行模板添加!",
+                                        'state': 579})
                     dictNow.update({'data': invoiceData,
                                     'imgFile': ossPath,
                                     'errMsg': "success!",
-                                    'state': 579})
+                                    'state': 200})
                     return dictNow
             except:
                 print("未知异常,进行上报")
