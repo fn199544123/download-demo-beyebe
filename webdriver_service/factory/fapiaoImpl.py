@@ -321,8 +321,8 @@ class fapiaoImpl(WebDriverImp):
                                         'state': 579})
                     dictNow.update({'data': invoiceData,
                                     'imgFile': ossPath,
-                                    'errMsg': "success!",
-                                    'state': 200})
+                                    'errMsg': invoiceData['errMsg'],
+                                    'state': invoiceData['state']})
                     return dictNow
             except:
                 print("未知异常,进行上报")

@@ -38,3 +38,11 @@ class QichachaHtmlItem(scrapy.Item):
     fengxian_html = scrapy.Field()
     report_html = scrapy.Field()
     history_html = scrapy.Field()
+
+
+# 股票信息
+class ShareItem(scrapy.Item):
+    name = scrapy.Field()  # 证劵名称
+    code = scrapy.Field()  # 证劵代码
+    etc = scrapy.Field()
+    tableName = scrapy.Field()
