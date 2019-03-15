@@ -25,7 +25,10 @@ if __name__ == '__main__':
     onlineAccount = [
         {'account': 'ytbl007', 'keyword': 'ytbl007aDmin'},
         {'account': 'ytbl008', 'keyword': 'ytbl008aDmin'},
-        {'account': 'ytbl009', 'keyword': 'ytbl009aDmin'}
+        {'account': 'ytbl009', 'keyword': 'ytbl009aDmin'},
+        {'account': 'ytbl0015', 'keyword': 'ytbl0015aDmin'},
+        {'account': 'ytbl0016', 'keyword': 'ytbl0016aDmin'}
+
     ]
     testAccount = [
         {'account': 'ytbl009', 'keyword': 'ytbl009aDmin'}
