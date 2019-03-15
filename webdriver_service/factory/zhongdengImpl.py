@@ -124,7 +124,8 @@ class zhongDengImpl(LoginDriverImp):
         try:
             afterDate = datetime.datetime.strptime(afterDate, "%Y%m%d")
         except:
-            return {'state': 622, 'errMsg': 'ERROR您的日期格式输入错误,请从新输入'}
+            input.update({'state': 622, 'errMsg': 'ERROR您的日期格式输入错误,请从新输入'})
+            return input
 
         driver = self.driver
         while True:
@@ -352,7 +353,7 @@ class zhongDengImpl(LoginDriverImp):
                     dictNow['companyName'] = companyName
                     dictNow['ossPath'] = None
                     dictNow['insertTime'] = datetime.datetime.now()
-                    dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载" #703
+                    dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"  # 703
                     dictNow['state'] = 703
 
                     pdfs.append(dictNow)

@@ -121,7 +121,8 @@ class fapiaoImpl(WebDriverImp):
         ]
         for key in keyMustExist:
             if key not in input:
-                return {'state': 619, 'errMsg': "ERROR缺少必备参数{},fpdm、fphm、kprq、kjje、（校验码如果有必须填jym）为必须存在的参数"}
+                input.update({'state': 619, 'errMsg': "ERROR缺少必备参数{},fpdm、fphm、kprq、kjje、（校验码如果有必须填jym）为必须存在的参数"})
+                return input
 
         driver = self.driver
         while True:
@@ -175,42 +176,52 @@ class fapiaoImpl(WebDriverImp):
                     if "发票代码有误!" in driver.page_source:
                         print("发票代码有误")
                         dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                        input.update(dictNow)
                         return dictNow
                     if "发票号码有误!" in driver.page_source:
                         print("发票号码有误")
                         dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                        input.update(dictNow)
                         return dictNow
                     if "开票日期有误!" in driver.page_source:
                         print("开票日期有误")
                         dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                        input.update(dictNow)
                         return dictNow
                     if "开票金额有误!" in driver.page_source:
                         print("开票金额有误")
                         dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                        input.update(dictNow)
                         return dictNow
                     if "校验码有误!" in driver.page_source:
                         print("校验码有误!")
                         dictNow = {'errMsg': "ERROR校验码有误!无法返回信息，请输入正确的数据或格式", 'state': 605}
+                        input.update(dictNow)
                         return dictNow
                     if "请输入发票号码" in driver.page_source:
                         print("请输入发票号码")
                         dictNow = {'errMsg': "ERROR请输入发票号码！", 'state': 606}
+                        input.update(dictNow)
                         return dictNow
                     if "请输入发票代码" in driver.page_source:
                         print("请输入发票代码")
                         dictNow = {'errMsg': "ERROR请输入发票代码", 'state': 607}
+                        input.update(dictNow)
                         return dictNow
                     if "请输入开具金额" in driver.page_source:
                         print("请输入开具金额")
                         dictNow = {'errMsg': "ERROR请输入开具金额", 'state': 608}
+                        input.update(dictNow)
                         return dictNow
                     if "请输入开票日期" in driver.page_source:
                         print("请输入开票日期")
                         dictNow = {'errMsg': "ERROR请输入开票日期", 'state': 609}
+                        input.update(dictNow)
                         return dictNow
                     if "请输入校验码" in driver.page_source:
                         print("请输入校验码")
                         dictNow = {'errMsg': "ERROR请输入校验码", 'state': 610}
+                        input.update(dictNow)
                         return dictNow
 
                     if 'yzm_img' in driver.page_source:
