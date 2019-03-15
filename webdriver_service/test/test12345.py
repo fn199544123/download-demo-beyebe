@@ -5,7 +5,7 @@ headers = {"Content-Type": "application/json"}
 # 接口1、2测试DEMO
 data12 = {
     "bill": {
-        'ossPath': "http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/data/20190222/d4107614554b82ff8e71a899b47d1114.pdf"
+        'ossPath': "http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/data/20190222/bffc69d60400cb4365f5ca2528fd27f2.pdf"
     }
 }
 

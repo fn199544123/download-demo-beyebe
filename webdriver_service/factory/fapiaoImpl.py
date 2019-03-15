@@ -95,6 +95,8 @@ class fapiaoImpl(WebDriverImp):
                     if i == 7:
                         item['taxPrice'] = span.text  # 税额
                 data['goods'].append(item)
+        data['state'] = 200
+        data['errMsg'] = "success!"
         return data
 
     def getDriverPort(self):
