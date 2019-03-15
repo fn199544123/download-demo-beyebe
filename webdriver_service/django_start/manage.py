@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import datetime
 import sys
 import os
 
@@ -11,6 +12,8 @@ def hello(request):
     return HttpResponse("Hello world ! ")
 
 if __name__ == '__main__':
+    print("启动时间startTime", datetime.datetime.now())
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_start.settings')
     try:
         from django.core.management import execute_from_command_line

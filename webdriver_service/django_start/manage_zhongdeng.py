@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import datetime
 import sys
 import os
 import platform
@@ -20,6 +21,7 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 if __name__ == '__main__':
     # 测试使用
     # WebDriverPool(dBean=zhongDengImpl, num=1, headless=False)
+    print("启动时间startTime", datetime.datetime.now())
     onlineAccount = [
         {'account': 'ytbl007', 'keyword': 'ytbl007aDmin'},
         {'account': 'ytbl008', 'keyword': 'ytbl008aDmin'},
