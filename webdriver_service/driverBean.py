@@ -67,6 +67,7 @@ class WebDriverImp():
         options.add_argument("--start-maximized")
         options.add_argument("--start-fullscreen")
         options.add_argument("window-size=1920,1080");
+
         store_path = './webDriver_download'
         if not os.path.exists(store_path):
             os.makedirs(store_path)
@@ -98,6 +99,8 @@ class WebDriverImp():
                 print("不知道是什么系统,无法实例化WebDriver对象")
                 raise Exception("不知道是什么系统,无法实例化Driver对象")
             self.driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
+            # self.driver = webdriver.Chrome(executable_path=driverPath)
+
             # self.driver.maximize_window()
 
             self.driver.implicitly_wait(7)

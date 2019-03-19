@@ -137,8 +137,8 @@ class fapiaoImpl(WebDriverImp):
                 fpdm = input['fpdm']
                 fphm = input['fphm']
                 kprq = input['kprq']
-                kjje = input['kjje']
-                jym = input['jym']
+                kjje = input.get('kjje', '')
+                jym = input.get('jym', '')
                 for i in range(100):
                     if 'fpdm' in driver.page_source:
                         break
@@ -270,11 +270,11 @@ class fapiaoImpl(WebDriverImp):
                 driver.find_element_by_id('yzm').clear()
                 driver.find_element_by_id('yzm').send_keys(inputa)
                 print("【验证】已经完成所有信息输入")
-                time.sleep(1)  # 这里延时未来可以调低一点,为了录屏
+                time.sleep(0.2)  # 这里延时未来可以调低一点,为了录屏
                 action_chains = ActionChains(self.driver)
                 action_chains.double_click(driver.find_element_by_id('checkfp')).perform()
                 print("正在进行查验")
-                time.sleep(1)
+                time.sleep(0.2)
                 for i in range(100):
                     if 'popup_ok' in driver.page_source or 'iframe' in driver.page_source:
                         break
