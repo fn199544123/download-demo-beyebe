@@ -238,7 +238,7 @@ class fapiaoImpl(LoginDriverImp):
                 time.sleep(0.1)
                 try:
                     for i in range(50):
-                        if '请输入验证码图片' in driver.page_source:
+                        if '请输入验证码' in driver.page_source:
                             self._state = "已经成功渲染验证码"
                             print("成功渲染验证码")
                             break

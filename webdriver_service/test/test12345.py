@@ -2,11 +2,14 @@ import requests
 import json
 import time
 
+ossPdfPathBig = "http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/data/20190222/ccbbaa7766314b725640cf8b351b3c39.pdf"
+ossPdfPathSmall = "http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/data/20190222/bffc69d60400cb4365f5ca2528fd27f2.pdf"
+
 headers = {"Content-Type": "application/json"}
 # 接口1、2测试DEMO
 data12 = {
     "bill": {
-        'ossPath': "http://byb-pic.oss-cn-shenzhen.aliyuncs.com/beyebe/data/20190222/bffc69d60400cb4365f5ca2528fd27f2.pdf"
+        'ossPath': ossPdfPathBig
     }
 }
 # 接口3，接口4测试DEMO
@@ -30,7 +33,7 @@ print("用时", time.time() - timeStart)
 发票验真
 """
 timeStart = time.time()
-text2 = requests.post("http://39.108.188.34:9088/spider/fapiaoList.go", data=text1.encode(), headers=headers).text
+text2 = requests.post("http://localhost:9088/spider/fapiaoList.go", data=text1.encode(), headers=headers).text
 print("发票验真结果")
 print(text2)
 print("用时", time.time() - timeStart)

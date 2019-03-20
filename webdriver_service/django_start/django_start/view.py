@@ -52,6 +52,7 @@ def changeModel(request):
             msg = {"state": 701,
                    "errMsg": "当前无可用Webdriver实例,通过参数stateMsg当前任务的工作状态。",
                    "stateMsg": WebDriverPool().getDriverState(),
+                   "missionStateMsg": "最近任务的完成情况{}/{}".format(misFinishNum, misTotalNum),
                    }
         jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
         return HttpResponse(jsonStr)
@@ -125,7 +126,10 @@ def changeModelBatch(request):
 
     except:
         if 'Empty' in traceback.format_exc():
-            jsonStr = json.dumps({'state': 701, 'errMsg': "系统繁忙！无空闲实例,请稍后再试"}, ensure_ascii=False, cls=CJsonEncoder)
+            jsonStr = json.dumps({'state': 701,
+                                  'errMsg': "系统繁忙！无空闲实例,请稍后再试",
+                                  "missionStateMsg": "最近任务的完成情况{}/{}".format(misFinishNum, misTotalNum)
+                                  }, ensure_ascii=False, cls=CJsonEncoder)
             traceback.print_exc()
             return HttpResponse(jsonStr)
 
