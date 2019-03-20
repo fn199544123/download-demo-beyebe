@@ -39,7 +39,7 @@ top_Moren = 0
 
 # 有远程遥控Driver和本地Driver两种模拟形式
 # 【2】支持继承批量接口
-class fapiaoImpl(WebDriverImp):
+class fapiaoImpl(LoginDriverImp):
 
     # class fapiaoImpl(WebDriverRemoteImp):
     def _parseInvoice(self, html):
@@ -102,6 +102,9 @@ class fapiaoImpl(WebDriverImp):
     def getDriverPort(self):
         return 5440
 
+    def _login(self):
+        self.driver.get('https://inv-veri.chinatax.gov.cn/index.html')
+
     def _deal(self, input):
         if 'invoiceCode' in input:
             input['fpdm'] = input['invoiceCode']
@@ -147,7 +150,6 @@ class fapiaoImpl(WebDriverImp):
                 driver.find_element_by_id('fpdm').clear()
                 driver.find_element_by_id('fpdm').send_keys(fpdm)
                 # 发票号码
-
                 driver.find_element_by_id('fphm').clear()
                 driver.find_element_by_id('fphm').send_keys(fphm)
                 # 开票日期
@@ -270,11 +272,11 @@ class fapiaoImpl(WebDriverImp):
                 driver.find_element_by_id('yzm').clear()
                 driver.find_element_by_id('yzm').send_keys(inputa)
                 print("【验证】已经完成所有信息输入")
-                time.sleep(0.2)  # 这里延时未来可以调低一点,为了录屏
+                time.sleep(0.1)  # 这里延时未来可以调低一点,为了录屏
                 action_chains = ActionChains(self.driver)
                 action_chains.double_click(driver.find_element_by_id('checkfp')).perform()
                 print("正在进行查验")
-                time.sleep(0.2)
+                time.sleep(0.1)
                 for i in range(100):
                     if 'popup_ok' in driver.page_source or 'iframe' in driver.page_source:
                         break

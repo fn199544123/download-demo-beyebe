@@ -92,6 +92,7 @@ class zhongDengImpl(LoginDriverImp):
                     # 如果为空,换一张验证码。不为空则直接输入
                     self.setAttribute(imgTag, "width", 150)
                     self.setAttribute(imgTag, "height", 40)
+                    time.sleep(1)
                     imgCode1 = self.getCodeString(imgTag)
                     if imgCode1 is None:
                         driver.find_element_by_id('imgId').click()
