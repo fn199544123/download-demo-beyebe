@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 from logging_utils.cJsonEncoder import CJsonEncoder
 from webdriver_service.driver_pool.driverPool import WebDriverPool
+import time
 
 misFinishNum = 0
 misTotalNum = 0
@@ -21,7 +22,10 @@ class MyThread(threading.Thread):
 
     def run(self):
         global misFinishNum
+
+        timeStart = time.time()
         self.result = self.driver.deal(self.input)
+        self.result['timeTotal'] = time.time() - timeStart
         misFinishNum = misFinishNum + 1
 
     def get_result(self):

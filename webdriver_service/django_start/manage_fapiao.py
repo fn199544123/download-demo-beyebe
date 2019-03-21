@@ -31,7 +31,6 @@ from django.conf.urls import url
 from webdriver_service.django_start.django_start.urls import urlpatterns
 from webdriver_service.django_start.django_start.view import changeModel
 
-
 if __name__ == '__main__':
 
     # 演示时使用下面的代码
@@ -39,7 +38,7 @@ if __name__ == '__main__':
     print("启动时间startTime", datetime.datetime.now())
 
     if 'inux' in platform.system():
-        WebDriverPool(dBean=fapiaoImpl, num=12, headless=True)
+        WebDriverPool(dBean=fapiaoImpl, num=10, headless=True)
     else:
         WebDriverPool(dBean=fapiaoImpl, num=1, headless=False)
 

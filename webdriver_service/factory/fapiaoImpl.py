@@ -106,6 +106,7 @@ class fapiaoImpl(LoginDriverImp):
         self.driver.get('https://inv-veri.chinatax.gov.cn/index.html')
 
     def _deal(self, input):
+
         if 'invoiceCode' in input:
             input['fpdm'] = input['invoiceCode']
         if 'invoiceNo' in input:
