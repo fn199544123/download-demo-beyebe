@@ -36,6 +36,7 @@ class MyThread(threading.Thread):
 
 
 def changeModel(request):
+    timeStart = time.time()
     try:
         if request.method == 'GET':
             arguments = dict(request.GET)
@@ -58,6 +59,8 @@ def changeModel(request):
                    "stateMsg": WebDriverPool().getDriverState(),
                    "missionStateMsg": "最近任务的完成情况{}/{}".format(misFinishNum, misTotalNum),
                    }
+        msg['timeTotal'] = time.time() - timeStart
+
         jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
         return HttpResponse(jsonStr)
     except:
@@ -76,6 +79,7 @@ def changeModel(request):
 # 批量处理接口
 def changeModelBatch(request):
     global misFinishNum, misTotalNum
+    timeStart = time.time()
     try:
         if request.method == 'GET':
             arguments = dict(request.GET)
@@ -114,9 +118,10 @@ def changeModelBatch(request):
                 threadNow.join()
 
             # 组装最终结果
-            msg = {'result': [], 'errMsg': "结果请遍历result查看", 'state': 200}
+            msg = {'result': [], 'errMsg': "成功！结果请遍历result查看", 'state': 200}
             for threadNow in threads:
                 msg['result'].append(threadNow.get_result())
+            msg['timeTotal'] = time.time() - timeStart
             jsonStr = json.dumps(msg, ensure_ascii=False, cls=CJsonEncoder)
             return HttpResponse(jsonStr)
         else:
