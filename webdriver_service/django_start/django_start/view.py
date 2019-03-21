@@ -46,6 +46,7 @@ def changeModel(request):
         # 将每个参数的队列转换成单个结果
 
         if WebDriverPool().queueSize() > 0:
+            print("输入参数", arguments)
             msg = WebDriverPool().getOneDriverNoWait().deal(arguments)
         else:
             # 现在没有可用driver,所以暂时不下发任务
@@ -92,12 +93,15 @@ def changeModelBatch(request):
                     for item in itemData['result']:
                         # msg = WebDriverPool().getOneDriver().deal(item)
                         driver = WebDriverPool().getOneDriver()
+                        print("输入参数", item)
                         t = MyThread(driver, item)
                         threads.append(t)
                         t.start()
                 else:
+
                     misTotalNum = len(arguments['data'])
                     driver = WebDriverPool().getOneDriver()
+                    print("输入参数", itemData)
                     t = MyThread(driver, itemData)
                     threads.append(t)
                     t.start()

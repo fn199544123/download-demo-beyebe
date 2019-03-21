@@ -3,7 +3,7 @@ import requests
 
 # 接口3，接口4测试DEMO
 data = {
-    "companyName": "东莞市民兴电缆有限公司",
+    "companyName": "广东佛盾人防工程有限公司",
     "billNums": ["25275763"],
     "afterDate": "20190121"
 }

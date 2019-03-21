@@ -268,6 +268,7 @@ class zhongDengImpl(LoginDriverImp):
             for i, regnoDict in enumerate(lstRegno):
                 regno = regnoDict['no']
                 # 大量下载极易造成卡死,要进行重试,最次最多重试5次
+                print("[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个")
                 self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(
                     input['companyName'],
                     len(lstRegno), i)
@@ -287,6 +288,7 @@ class zhongDengImpl(LoginDriverImp):
 
                 for h in range(5):
                     print(i, regno)
+                    print("正在尝试下载")
                     self.download_pdf(regno, companyName, pdfs)
                     break
                 else:
