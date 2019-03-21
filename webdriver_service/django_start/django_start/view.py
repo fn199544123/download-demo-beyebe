@@ -33,7 +33,6 @@ class MyThread(threading.Thread):
 
 def changeModel(request):
     try:
-
         if request.method == 'GET':
             arguments = dict(request.GET)
             for arg in arguments:

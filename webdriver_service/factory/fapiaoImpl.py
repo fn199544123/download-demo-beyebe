@@ -381,15 +381,19 @@ class fapiaoImpl(LoginDriverImp):
         while True:
             # 尝试到成功为止
             for url in urlList:
-                try:  # 异常处理
+                try:
+                    # 进行验证码图片截取
                     try:
                         filePath = self.get_image()
                     except:
+                        print("[WARNING]使用旧方法请求王博验证码接口")
                         traceback.print_exc()
                         filePath = self.get_image_old()
                         # TODO 未来删除
                         ossUrl = fileUpdate(filePath)
+                        print("验证码图片存储OSS", ossUrl)
                         self.db['test_yanzhengma'].insert_one({'ossUrl': ossUrl})
+                    # 进行验证码图片识别
                     try:  # 图片删除
                         file = {'file': open(filePath, 'rb')}
                         colorStr = filePath.split('_')[-1].replace('.png', '')
@@ -486,21 +490,6 @@ class fapiaoImpl(LoginDriverImp):
             loc = img.location
             size = img.size
             # 图片和标签大小不一致的,不能通过size获取图片,截图会偏移
-            for i in range(10):
-                if loc['x'] == 0:
-                    time.sleep(0.1)
-                    continue
-                else:
-                    left_Moren = loc['x']
-                    top_Moren = loc['y']
-                    print("已对验证码图片位置做死定位,从而降低定位不到时候的命中率")
-                    break
-            else:
-                if left_Moren == 0:
-                    raise Exception("定位错误,尚未死定位")
-                else:
-                    loc['x'] = left_Moren
-                    loc['y'] = top_Moren
             left = loc['x']
             top = loc['y']
             right = left + size['width']

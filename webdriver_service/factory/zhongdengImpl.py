@@ -224,13 +224,13 @@ class zhongDengImpl(LoginDriverImp):
                     break
             # 查看是否有记录
 
-            for tt in range(100):
+            for tt in range(1000):
                 if '下载' in driver.page_source:
                     break
                 if '本次查询共查询到登记0笔' in driver.page_source:
                     returnObj = {'state': 210, 'errMsg': 'ERROR错误,没有任何保理记录', 'regnoList': [], 'pdfs': []}
                     return returnObj
-                time.sleep(0.1)
+                time.sleep(0.01)
             # 记录所有regno
             lstRegno = []
             # 首先查看有几页,如果有n页,那么就要采集n次
@@ -446,12 +446,12 @@ class zhongDengImpl(LoginDriverImp):
 
     def click100_by_tag(self, tag):
         # 保证可以点击到的方法
-        time.sleep(0.1)
+        time.sleep(0.01)
         action_chains = ActionChains(self.driver)
         action_chains.move_to_element_with_offset(tag, 10, 10)
         action_chains.click()
         action_chains.perform()
-        print("完成按键操作")
+        print("完成100TAG按键操作")
 
 
 if __name__ == '__main__':
