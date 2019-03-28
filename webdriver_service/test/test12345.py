@@ -33,7 +33,7 @@ print("用时", time.time() - timeStart)
 发票验真
 """
 timeStart = time.time()
-text2 = requests.post("http://localhost:9088/spider/fapiaoList.go", data=text1.encode(), headers=headers).text
+text2 = requests.post("http://39.108.188.34:9088/spider/fapiaoList.go", data=text1.encode(), headers=headers).text
 print("发票验真结果")
 print(text2)
 print("用时", time.time() - timeStart)

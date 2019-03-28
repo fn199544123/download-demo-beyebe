@@ -355,6 +355,7 @@ class fapiaoImpl(LoginDriverImp):
                     driver.save_screenshot(filePath)
                     ossPath = fileUpdate(filePath)
                     invoiceData = {}
+
                     try:
                         invoiceData = self._parseInvoice(driver.page_source)
                     except:
