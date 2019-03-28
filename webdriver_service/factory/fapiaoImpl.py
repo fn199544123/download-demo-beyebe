@@ -179,51 +179,71 @@ class fapiaoImpl(LoginDriverImp):
                     if "发票代码有误!" in driver.page_source:
                         print("发票代码有误")
                         dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "发票号码有误!" in driver.page_source:
                         print("发票号码有误")
                         dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "开票日期有误!" in driver.page_source:
                         print("开票日期有误")
                         dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "开票金额有误!" in driver.page_source:
                         print("开票金额有误")
                         dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "校验码有误!" in driver.page_source:
                         print("校验码有误!")
                         dictNow = {'errMsg': "ERROR校验码有误!无法返回信息，请输入正确的数据或格式", 'state': 605}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "请输入发票号码" in driver.page_source:
                         print("请输入发票号码")
                         dictNow = {'errMsg': "ERROR请输入发票号码！", 'state': 606}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "请输入发票代码" in driver.page_source:
                         print("请输入发票代码")
                         dictNow = {'errMsg': "ERROR请输入发票代码", 'state': 607}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "请输入开具金额" in driver.page_source:
                         print("请输入开具金额")
                         dictNow = {'errMsg': "ERROR请输入开具金额", 'state': 608}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "请输入开票日期" in driver.page_source:
                         print("请输入开票日期")
                         dictNow = {'errMsg': "ERROR请输入开票日期", 'state': 609}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
                     if "请输入校验码" in driver.page_source:
                         print("请输入校验码")
                         dictNow = {'errMsg': "ERROR请输入校验码", 'state': 610}
+                        dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                         input.update(dictNow)
                         return dictNow
 
@@ -285,27 +305,37 @@ class fapiaoImpl(LoginDriverImp):
                 if '超过该张发票当日查验次数' in driver.page_source:
                     print("超过次数")
                     dictNow = {'errMsg': "ERROR验真平台今日超过次数！无法返回信息", 'state': 413}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                     return dictNow
                     # 看输入是否有错误
                 elif "发票代码有误!" in driver.page_source:
                     print("发票代码有误")
                     dictNow = {'errMsg': "ERROR发票代码有误！无法返回信息，请输入正确的数据或格式", 'state': 601}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                     return dictNow
                 elif "发票号码有误!" in driver.page_source:
                     print("发票号码有误")
                     dictNow = {'errMsg': "ERROR发票号码有误！无法返回信息，请输入正确的数据或格式", 'state': 602}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                     return dictNow
                 elif "开票日期有误!" in driver.page_source:
                     print("开票日期有误")
                     dictNow = {'errMsg': "ERROR开票日期有误！无法返回信息，请输入正确的数据或格式", 'state': 603}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
                     return dictNow
                 elif "开票金额有误!" in driver.page_source:
                     print("开票金额有误!")
                     dictNow = {'errMsg': "ERROR开票金额有误！无法返回信息，请输入正确的数据或格式", 'state': 604}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
                     return dictNow
                 elif '校验码有误!' in driver.page_source:
                     print("校验码有误")
                     dictNow = {'errMsg': "校验码有误！无法返回信息,请输入校验码或查看是否正确", 'state': 605}
+                    dictNow['ossPathScreen'] = self.get_full_screen_oss()
+
                     return dictNow
                 elif '一分钟' in driver.page_source:
                     print("访问过于频繁，休息60秒后再试")
@@ -332,11 +362,11 @@ class fapiaoImpl(LoginDriverImp):
                         invoiceData['html'] = driver.page_source
                         invoiceData['errMsgText'] = traceback.format_exc()
                         dictNow.update({'data': invoiceData,
-                                        'imgFile': ossPath,
+                                        'ossPathScreen': ossPath,
                                         'errMsg': "ERROR解析结构异常,发现新模板或者改版,请将这个返回交付开发者进行模板添加!",
                                         'state': 579})
                     dictNow.update({'data': invoiceData,
-                                    'imgFile': ossPath,
+                                    'ossPathScreen': ossPath,
                                     'errMsg': invoiceData.get('errMsg', 'maybe_success!'),
                                     'state': invoiceData.get('state', 299)})
                     return dictNow

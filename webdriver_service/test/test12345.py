@@ -9,7 +9,7 @@ headers = {"Content-Type": "application/json"}
 # 接口1、2测试DEMO
 data12 = {
     "bill": {
-        'ossPath': ossPdfPathBig
+        'ossPath': ossPdfPathSmall
     }
 }
 # 接口3，接口4测试DEMO

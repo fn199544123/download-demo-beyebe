@@ -111,7 +111,7 @@ if __name__ == '__main__':
     import time
 
     a1 = time.time()
-    print(fileUpdate('test.txt', path='beyebe/', isFileName=True))
+    print(fileUpdate('/Users/magic/Desktop/其他30张发票2019-03-21 11.16.40.pdf', path='beyebe/', isFileName=True))
     print(time.time() - a1)
     # print(fileUpdate('/Users/magic/PycharmProjects/scrapy-demo-beyebe/oss_aliyun/test/test2.jpg', path='beyebe/docker', isFileName=True))
     # print(fileUpdate('./test.txt'))

@@ -2,7 +2,9 @@ import requests
 import json
 
 # 接口1、2测试DEMO
-data = {"bill":{"ossPath":"http://boss.yintaifac.com:8888/obpm/uploads/item/2019/a1b501db-29c4-4fc3-822b-de0ac87aadfc.pdf"}}
+ossPath = "http://ibossapi.oss-cn-shenzhen.aliyuncs.com/beyebe/其他30张发票2019-03-21 11_9661329e5fcb09c91124e0002ce3ba78.pdf"
+# ossPath="http://boss.yintaifac.com:8888/obpm/uploads/item/2019/a1b501db-29c4-4fc3-822b-de0ac87aadfc.pdf"
+data = {"bill": {"ossPath": ossPath}}
 
 headers = {"Content-Type": "application/json"}
 text1 = requests.post("http://39.108.188.34:8893/QrcodeDetectV3", data=json.dumps(data).encode(), headers=headers).text
