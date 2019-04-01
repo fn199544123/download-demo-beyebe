@@ -98,9 +98,9 @@ class WebDriverImp():
             else:
                 print("不知道是什么系统,无法实例化WebDriver对象")
                 raise Exception("不知道是什么系统,无法实例化Driver对象")
-            # self.driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
+            self.driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
             # 下面是因为在mac上无法进入chrome调试模式
-            self.driver = webdriver.Chrome(executable_path=driverPath)
+            # self.driver = webdriver.Chrome(executable_path=driverPath)
 
             # self.driver.maximize_window()
 
