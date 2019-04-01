@@ -345,11 +345,13 @@ class zhongDengImpl(LoginDriverImp):
                         ossPath = fileUpdate(filePath)
                         # 上传成功后删除oss对象
                         os.remove(filePath)
+                        dictNow = {}
                         dictNow['regno'] = regno
                         dictNow['pdfName'] = name
                         dictNow['companyName'] = companyName
                         dictNow['ossPath'] = ossPath
                         dictNow['insertTime'] = datetime.datetime.now()
+
                         self.db[tableName].insert(dictNow)
                         dictNow['_id'] = str(dictNow['_id'])
                         pdfs.append(dictNow)
