@@ -268,7 +268,8 @@ class zhongDengImpl(LoginDriverImp):
             for i, regnoDict in enumerate(lstRegno):
                 regno = regnoDict['no']
                 # 大量下载极易造成卡死,要进行重试,最次最多重试5次
-                print("[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个")
+                print("[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(input['companyName'],
+                                                                                              len(lstRegno), str(i)))
                 self._state = "[中登网登记]正在查询的公司是:{},登记证明编号记录完成,正在依次下载,总进度3/4,应下载文件共{}个,正在下载第{}个".format(
                     input['companyName'],
                     len(lstRegno), i)
@@ -317,23 +318,30 @@ class zhongDengImpl(LoginDriverImp):
                     break
                 time.sleep(0.1)
 
-            for item in driver.find_elements_by_css_selector("a"):
-
+            for i, aItem in enumerate(driver.find_elements_by_css_selector("a")):
                 # 这里只下载第一个,所以第一个就Break
-                name = item.text
+                # 2019年4月1日 改成采集所有内容
+                name = aItem.text
                 print("获取文件名", name)
                 filePath = "./webDriver_download/" + name
                 print(name, "尚未缓存,走下载上传路线")
                 # 下载
-                # item.click()
+                if i == 0:
+                    # 初始登记
+                    driver.execute_script("download('{}');".format(name.replace('.pdf', '')))
+                    time.sleep(0.5)
+                else:
+                    aItem.click()
+                    time.sleep(0.1)
                 # href="javascript:download('02973013000359528048');"
-                """
-                使用docker下载文件怎么都不好使，妈蛋！！！
-                """
-                driver.execute_script("download('{}');".format(name.replace('.pdf', '')))
-                for i in range(10):
+
+            for aItem in driver.find_elements_by_css_selector("a"):
+                name = aItem.text
+                filePath = "./webDriver_download/" + name
+                # filePath = "webdriver_service/django_start/webDriver_download/" + name
+                print("正在检查文件是否下载完成", filePath)
+                for i in range(100):
                     if os.path.exists(filePath):
-                        time.sleep(0.2)
                         ossPath = fileUpdate(filePath)
                         # 上传成功后删除oss对象
                         os.remove(filePath)
@@ -345,10 +353,10 @@ class zhongDengImpl(LoginDriverImp):
                         self.db[tableName].insert(dictNow)
                         dictNow['_id'] = str(dictNow['_id'])
                         pdfs.append(dictNow)
-                        return dictNow
+                        break
                     else:
                         print("文件还在浏览器下载中,请稍后！")
-                        time.sleep(0.8)  # 100次0.1秒，共10秒
+                        time.sleep(0.1)  # 100次0.1秒，共10秒
                 if dictNow == {}:
                     print("10秒都没有下载成功,下载异常")
                     dictNow['regno'] = regno
@@ -358,14 +366,12 @@ class zhongDengImpl(LoginDriverImp):
                     dictNow['insertTime'] = datetime.datetime.now()
                     dictNow['errMsg'] = "ERROR 下载10秒都没有下载完,可能是中登网下载链接失效无法下载"  # 703
                     dictNow['state'] = 703
-
                     pdfs.append(dictNow)
                     # 只采集第一个,其他的不采集,于是break
-                    return
-                return
         except:
             traceback.print_exc()
             time.sleep(1)
+        return pdfs
 
     # def duplicate(self, input):
 
@@ -378,9 +384,9 @@ class zhongDengImpl(LoginDriverImp):
     #     :return:
     #     """
     #     dictDup = {'fpdm': input['fpdm'], 'fphm': input['fphm']}
-    #     item = self.db['auto_' + type(self).__name__].find_one(dictDup)
-    #     if item is not None:
-    #         return dict(item)
+    #     aItem = self.db['auto_' + type(self).__name__].find_one(dictDup)
+    #     if aItem is not None:
+    #         return dict(aItem)
     #     else:
     #         return False
 
