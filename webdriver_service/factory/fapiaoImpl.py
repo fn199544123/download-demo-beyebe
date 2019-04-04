@@ -142,6 +142,7 @@ class fapiaoImpl(LoginDriverImp):
                 fphm = input['fphm']
                 kprq = input['kprq']
                 kjje = input.get('kjje', '')
+                #取后六位
                 jym = input.get('jym', '000000')[-6:]
                 for i in range(100):
                     if 'fpdm' in driver.page_source:
