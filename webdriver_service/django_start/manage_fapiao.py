@@ -26,7 +26,7 @@ docker run -d -p 5440:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 # http://39.108.188.34:9088/spider/fapiao.go?fpdm=4403181130&fphm=27671246&kprq=20180920&kjje=351.69
 # http://39.108.188.34:9088/spider/fapiao.go?fpdm=011001800211&fphm=28519832&kprq=20190109&kjje=1020&jym=07842591941327323876
 # http://39.108.188.34:9088/spider/fapiao.go?fpdm=044031800211&fphm=28519832&kprq=20190215&kjje=42.93&jym=7006849628077367328
-
+# http://localhost:9088/spider/fapiao.go?fpdm=011001800104&fphm=55518592&kprq=20190304&kjje=1020&jym=67547104442692182289
 from django.conf.urls import url
 from webdriver_service.django_start.django_start.urls import urlpatterns
 from webdriver_service.django_start.django_start.view import changeModel
