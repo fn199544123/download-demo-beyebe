@@ -17,6 +17,8 @@ docker run -d -p 5441:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 # http://localhost:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 # http://39.108.188.34:9089/spider/zhongdeng.go?companyName=深圳银泰保理有限公司
 
+
+
 # 中登网
 if __name__ == '__main__':
     # 测试使用
