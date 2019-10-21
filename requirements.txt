@@ -124,7 +124,7 @@ uritemplate==3.0.0
 urllib3==1.24.1
 uWSGI==2.0.18
 w3lib==1.19.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wordcloud==1.5.0
 xlrd==0.7.1
 xlwt==0.7.2
