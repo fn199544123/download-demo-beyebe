@@ -42,7 +42,7 @@ future==0.17.1
 gast==0.2.2
 grpcio==1.18.0
 h5py==2.9.0
-httplib2==0.12.1
+httplib2==0.18.0
 hyperlink==18.0.0
 idna==2.7
 incremental==17.5.0
