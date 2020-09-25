@@ -113,7 +113,7 @@ sqlalchemy-migrate==0.12.0
 sqlparse==0.3.0
 Tempita==0.5.2
 tensorboard==1.12.2
-tensorflow==1.13.0rc2
+tensorflow==1.15.4
 tensorflow-estimator==1.13.0rc0
 termcolor==1.1.0
 tornado==5.1.1
