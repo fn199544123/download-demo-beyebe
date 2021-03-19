@@ -29,7 +29,7 @@ Django==2.1.5
 django-apscheduler==0.3.0
 django-filter==2.1.0
 django-rest-swagger==2.2.0
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 Elixir==0.7.1
 envoy==0.0.3
 et-xmlfile==1.0.1
