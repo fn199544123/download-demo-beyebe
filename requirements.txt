@@ -51,7 +51,7 @@ itsdangerous==1.1.0
 itypes==1.1.0
 jdcal==1.4
 jieba==0.39
-Jinja2==2.10
+Jinja2==2.11.3
 json2html==1.2.1
 Keras-Applications==1.0.7
 Keras-Preprocessing==1.0.9
