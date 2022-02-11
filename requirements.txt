@@ -118,7 +118,7 @@ tensorflow-estimator==1.13.0rc0
 termcolor==1.1.0
 tornado==5.1.1
 traits==5.1.1
-Twisted==18.7.0
+Twisted==22.1.0
 tzlocal==1.5.1
 uritemplate==3.0.0
 urllib3==1.24.1
