@@ -91,7 +91,7 @@ PyHamcrest==1.9.0
 pymongo==3.7.1
 pyOpenSSL==18.0.0
 pyparsing==2.3.0
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 pypinyin==0.35.2
 python-dateutil==2.7.5
 pytz==2018.9
