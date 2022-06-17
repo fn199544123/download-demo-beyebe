@@ -101,7 +101,7 @@ rdflib==4.2.2
 redis==2.10.6
 requests==2.21.0
 scipy==1.2.1
-Scrapy==1.5.1
+Scrapy==2.6.1
 scrapy-redis==0.6.8
 selenium==3.141.0
 service-identity==17.0.0
